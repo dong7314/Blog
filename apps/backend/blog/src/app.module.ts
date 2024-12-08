@@ -6,12 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import authConfig from './config/auth.config';
 import emailConfig from './config/email.config';
 import { validationSchema } from './config/validation.schema';
+import urlConfig from './config/url.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`${__dirname}/config/env/.${process.env.NODE_ENV}.env`],
-      load: [emailConfig, authConfig],
+      load: [emailConfig, authConfig, urlConfig],
       isGlobal: true,
       validationSchema
     }),

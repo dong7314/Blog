@@ -16,7 +16,7 @@ export class UserEntity {
   @Column({ length: 200 })
   password: string;
 
-  @OneToMany(type => UserAuthorityEntity, userAuthority => userAuthority.user, { eager: true, cascade: true })
+  @OneToMany(type => UserAuthorityEntity, userAuthority => userAuthority.user, { eager: true })
   authorities?: any[];
 
   @Column({

@@ -16,7 +16,7 @@ export class UserAuthorityEntity {
   })
   authority: UserAuthorityEnum
 
-  @ManyToOne(type => UserEntity, user => user.authorities)
+  @ManyToOne(type => UserEntity, user => user.authorities, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity
 }

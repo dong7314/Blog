@@ -25,5 +25,8 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7"
   }
 }

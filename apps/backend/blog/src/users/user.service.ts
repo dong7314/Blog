@@ -1,16 +1,17 @@
 import * as uuid from 'uuid';
 import * as bcrypt from 'bcrypt';
-import { Injectable, NotAcceptableException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotAcceptableException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 
-import { UserInfo } from './dto/user.info';
+import { UserInfo } from './user.info';
 import { UserEntity } from './entity/user.entity';
 import { AuthService } from 'src/auth/auth.service';
 import { EmailService } from 'src/email/email.service';
 import { UserStatusEnum } from './entity/enum/user.status.enum';
 import { UserAuthorityEntity } from './entity/user.authority.entity';
 import { UserAuthorityEnum } from './entity/enum/user.authority.enum';
+import { UserTokenEntity } from './entity/user.token.entity';
 
 
 @Injectable()
@@ -18,9 +19,10 @@ export class UserService {
 
   constructor(
     private dataSource: DataSource,
-    private authService: AuthService,
     private emailService: EmailService,
-    @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>
+    @Inject(forwardRef(() => AuthService)) private authService: AuthService,
+    @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>,
+    @InjectRepository(UserTokenEntity) private tokenRepository: Repository<UserTokenEntity>
   ) { }
 
   async createUser(name: string, email: string, password: string) {
@@ -32,10 +34,11 @@ export class UserService {
 
     const createdUser = await this.saveUser(name, email, password, signupVerifyToken);
     await this.saveAuthority(createdUser, 'guest');
+    await this.saveToken(createdUser, null, null);
     await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
-  async verifyEmail(signupVerifyToken: string): Promise<string> {
+  async verifyEmail(signupVerifyToken: string): Promise<any> {
     const user = await this.userRepository.findOne({
       where: { signupVerifyToken }
     });
@@ -47,14 +50,21 @@ export class UserService {
     user.status = UserStatusEnum.ENABLED;
     this.userRepository.save(user);
 
-    return this.authService.login({
+    const jwt = await this.authService.login({
       id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      authorities: user.authorities
     });
-  }
 
-  async login(email: string, password: string): Promise<{ accessToken: string }> {
+    return {
+      access_token: jwt.access_token,
+      refresh_token: jwt.refresh_token
+    };
+  }
+  
+
+  async login(email: string, password: string): Promise<{ access_token: string, refresh_token: string }> {
 
     const user = await this.userRepository.findOne({
       where: { email }
@@ -70,13 +80,16 @@ export class UserService {
       throw new UnauthorizedException("이메일 인증을 진행해 주세요.");
     }
 
+    const jwt = await this.authService.login({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      authorities: user.authorities
+    });
+
     return {
-      accessToken: this.authService.login({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        authorities: user.authorities
-      })
+      access_token: jwt.access_token,
+      refresh_token: jwt.refresh_token
     };
   }
 
@@ -99,6 +112,70 @@ export class UserService {
       email: user.email,
       authorities: user.authorities
     };
+  }
+
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email }
+    })
+
+    return user;
+  }
+
+  async setCurrentRefreshToken(refreshToken: string, userId: number) {
+    const token = await this.tokenRepository.findOne({
+      where: { userId }
+    });
+
+    const currentRefreshToken = await this.getCurrentHashedRefreshToken(refreshToken);
+    const currentRefreshTokenExp = await this.getCurrentRefreshTokenExp();
+
+    await this.tokenRepository.update(token.id, {
+      currentRefreshToken,
+      currentRefreshTokenExp
+    });
+  }
+
+  async getCurrentHashedRefreshToken(refreshToken: string) {
+    const saltOrRounds = 10;
+    const currentRefreshToken = await bcrypt.hash(refreshToken, saltOrRounds);
+    return currentRefreshToken;
+  }
+
+  async getCurrentRefreshTokenExp(): Promise<Date> {
+    const currentDate = new Date();
+    const currentRefreshTokenExp = new Date(currentDate.getTime() + 2000000);
+    return currentRefreshTokenExp;
+  }
+
+  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number): Promise<UserInfo> {
+    const token: UserTokenEntity = await this.tokenRepository.findOne({
+      where: { userId }
+    })
+	
+    if (!token.currentRefreshToken) {
+      return null;
+    }
+	
+    const isRefreshTokenMatching = await bcrypt.compare(
+      refreshToken,
+      token.currentRefreshToken
+    );
+
+    if (isRefreshTokenMatching) {
+      return await this.getUserInfo(`${userId}`);
+    } 
+  }
+
+  async removeRefreshToken(userId: number): Promise<any> {
+    const token = await this.tokenRepository.findOne({
+      where: { userId }
+    });
+
+    return await this.tokenRepository.update(token.id, {
+      currentRefreshToken: null,
+      currentRefreshTokenExp: null,
+    });
   }
 
   private async checkUserExists(emailAddress: string) {
@@ -135,6 +212,17 @@ export class UserService {
 
       await manager.save(authorityEntity);
     })
+  }
+
+  private async saveToken(user: UserEntity, refreshToken: string, refreshExp: Date) {
+    await this.dataSource.transaction(async manager => {
+      const token = new UserTokenEntity();
+      token.user = user;
+      token.currentRefreshToken = refreshToken;
+      token.currentRefreshTokenExp = refreshExp;
+
+      await manager.save(token);
+    });
   }
 
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
