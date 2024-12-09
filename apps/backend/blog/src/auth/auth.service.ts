@@ -1,14 +1,14 @@
-import * as jwt from 'jsonwebtoken';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { forwardRef, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 
 import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
+import { UserService } from 'src/users/user.service';
 import authConfig from 'src/config/auth.config';
 
 import { Payload } from './dto/payload.dto.interface';
 import { UserInfo } from 'src/users/user.info';
 import { RefreshTokenDto } from 'src/users/dto/token/refresh.token.dto';
-import { UserService } from 'src/users/user.service';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +26,18 @@ export class AuthService {
     const refresh_token = await this.generateRefreshToken(user);
     
     return { access_token, refresh_token };
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_10AM) 
+  async removeExpiredTokens() {
+    const currentTime = new Date().getTime();
+    const expiredTokens = await this.userService.findExpiredTokens(currentTime);
+    console.log(expiredTokens);
+    for (const token of expiredTokens) {
+      if (token.currentRefreshToken) {
+        await this.userService.removeRefreshToken(token.userId); 
+      }
+    }
   }
 
   async refresh(refreshTokenDto: RefreshTokenDto): Promise<{ accessToken: string }> {

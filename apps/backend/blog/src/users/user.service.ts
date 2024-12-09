@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import * as bcrypt from 'bcrypt';
 import { forwardRef, Inject, Injectable, NotAcceptableException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource } from 'typeorm';
+import { Repository, DataSource, LessThan } from 'typeorm';
 
 import { UserInfo } from './user.info';
 import { UserEntity } from './entity/user.entity';
@@ -144,7 +144,7 @@ export class UserService {
 
   async getCurrentRefreshTokenExp(): Promise<Date> {
     const currentDate = new Date();
-    const currentRefreshTokenExp = new Date(currentDate.getTime() + 2000000);
+    const currentRefreshTokenExp = new Date(currentDate.getTime() + 2000000000);
     return currentRefreshTokenExp;
   }
 
@@ -176,6 +176,16 @@ export class UserService {
       currentRefreshToken: null,
       currentRefreshTokenExp: null,
     });
+  }
+
+  async findExpiredTokens(currentTime: number): Promise<UserTokenEntity[]> {
+    const currentDate = new Date(currentTime);
+
+    const expiredTokens = this.tokenRepository.find({
+      where: { currentRefreshTokenExp: LessThan(currentDate)}
+    });
+    
+    return expiredTokens;
   }
 
   private async checkUserExists(emailAddress: string) {

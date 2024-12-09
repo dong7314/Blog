@@ -37,7 +37,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.1"],\
           ["@typescript-eslint/eslint-plugin", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:8.17.0"],\
           ["@typescript-eslint/parser", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:8.17.0"],\
-          ["cookie-parser", "npm:1.4.7"],\
           ["eslint", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:9.16.0"],\
           ["eslint-config-prettier", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:9.1.0"],\
           ["eslint-config-standard-with-typescript", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:43.0.1"],\
@@ -1929,6 +1928,34 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@nestjs/schedule", [\
+      ["npm:4.1.2", {\
+        "packageLocation": "./.yarn/cache/@nestjs-schedule-npm-4.1.2-b0dd5c776d-90124e454f.zip/node_modules/@nestjs/schedule/",\
+        "packageDependencies": [\
+          ["@nestjs/schedule", "npm:4.1.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:4.1.2", {\
+        "packageLocation": "./.yarn/__virtual__/@nestjs-schedule-virtual-b4cc359346/0/cache/@nestjs-schedule-npm-4.1.2-b0dd5c776d-90124e454f.zip/node_modules/@nestjs/schedule/",\
+        "packageDependencies": [\
+          ["@nestjs/schedule", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:4.1.2"],\
+          ["@nestjs/common", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.4.13"],\
+          ["@nestjs/core", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.4.13"],\
+          ["@types/nestjs__common", null],\
+          ["@types/nestjs__core", null],\
+          ["cron", "npm:3.2.1"],\
+          ["uuid", "npm:11.0.3"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@nestjs/core",\
+          "@types/nestjs__common",\
+          "@types/nestjs__core"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@nestjs/schematics", [\
       ["npm:10.2.3", {\
         "packageLocation": "./.yarn/cache/@nestjs-schematics-npm-10.2.3-0ef5ee4e2d-c883c10605.zip/node_modules/@nestjs/schematics/",\
@@ -2534,6 +2561,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/jsonwebtoken", "npm:9.0.7"],\
           ["@types/node", "npm:22.10.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/luxon", [\
+      ["npm:3.4.2", {\
+        "packageLocation": "./.yarn/cache/@types-luxon-npm-3.4.2-092583f006-d835467de3.zip/node_modules/@types/luxon/",\
+        "packageDependencies": [\
+          ["@types/luxon", "npm:3.4.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3977,7 +4013,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.1"],\
           ["@typescript-eslint/eslint-plugin", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:8.17.0"],\
           ["@typescript-eslint/parser", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:8.17.0"],\
-          ["cookie-parser", "npm:1.4.7"],\
           ["eslint", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:9.16.0"],\
           ["eslint-config-prettier", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:9.1.0"],\
           ["eslint-config-standard-with-typescript", "virtual:c6dcce817fa225290e033ab3df9d032741dc228bb28c9cbb4719875ef6095c1c8f4a1ecb6d1cce6f1119ad7c9bb93c31bc307a4e235fab5627d039ca42e55b65#npm:43.0.1"],\
@@ -4698,6 +4733,17 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/create-require-npm-1.1.1-839884ca2e-157cbc59b2.zip/node_modules/create-require/",\
         "packageDependencies": [\
           ["create-require", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["cron", [\
+      ["npm:3.2.1", {\
+        "packageLocation": "./.yarn/cache/cron-npm-3.2.1-bc4ad1b3e4-26e2ea54c4.zip/node_modules/cron/",\
+        "packageDependencies": [\
+          ["cron", "npm:3.2.1"],\
+          ["@types/luxon", "npm:3.4.2"],\
+          ["luxon", "npm:3.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8558,6 +8604,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["luxon", [\
+      ["npm:3.5.0", {\
+        "packageLocation": "./.yarn/cache/luxon-npm-3.5.0-92bb977f7f-335789bba9.zip/node_modules/luxon/",\
+        "packageDependencies": [\
+          ["luxon", "npm:3.5.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["magic-string", [\
       ["npm:0.30.8", {\
         "packageLocation": "./.yarn/cache/magic-string-npm-0.30.8-0378572eee-51a1f06f67.zip/node_modules/magic-string/",\
@@ -11575,6 +11630,7 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/jwt", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.2.0"],\
           ["@nestjs/passport", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.0.3"],\
           ["@nestjs/platform-express", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.4.13"],\
+          ["@nestjs/schedule", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:4.1.2"],\
           ["@nestjs/schematics", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.2.3"],\
           ["@nestjs/swagger", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:8.1.0"],\
           ["@nestjs/testing", "virtual:a1c0eb98d6b8db75f2c2ab1e5fe8b09cd28fdc3624757bdca8b27f8dbe08e7deb6d1393005043f8097319418d208f833ec98fc519364ee4a13cf20ca765faa0e#npm:10.4.13"],\
