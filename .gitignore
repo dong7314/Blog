@@ -13,3 +13,5 @@
 .development.env
 .production.env
 .stage.env
+.npmrc
+*storybook.log

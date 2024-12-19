@@ -6,6 +6,11 @@
     "apps/backend/*",
     "apps/frontend/*"
   ],
+  "scripts": {
+    "backend": "yarn workspace @backend/blog",
+    "frontend": "yarn workspace @frontend/blog",
+    "coreui": "yarn workspace @frontend/coreui"
+  },
   "devDependencies": {
     "@types/eslint": "^9.6.1",
     "@types/jest": "^29.5.14",
