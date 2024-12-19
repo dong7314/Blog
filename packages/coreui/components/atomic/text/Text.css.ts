@@ -1,7 +1,8 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const fontStyle = style({
-  fontFamily: 'Pretendard'
+  fontFamily: 'Pretendard',
+  transition: 'color .2s ease-out'
 })
 
 export const fontSize = styleVariants({

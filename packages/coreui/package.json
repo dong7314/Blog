@@ -13,6 +13,7 @@
     "@storybook/test": "8.4.7",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@vanilla-extract/babel-plugin": "^1.2.0",
     "@vanilla-extract/css": "^1.16.1",
     "@vanilla-extract/vite-plugin": "^4.0.18",
     "storybook": "8.4.7",
@@ -21,10 +22,11 @@
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "storybook build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "dompurify": "^3.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }

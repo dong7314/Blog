@@ -19,6 +19,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vanilla-extract/babel-plugin": "^1.2.0",
+    "@vanilla-extract/css": "^1.16.1",
+    "@vanilla-extract/vite-plugin": "^4.0.18",
     "eslint": "^9",
     "eslint-config-next": "15.1.1",
     "typescript": "^5"
