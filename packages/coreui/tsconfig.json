@@ -16,6 +16,6 @@
     "include": [
       "./.storybook", 
       "./stories" 
-    ],
+, "components/atomic/text/Text.css.ts", "components/atomic/text/Text.tsx"    ],
     "exclude": ["node_modules", "dist"]
   }
