@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ESNext", 
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+      "types": ["react", "react-dom", "@storybook/react"], 
+      "allowJs": false,
+      "skipLibCheck": true, 
+      "esModuleInterop": true, 
+      "strict": true,
+      "forceConsistentCasingInFileNames": true, 
+      "module": "ESNext",
+      "moduleResolution": "Node", 
+      "isolatedModules": true, 
+      "jsx": "react-jsx" 
+    },
+    "include": [
+      "./.storybook", 
+      "./stories" 
+, "components/atomic/text/Text.css.ts", "components/atomic/text/Text.tsx", "components/atomic/button/Button.tsx"    ],
+    "exclude": ["node_modules", "dist"]
+  }
