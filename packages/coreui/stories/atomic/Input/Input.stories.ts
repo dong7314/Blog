@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Label",
+    label: "이메일",
     type: "text",
     size: "m",
   },

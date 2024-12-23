@@ -3,11 +3,27 @@ import { style } from "@vanilla-extract/css";
 export const nav = style({
   display: "flex",
   flexDirection: "column",
-  width: "300px",
-  height: "100%",
-  paddingInline: "2rem",
-  paddingBlock: "1.25rem",
+  width: "100%",
   boxSizing: "border-box",
-  borderRight: "1px solid #ededed",
-  boxShadow: "0 4px 20px #0000000f",
+});
+
+export const navBox = style({
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+  borderBottom: "1px solid #ededed",
+});
+
+export const navDefaultContent = style({
+  display: "flex",
+  alignItems: "center",
+  width: "1400px",
+});
+
+export const header = style({
+  height: "65px",
+});
+
+export const bottom = style({
+  height: "55px",
 });

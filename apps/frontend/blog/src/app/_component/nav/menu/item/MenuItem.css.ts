@@ -2,16 +2,24 @@ import { style } from "@vanilla-extract/css";
 
 export const menuLi = style({
   display: "inline-flex",
-  marginBottom: "0.75rem",
 });
 
 export const item = style({
   display: "flex",
   alignItems: "center",
-  width: "100%",
-  height: "100%",
   padding: "0.75rem",
-  textDecoration: "none",
+  marginInline: "0.5rem",
+  color: "#A5A5A5",
+  fontSize: "1rem",
   fontFamily: "Pretendard",
-  fontSize: "1.25rem",
+  textDecoration: "none",
+  transition: "all .15s ease-out",
+  ":hover": {
+    color: "#262626",
+  },
+});
+
+export const active = style({
+  color: "#262626",
+  fontWeight: 700,
 });

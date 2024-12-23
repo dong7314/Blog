@@ -1,1 +1,1 @@
-export type IconType = 'loading';
+export type IconType = "loading" | "search" | "theme";
