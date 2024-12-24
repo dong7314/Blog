@@ -1,8 +1,15 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
+export const inputBox = style({
+  display: "flex",
+  width: "100%",
+  flexDirection: "column",
+});
+
 export const outlineInput = style({
   display: "flex",
   position: "relative",
+  width: "100%",
   minWidth: "100px",
   border: "2px solid transparent",
   borderRadius: "6px",
@@ -12,6 +19,10 @@ export const outlineInput = style({
 
 export const outlineFocus = style({
   border: "2px solid #66A3FF",
+});
+
+export const outlineError = style({
+  border: "2px solid #FC6969",
 });
 
 export const label = style({
@@ -34,12 +45,17 @@ export const labelFocus = style({
   color: "#66A3FF",
 });
 
+export const labelError = style({
+  color: "#FC6969",
+});
+
 export const labelInValue = style({
   top: "0",
   fontSize: "0.75rem",
 });
 
 export const inlineInput = style({
+  width: "100%",
   padding: "8px 12px",
   outline: "none",
   color: "#262626",
@@ -48,6 +64,21 @@ export const inlineInput = style({
   boxSizing: "border-box",
   fontFamily: "Pretendard",
   zIndex: 0,
+  "::placeholder": {
+    color: "#a5a5a5",
+  },
+});
+
+export const inlineInputPassword = style({
+  paddingRight: "40px",
+});
+
+export const passwordIconButton = style({
+  display: "inline-flex",
+  position: "absolute",
+  right: "20px",
+  top: "50%",
+  transform: "translateY(-50%)",
 });
 
 export const size = styleVariants({
@@ -63,4 +94,9 @@ export const size = styleVariants({
     height: "40px",
     fontSize: "1rem",
   },
+});
+
+export const inputError = style({
+  marginLeft: "2px",
+  marginTop: "4px",
 });

@@ -55,6 +55,12 @@ export const Button = ({
       l: "l",
     })[size] as TextSize;
 
+  const handleClick = () => {
+    if (!disabled && onClick) {
+      onClick();
+    }
+  };
+
   const fontColor = disabled ? getDisabledFontColor(type) : getFontColor(type);
   const fontSize = getFontSize(size);
   const buttonStyle = composeStyles(
@@ -65,7 +71,7 @@ export const Button = ({
   );
 
   return (
-    <button type="button" onClick={onClick} className={buttonStyle}>
+    <button type="button" onClick={handleClick} className={buttonStyle}>
       <Text color={fontColor} size={fontSize}>
         {children}
       </Text>

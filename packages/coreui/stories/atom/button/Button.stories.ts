@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button } from '../../../components/atomic/button/Button';
+import { Button } from '../../../components/atom/button/Button';
 
 const meta = {
   title: 'Atomic/Button',
