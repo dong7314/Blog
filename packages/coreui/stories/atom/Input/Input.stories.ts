@@ -20,6 +20,7 @@ export const Default: Story = {
     label: "Default",
     type: "text",
     size: "m",
+    rounded: true,
   },
 };
 

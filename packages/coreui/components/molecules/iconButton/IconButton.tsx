@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import DOMPurify from "dompurify";
+import { composeStyles } from "@vanilla-extract/css";
 
 import * as styles from "./IconButton.css";
 
 import { Icon } from "../../atom/icon/Icon";
 import { IconType } from "../../atom/icon/Icon.type";
 import { IconButtonSize } from "./IconButton.type";
-import { composeStyles } from "@vanilla-extract/css";
 
 export interface IconButtonProps {
   /** 아이콘 버튼 종류 설정 */

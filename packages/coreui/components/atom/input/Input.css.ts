@@ -17,6 +17,10 @@ export const outlineInput = style({
   transition: "border .1s ease-out",
 });
 
+export const outlineRounded = style({
+  borderRadius: "18px",
+});
+
 export const outlineFocus = style({
   border: "2px solid #66A3FF",
 });
@@ -67,6 +71,10 @@ export const inlineInput = style({
   "::placeholder": {
     color: "#a5a5a5",
   },
+});
+
+export const inlineRounded = style({
+  borderRadius: "16px",
 });
 
 export const inlineInputPassword = style({

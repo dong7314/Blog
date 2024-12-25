@@ -10,6 +10,8 @@ import { InputType, InputSize } from "./Input.type";
 export interface InputProps {
   /** 인풋 라벨 설정 */
   label?: string;
+  /** 인풋 라운드 효과 설정 */
+  rounded?: boolean;
   /** 인풋 타입 설정 */
   type?: InputType;
   /** 인풋 사이즈 설정 */
@@ -26,6 +28,8 @@ export interface InputProps {
   placeholder?: string;
   /** 클릭 시 동작할 함수 */
   onChange?: (value: string) => void;
+  /** input에 style 커스텀 설정 */
+  className?: string;
 }
 
 /** Primary UI component for user interaction */
@@ -33,12 +37,14 @@ export const Input = ({
   type = "text",
   size = "m",
   label,
+  rounded,
   pattern,
   minLength,
   maxLength,
   error,
   placeholder,
   onChange,
+  className,
 }: InputProps) => {
   const [currentError, setCurrentError] = useState(false);
   const [value, setValue] = useState("");
@@ -47,6 +53,7 @@ export const Input = ({
 
   const outlineInputStyle = composeStyles(
     styles.outlineInput,
+    rounded ? styles.outlineRounded : "",
     focus ? styles.outlineFocus : "",
     currentError ? styles.outlineError : "",
   );
@@ -59,6 +66,8 @@ export const Input = ({
   const inlineInputStyle = composeStyles(
     styles.inlineInput,
     styles.size[size],
+    className ? className : "",
+    rounded ? styles.inlineRounded : "",
     type === "password" ? styles.inlineInputPassword : "",
   );
 

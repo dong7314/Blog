@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 
 import { IconButton } from "../../../components/molecules/iconButton/IconButton";
-import { fn } from "@storybook/test";
 
 const meta = {
   title: "Molecules/IconButton",
