@@ -21,7 +21,8 @@ export const navDefaultContent = style({
 });
 
 export const header = style({
-  height: "65px",
+  justifyContent: "space-between",
+  height: "70px",
 });
 
 export const bottom = style({

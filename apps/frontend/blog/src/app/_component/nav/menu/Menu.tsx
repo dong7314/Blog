@@ -19,8 +19,8 @@ export default async function Menu() {
   return (
     <ul className={styles.menu}>
       {menuData &&
-        menuData.map((data) => {
-          return <MenuItem data={data} />;
+        menuData.map((data, index) => {
+          return <MenuItem data={data} key={index} />;
         })}
     </ul>
   );

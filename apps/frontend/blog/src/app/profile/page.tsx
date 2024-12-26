@@ -1,3 +1,3 @@
-export default function Pofile() {
+export default function PofilePage() {
   return <div>Pofile Page</div>;
 }

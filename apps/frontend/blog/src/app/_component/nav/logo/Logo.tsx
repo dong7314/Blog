@@ -7,7 +7,7 @@ export default function Logo() {
   return (
     <div className={styles.logo}>
       <Link href={"/home"}>
-        <Image src={LogoImage} alt="DPOST" height={40} />
+        <Image src={LogoImage} alt="DPOST" height={40} priority />
       </Link>
     </div>
   );
