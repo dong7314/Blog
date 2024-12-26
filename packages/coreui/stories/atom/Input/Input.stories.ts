@@ -20,7 +20,6 @@ export const Default: Story = {
     label: "Default",
     type: "text",
     size: "m",
-    rounded: true,
   },
 };
 
@@ -82,5 +81,12 @@ export const Placeholder: Story = {
     type: "text",
     placeholder: "Placeholder",
     size: "m",
+  },
+};
+
+export const Rounded: Story = {
+  args: {
+    type: "text",
+    rounded: true,
   },
 };

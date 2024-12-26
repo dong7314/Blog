@@ -52,7 +52,8 @@ export const Button = ({
       t: "xs",
       s: "s",
       m: "s",
-      l: "l",
+      l: "s",
+      xl: "m",
     })[size] as TextSize;
 
   const handleClick = () => {
@@ -72,7 +73,7 @@ export const Button = ({
 
   return (
     <button type="button" onClick={handleClick} className={buttonStyle}>
-      <Text color={fontColor} size={fontSize}>
+      <Text color={fontColor} size={fontSize} weight={500}>
         {children}
       </Text>
     </button>

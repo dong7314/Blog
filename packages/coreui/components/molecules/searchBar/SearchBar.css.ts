@@ -8,11 +8,11 @@ export const searchBar = style({
 export const iconButton = style({
   display: "inline-flex",
   position: "absolute",
-  right: "10px",
+  left: "10px",
   top: "50%",
   transform: "translateY(-50%)",
 });
 
 export const overrideInput = style({
-  paddingRight: "40px !important",
+  paddingLeft: "40px !important",
 });

@@ -1,3 +1,3 @@
-export type ButtonType = 'primary' | 'tertiary' | 'secondary' | 'negative';
+export type ButtonType = "primary" | "tertiary" | "secondary" | "negative";
 
-export type ButtonSize = 't' | 's' | 'm' | 'l';
+export type ButtonSize = "t" | "s" | "m" | "l" | "xl";

@@ -19,8 +19,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onClick: fn(() => {
-      alert("click!");
+    onSearch: fn((value: string) => {
+      console.log(value);
     }),
   },
 };

@@ -25,7 +25,7 @@ export const Icon = ({
 }: IconProps) => {
   const [strokeColor, setStrokeColor] = useState(color);
   const IconComponent = icons[type];
-  const sizes = { xs: "12", s: "14", m: "16", l: "18", xl: "20" };
+  const sizes = { xs: "12", s: "14", m: "16", l: "18", xl: "20", h: "24" };
 
   if (!IconComponent) {
     return null;

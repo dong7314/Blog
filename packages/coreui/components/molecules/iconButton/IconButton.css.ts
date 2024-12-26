@@ -41,4 +41,8 @@ export const iconButtonSize = styleVariants({
     width: "2rem",
     height: "2rem",
   },
+  h: {
+    width: "2.25rem",
+    height: "2.25rem",
+  },
 });
