@@ -6,8 +6,11 @@ export const fontStyle = style({
 })
 
 export const fontSize = styleVariants({
-  dxs: [fontStyle, { 
+  t: [fontStyle, { 
     fontSize: '8px' 
+  }],
+  dxs: [fontStyle, { 
+    fontSize: '10px' 
   }],
   xs: [fontStyle, { 
     fontSize: '12px' 
@@ -27,4 +30,10 @@ export const fontSize = styleVariants({
   dxl: [fontStyle, { 
     fontSize: '24px' 
   }],
+  h: [fontStyle, { 
+    fontSize: '32px' 
+  }],
+  xh: [fontStyle, { 
+    fontSize: '40px' 
+  }], 
 });
