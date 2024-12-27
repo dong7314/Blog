@@ -14,6 +14,7 @@ export const modalContainer = style({
   left: 0,
   right: 0,
   bottom: 0,
+  zIndex: 99999,
 });
 
 export const modalContainerOpen = style({
@@ -23,7 +24,7 @@ export const modalContainerOpen = style({
 export const modal = style({
   display: "flex",
   flexDirection: "column",
-  padding: "24px 20px",
+  padding: "24px 24px",
   backgroundColor: "#fff",
   border: "1px solid #ededed",
   borderRadius: "0.75rem",

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode, useEffect, useState } from "react";
 
 import * as styles from "./Modal.css";
@@ -17,6 +19,7 @@ export interface ModalProps {
 }
 
 export const Modal = ({ width, height, children, back }: ModalProps) => {
+  const [isMouseDownInside, setIsMouseDownInside] = useState(false);
   const [modalContainerStyle, setModalContainerStyle] = useState(
     styles.modalContainer,
   );
@@ -34,10 +37,19 @@ export const Modal = ({ width, height, children, back }: ModalProps) => {
   }, []);
 
   return (
-    <div className={modalContainerStyle} onClick={handleBackFn}>
+    <div
+      className={modalContainerStyle}
+      onMouseDown={() => setIsMouseDownInside(false)}
+      onMouseUp={() => {
+        if (!isMouseDownInside) {
+          handleBackFn();
+        }
+      }}
+    >
       <div
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation();
+          setIsMouseDownInside(true);
         }}
         className={styles.modal}
         style={{ width, height }}
