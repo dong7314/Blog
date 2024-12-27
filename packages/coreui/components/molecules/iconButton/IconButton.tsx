@@ -1,5 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import DOMPurify from "dompurify";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { composeStyles } from "@vanilla-extract/css";
 
 import * as styles from "./IconButton.css";

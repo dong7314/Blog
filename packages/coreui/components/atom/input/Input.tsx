@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
   useState,
   FocusEventHandler,
@@ -17,6 +19,8 @@ import { InputType, InputSize, InputRef } from "./Input.type";
 export interface InputProps {
   /** 인풋 라벨 설정 */
   label?: string;
+  /** 인풋 네임 설정 */
+  name?: string;
   /** 인풋 타입 설정 */
   type?: InputType;
   /** 인풋 사이즈 설정 */
@@ -45,6 +49,7 @@ export const Input = forwardRef<InputRef, InputProps>(
     {
       type = "text",
       size = "m",
+      name,
       label,
       rounded,
       pattern,
@@ -124,6 +129,7 @@ export const Input = forwardRef<InputRef, InputProps>(
             id={label}
             ref={inputRef}
             type={inputType}
+            name={name}
             value={value}
             pattern={pattern}
             minLength={minLength}
@@ -133,6 +139,30 @@ export const Input = forwardRef<InputRef, InputProps>(
             onFocus={handleFocus}
             onChange={handleChange}
           />
+          {type === "password" && (
+            <div className={styles.passwordIconButton}>
+              {inputType === "password" && (
+                <IconButton
+                  onClick={() => {
+                    setInputType("text");
+                  }}
+                  type="secret"
+                  color="#a5a5a5"
+                  hoverColor="#595959"
+                />
+              )}
+              {inputType === "text" && (
+                <IconButton
+                  onClick={() => {
+                    setInputType("password");
+                  }}
+                  type="secret_open"
+                  color="#a5a5a5"
+                  hoverColor="#595959"
+                />
+              )}
+            </div>
+          )}
         </div>
         {currentError && error ? (
           <div className={styles.inputError}>
@@ -141,30 +171,6 @@ export const Input = forwardRef<InputRef, InputProps>(
             </Text>
           </div>
         ) : undefined}
-        {type === "password" && (
-          <div className={styles.passwordIconButton}>
-            {inputType === "password" && (
-              <IconButton
-                onClick={() => {
-                  setInputType("text");
-                }}
-                type="secret"
-                color="#a5a5a5"
-                hoverColor="#595959"
-              />
-            )}
-            {inputType === "text" && (
-              <IconButton
-                onClick={() => {
-                  setInputType("password");
-                }}
-                type="secret_open"
-                color="#a5a5a5"
-                hoverColor="#595959"
-              />
-            )}
-          </div>
-        )}
       </div>
     );
   },

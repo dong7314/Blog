@@ -1,5 +1,6 @@
+"use client";
+
 import React, { ReactNode, useEffect, useState } from "react";
-import DOMPurify from "dompurify";
 
 import * as styles from "./Icon.css";
 

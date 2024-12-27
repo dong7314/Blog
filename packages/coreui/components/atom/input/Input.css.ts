@@ -84,7 +84,7 @@ export const inlineInputPassword = style({
 export const passwordIconButton = style({
   display: "inline-flex",
   position: "absolute",
-  right: "20px",
+  right: "10px",
   top: "50%",
   transform: "translateY(-50%)",
 });
