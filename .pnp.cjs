@@ -1919,6 +1919,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:0773bb82f172f12f2a27510f3b4d2152276a2ca450e4d53c96c6e44fdb56ae9f311e56eaf285d400870527d8cef26108a22393f584fa29cba2149928329665c8#npm:19.0.0"],\
           ["storybook", "virtual:0773bb82f172f12f2a27510f3b4d2152276a2ca450e4d53c96c6e44fdb56ae9f311e56eaf285d400870527d8cef26108a22393f584fa29cba2149928329665c8#npm:8.4.7"],\
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
+          ["uuid", "npm:11.0.3"],\
           ["vite", "virtual:0773bb82f172f12f2a27510f3b4d2152276a2ca450e4d53c96c6e44fdb56ae9f311e56eaf285d400870527d8cef26108a22393f584fa29cba2149928329665c8#npm:6.0.3"]\
         ],\
         "linkType": "SOFT"\

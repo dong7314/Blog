@@ -7,6 +7,7 @@ import React, {
   useRef,
   useImperativeHandle,
   forwardRef,
+  useId,
 } from "react";
 import { composeStyles } from "@vanilla-extract/css";
 
@@ -62,6 +63,7 @@ export const Input = forwardRef<InputRef, InputProps>(
     }: InputProps,
     ref,
   ) => {
+    const uuid = useId();
     const [currentError, setCurrentError] = useState(false);
     const [value, setValue] = useState("");
     const [focus, setFocus] = useState(false);
@@ -120,13 +122,13 @@ export const Input = forwardRef<InputRef, InputProps>(
       <div className={styles.inputBox}>
         <div className={outlineInputStyle}>
           {label && (
-            <label className={labelStyle} htmlFor={label}>
+            <label className={labelStyle} htmlFor={uuid}>
               {!placeholder && label}
             </label>
           )}
           <input
             className={inlineInputStyle}
-            id={label}
+            id={uuid}
             ref={inputRef}
             type={inputType}
             name={name}
@@ -146,7 +148,7 @@ export const Input = forwardRef<InputRef, InputProps>(
                   onClick={() => {
                     setInputType("text");
                   }}
-                  type="secret"
+                  type="secret_open"
                   color="#a5a5a5"
                   hoverColor="#595959"
                 />
@@ -156,7 +158,7 @@ export const Input = forwardRef<InputRef, InputProps>(
                   onClick={() => {
                     setInputType("password");
                   }}
-                  type="secret_open"
+                  type="secret"
                   color="#a5a5a5"
                   hoverColor="#595959"
                 />

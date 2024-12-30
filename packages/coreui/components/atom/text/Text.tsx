@@ -5,6 +5,7 @@ import React, { ReactNode } from "react";
 import * as styles from "./Text.css";
 
 import { TextSize, TextWeight } from "./Text.type";
+import { composeStyles } from "@vanilla-extract/css";
 
 export interface TextProps {
   /** 폰트 색상 설정 */
@@ -15,6 +16,8 @@ export interface TextProps {
   weight?: TextWeight;
   /** 폰트 내용 */
   children: ReactNode;
+  /** text에 style 커스텀 설정 */
+  className?: string;
 }
 
 export const Text = ({
@@ -22,12 +25,15 @@ export const Text = ({
   color = "#262626",
   weight = 400,
   children,
+  className,
 }: TextProps) => {
+  const textStyle = composeStyles(
+    styles.fontSize[size],
+    className ? className : "",
+  );
+
   return (
-    <div
-      className={styles.fontSize[size]}
-      style={{ color, fontWeight: weight }}
-    >
+    <div className={textStyle} style={{ color, fontWeight: weight }}>
       {children}
     </div>
   );

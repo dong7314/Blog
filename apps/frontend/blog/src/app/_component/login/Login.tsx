@@ -37,7 +37,7 @@ export default function Login({ modal = false }: Props) {
               type="text"
               name={"email"}
               label={"이메일 주소"}
-              error={"유효한 이메일 주소를 입력해주세요."}
+              error={"유효한 이메일 주소를 입력해 주세요."}
               pattern={"[a-zA-Z0-9.]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"}
             />
           </div>

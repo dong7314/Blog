@@ -1224,6 +1224,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     storybook: "npm:8.4.7"
     typescript: "npm:^5.7.2"
+    uuid: "npm:^11.0.3"
     vite: "npm:^6.0.3"
   languageName: unknown
   linkType: soft

@@ -3,7 +3,8 @@ import { style } from "@vanilla-extract/css";
 export const loginSection = style({
   display: "flex",
   flexDirection: "column",
-  width: "100%",
+  paddingInline: "6px",
+  width: "calc(100% - 12px)",
   height: "100%",
   alignItems: "center",
   justifyContent: "space-between",
@@ -62,7 +63,7 @@ export const socialLogin = style({
 export const loginSeperatorBox = style({
   display: "flex",
   width: "100%",
-  marginBottom: "24px",
+  marginBottom: "20px",
 });
 
 export const loginSeperator = style({

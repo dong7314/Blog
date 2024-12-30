@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const loginPage = style({
+export const authPage = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -8,9 +8,7 @@ export const loginPage = style({
   height: "100%",
 });
 
-export const loginBox = style({
-  display: "inline-flex",
+export const authLayout = style({
+  display: "flex",
   width: "380px",
-  height: "445px",
-  marginBottom: "48px",
 });

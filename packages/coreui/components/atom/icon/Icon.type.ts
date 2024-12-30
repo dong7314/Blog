@@ -6,6 +6,7 @@ export type IconType =
   | "secret_open"
   | "bell"
   | "light"
-  | "dark";
+  | "dark"
+  | "check";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";
