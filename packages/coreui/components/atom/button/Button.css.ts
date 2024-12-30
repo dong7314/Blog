@@ -20,9 +20,9 @@ export const base = style({
 export const type = styleVariants({
   primary: {
     color: "#fff",
-    backgroundColor: "#0066ff",
+    backgroundColor: "#595959",
     ":hover": {
-      backgroundColor: "#0056d6",
+      backgroundColor: "#3f3f3f",
     },
   },
   secondary: {

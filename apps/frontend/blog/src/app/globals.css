@@ -10,6 +10,8 @@ body {
 }
 
 main {
+  width: 1400px;
+  margin-inline: auto;
   height: calc(100% - 127px);
 }
 

@@ -30,8 +30,8 @@ export const label = style({
 });
 
 export const checked = style({
-  border: "1px solid #0066ff",
-  backgroundColor: "#0066ff",
+  border: "1px solid #595959",
+  backgroundColor: "#595959",
 });
 
 export const disabled = style({

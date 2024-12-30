@@ -16,13 +16,15 @@
     "@vanilla-extract/vite-plugin": "^4.0.18",
     "next": "15.1.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-slick": "^0.30.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-slick": "^0",
     "eslint": "^9",
     "eslint-config-next": "15.1.1",
     "typescript": "^5"
