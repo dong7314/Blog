@@ -1193,6 +1193,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.16.1"
     "@vanilla-extract/next-plugin": "npm:^2.4.7"
     "@vanilla-extract/vite-plugin": "npm:^4.0.18"
+    dayjs: "npm:^1.11.13"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.1.1"
     next: "npm:15.1.1"
@@ -5578,6 +5579,13 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.21.0"
   checksum: 10c0/e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.13":
+  version: 1.11.13
+  resolution: "dayjs@npm:1.11.13"
+  checksum: 10c0/a3caf6ac8363c7dade9d1ee797848ddcf25c1ace68d9fe8678ecf8ba0675825430de5d793672ec87b24a69bf04a1544b176547b2539982275d5542a7955f35b7
   languageName: node
   linkType: hard
 

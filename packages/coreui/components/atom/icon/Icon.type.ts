@@ -7,6 +7,7 @@ export type IconType =
   | "bell"
   | "light"
   | "dark"
-  | "check";
+  | "check"
+  | "favorite";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";

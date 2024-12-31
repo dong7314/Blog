@@ -8,7 +8,8 @@ export const PrePostDataList: PrePost[] = [
     author: "HyunHo Lee",
     likes: 55,
     comment: 3,
-    createdDate: new Date(),
+    thumbnail: "/example1.jpg",
+    createdDate: new Date(2024, 11, 16),
   },
   {
     title: "나의 GitHub Copilot 활용법 & Tip (feat. Me)",
@@ -17,6 +18,7 @@ export const PrePostDataList: PrePost[] = [
     author: "숑숑",
     likes: 38,
     comment: 3,
+    thumbnail: "/example2.jpg",
     createdDate: new Date(),
   },
   {
@@ -26,6 +28,7 @@ export const PrePostDataList: PrePost[] = [
     author: "지상 최강의 개발자 쥬니니",
     likes: 33,
     comment: 11,
+    thumbnail: "/example3.jpg",
     createdDate: new Date(),
   },
   {
@@ -36,6 +39,7 @@ export const PrePostDataList: PrePost[] = [
     author: "eunbinn",
     likes: 25,
     comment: 0,
+    thumbnail: "/example1.jpg",
     createdDate: new Date(),
   },
   {
@@ -45,6 +49,7 @@ export const PrePostDataList: PrePost[] = [
     author: "김현지",
     likes: 18,
     comment: 15,
+    thumbnail: "/example2.jpg",
     createdDate: new Date(),
   },
   {
@@ -54,6 +59,7 @@ export const PrePostDataList: PrePost[] = [
     author: "우혁",
     likes: 22,
     comment: 2,
+    thumbnail: "/example3.jpg",
     createdDate: new Date(),
   },
   {
@@ -64,6 +70,7 @@ export const PrePostDataList: PrePost[] = [
     author: "허욤이",
     likes: 19,
     comment: 7,
+    thumbnail: "/example1.jpg",
     createdDate: new Date(),
   },
   {
@@ -74,6 +81,7 @@ export const PrePostDataList: PrePost[] = [
     author: "일일일",
     likes: 35,
     comment: 6,
+    thumbnail: "/example2.jpg",
     createdDate: new Date(),
   },
   {
@@ -83,6 +91,7 @@ export const PrePostDataList: PrePost[] = [
     author: "강문혁",
     likes: 18,
     comment: 0,
+    thumbnail: "/example3.jpg",
     createdDate: new Date(),
   },
   {
@@ -92,6 +101,7 @@ export const PrePostDataList: PrePost[] = [
     author: "우혁",
     likes: 31,
     comment: 0,
+    thumbnail: "/example1.jpg",
     createdDate: new Date(),
   },
 ];
