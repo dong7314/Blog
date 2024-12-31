@@ -1,4 +1,5 @@
 export default interface PrePost {
+  id: number;
   title: string;
   postDescription: string;
   content: string;

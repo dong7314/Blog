@@ -2,6 +2,7 @@ import PrePost from "../model/PrePost";
 
 export const PrePostDataList: PrePost[] = [
   {
+    id: 102,
     title: "평범한 3년차 개발자의 회고글",
     postDescription: "쉽지 않았던 1년. 생각보다 한게 많다.",
     content: "",
@@ -12,6 +13,7 @@ export const PrePostDataList: PrePost[] = [
     createdDate: new Date(2024, 11, 16),
   },
   {
+    id: 99,
     title: "나의 GitHub Copilot 활용법 & Tip (feat. Me)",
     postDescription: "빠퇴를 돕는 14가지 Github Copilot 활용 Tip",
     content: "",
@@ -19,9 +21,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 38,
     comment: 3,
     thumbnail: "/example2.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 10, 24),
   },
   {
+    id: 42,
     title: "월 유지비 1$ 미만으로 마참내 안죽는 요단강 익스프레스",
     postDescription: "요단강 익스프레스 정상영업 합니다.",
     content: "",
@@ -29,9 +32,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 33,
     comment: 11,
     thumbnail: "/example3.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 5),
   },
   {
+    id: 55,
     title: "[번역] 리액트 19 업그레이드 가이드",
     postDescription: "",
     content:
@@ -40,9 +44,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 25,
     comment: 0,
     thumbnail: "/example1.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 22),
   },
   {
+    id: 37,
     title: "2달만에 카카오벤처스 그만두고 이직한 여고생 개발자",
     postDescription: "야 너도 할 수 있어",
     content: "",
@@ -50,9 +55,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 18,
     comment: 15,
     thumbnail: "/example2.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 29),
   },
   {
+    id: 123,
     title: "우아한 테크 코스 7기 최종 합격 후기",
     postDescription: "누군가에게 도움이 될 수 있길 바라며..",
     content: "",
@@ -60,9 +66,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 22,
     comment: 2,
     thumbnail: "/example3.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 30),
   },
   {
+    id: 607,
     title:
       "항해 플러스 프론트엔드 후기(1주차) - 프레임워크 없이 SPA를 구현해 보자",
     postDescription: "네...? 프레임워크 없이 SPA를 구현해 보라고요?",
@@ -71,9 +78,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 19,
     comment: 7,
     thumbnail: "/example1.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 12, 24),
   },
   {
+    id: 432,
     title: "[TOP 10] 개발자들이 많이 읽은 아티클 모음 - 12월 3주차",
     postDescription: "",
     content:
@@ -82,9 +90,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 35,
     comment: 6,
     thumbnail: "/example2.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 19),
   },
   {
+    id: 72,
     title: "겜린더 출시 후기",
     postDescription: "근데 이제 디자이너 친구를 곁들인... 1인 개발 후기",
     content: "",
@@ -92,9 +101,10 @@ export const PrePostDataList: PrePost[] = [
     likes: 18,
     comment: 0,
     thumbnail: "/example3.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 12),
   },
   {
+    id: 22,
     title: "useState의 내부 동작 원리",
     postDescription: "useState의 내부 동작 원리와 리렌더링 매커니즘 이해하기",
     content: "",
@@ -102,6 +112,6 @@ export const PrePostDataList: PrePost[] = [
     likes: 31,
     comment: 0,
     thumbnail: "/example1.jpg",
-    createdDate: new Date(),
+    createdDate: new Date(2024, 11, 30),
   },
 ];

@@ -6,22 +6,16 @@ import "dayjs/locale/ko";
 import * as styles from "./Post.css";
 
 import { Icon, Text, TextButton } from "@frontend/coreui";
+import PrePost from "../../model/PrePost";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-export default function Post() {
-  const data = {
-    title: "평범한 3년차 개발자의 회고글",
-    postDescription: "쉽지 않았던 1년. 생각보다 한게 많다.",
-    content: "",
-    author: "HyunHo Lee",
-    likes: 55,
-    comment: 3,
-    thumbnail: "/example1.jpg",
-    createdDate: new Date(2024, 11, 16),
-  };
+type Props = {
+  data: PrePost;
+};
 
+export default function Post({ data }: Props) {
   const convertDate = (date: Date) => {
     const givenDate = dayjs(date);
     // 1주일 전 기준
@@ -42,7 +36,7 @@ export default function Post() {
         <Image
           src={data.thumbnail}
           alt={data.title}
-          layout="fill"
+          layout="relate"
           objectFit="cover"
           objectPosition="center"
           className={styles.imageHover}
