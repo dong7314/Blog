@@ -1,6 +1,10 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 
-export const sliderContainer = style({
-  display: "flex",
-  width: "100%",
+export const postContainer = style({
+  padding: "10px",
+  boxSizing: "border-box",
+});
+
+globalStyle(".slick-dots li button:before", {
+  transition: "all .1s ease-out",
 });

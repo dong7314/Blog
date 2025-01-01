@@ -13,19 +13,21 @@ export default function PostCarousel() {
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
   };
 
   return (
-    <div className={styles.sliderContainer}>
-      <Slider {...settings}>
-        {exampleData.map((data: PrePost) => {
-          return <Post key={data.id} data={data} />;
-        })}
-      </Slider>
-    </div>
+    <Slider {...settings}>
+      {exampleData.map((data: PrePost) => {
+        return (
+          <div key={data.id} className={styles.postContainer}>
+            <Post data={data} />
+          </div>
+        );
+      })}
+    </Slider>
   );
 }

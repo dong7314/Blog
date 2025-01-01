@@ -36,7 +36,7 @@ export default function Post({ data }: Props) {
         <Image
           src={data.thumbnail}
           alt={data.title}
-          layout="relate"
+          layout="fill"
           objectFit="cover"
           objectPosition="center"
           className={styles.imageHover}

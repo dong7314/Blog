@@ -28,7 +28,7 @@ export const PrePostDataList: PrePost[] = [
     title: "월 유지비 1$ 미만으로 마참내 안죽는 요단강 익스프레스",
     postDescription: "요단강 익스프레스 정상영업 합니다.",
     content: "",
-    author: "지상 최강의 개발자 쥬니니",
+    author: "지상 최강의 개발자",
     likes: 33,
     comment: 11,
     thumbnail: "/example3.jpg",
