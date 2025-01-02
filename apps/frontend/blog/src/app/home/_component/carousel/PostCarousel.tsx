@@ -5,8 +5,9 @@ import Slider from "react-slick";
 import * as styles from "./PostCarousel.css";
 
 import Post from "../post/Post";
-import PrePost from "../../model/PrePost";
+import PrePost from "../../model/Post";
 import { PrePostDataList } from "../../data/PrePostDataEx";
+import { PostNextArrow, PostPrevArrow } from "./arrow/PostArrows";
 
 export default function PostCarousel() {
   const exampleData = PrePostDataList;
@@ -17,6 +18,8 @@ export default function PostCarousel() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
+    nextArrow: <PostNextArrow />,
+    prevArrow: <PostPrevArrow />,
   };
 
   return (

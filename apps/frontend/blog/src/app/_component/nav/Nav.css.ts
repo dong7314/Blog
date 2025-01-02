@@ -11,7 +11,7 @@ export const navBox = style({
   display: "flex",
   justifyContent: "center",
   width: "100%",
-  borderBottom: "1px solid #ededed",
+  borderBottom: "1px solid #e6e6e6",
 });
 
 export const navDefaultContent = style({

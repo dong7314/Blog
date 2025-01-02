@@ -8,6 +8,9 @@ export type IconType =
   | "light"
   | "dark"
   | "check"
-  | "favorite";
+  | "favorite"
+  | "left"
+  | "right"
+  | "comment";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";

@@ -46,7 +46,7 @@ export default function RootLayout({ children, modal }: Props) {
       <body>
         <Nav />
         <main>
-          {children}
+          <div className="container">{children}</div>
           {modal}
         </main>
       </body>

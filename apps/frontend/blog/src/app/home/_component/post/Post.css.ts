@@ -13,7 +13,7 @@ export const postContainer = style({
   transition: "all .2s ease-out",
   ":hover": {
     cursor: "pointer",
-    boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.08)",
+    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.08)",
   },
 });
 

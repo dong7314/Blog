@@ -1,4 +1,4 @@
-import PrePost from "../model/PrePost";
+import PrePost from "../model/Post";
 
 export const PrePostDataList: PrePost[] = [
   {
@@ -78,7 +78,7 @@ export const PrePostDataList: PrePost[] = [
     likes: 19,
     comment: 7,
     thumbnail: "/example1.jpg",
-    createdDate: new Date(2024, 12, 24),
+    createdDate: new Date(2024, 11, 24),
   },
   {
     id: 432,

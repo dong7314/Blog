@@ -6,7 +6,7 @@ import "dayjs/locale/ko";
 import * as styles from "./Post.css";
 
 import { Icon, Text, TextButton } from "@frontend/coreui";
-import PrePost from "../../model/PrePost";
+import PrePost from "../../model/Post";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
