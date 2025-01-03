@@ -12,8 +12,11 @@ body {
 main {
   width: 100%;
   height: calc(100% - 127px);
+  padding-left: 13px;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-gutter: stable;
+  box-sizing: border-box;
 }
 
 main::-webkit-scrollbar {
@@ -44,4 +47,7 @@ main::-webkit-scrollbar-thumb:hover {
 a {
   text-decoration: none;
   display: inline-flex;
+}
+
+.toastui-editor-.toastui-editor-defaultUI {
 }

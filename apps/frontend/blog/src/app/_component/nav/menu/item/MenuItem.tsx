@@ -1,12 +1,12 @@
 "use client";
 
-import * as styles from "./MenuItem.css";
-
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import * as styles from "./MenuItem.css";
+import { composeStyles } from "@vanilla-extract/css";
 
 import MenuData from "../model/MenuData";
-import { usePathname } from "next/navigation";
-import { composeStyles } from "@vanilla-extract/css";
 
 type Props = {
   data: MenuData;

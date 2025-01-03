@@ -42,6 +42,10 @@ export default function RootLayout({ children, modal }: Props) {
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/tui-color-picker@2.2.6/dist/tui-color-picker.min.css"
+        ></link>
       </head>
       <body>
         <Nav />

@@ -1878,7 +1878,13 @@ const RAW_RUNTIME_STATE =
           ["@frontend/blog", "workspace:apps/frontend/blog"],\
           ["@eslint/eslintrc", "npm:3.2.0"],\
           ["@frontend/coreui", "workspace:packages/coreui"],\
+          ["@toast-ui/editor", "npm:3.2.2"],\
+          ["@toast-ui/editor-plugin-code-syntax-highlight", "npm:3.1.0"],\
+          ["@toast-ui/editor-plugin-color-syntax", "npm:3.1.0"],\
+          ["@toast-ui/editor-plugin-table-merged-cell", "npm:3.1.0"],\
+          ["@toast-ui/react-editor", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:3.2.3"],\
           ["@types/node", "npm:20.17.10"],\
+          ["@types/prismjs", "npm:1.26.5"],\
           ["@types/react", "npm:19.0.2"],\
           ["@types/react-dom", "virtual:0773bb82f172f12f2a27510f3b4d2152276a2ca450e4d53c96c6e44fdb56ae9f311e56eaf285d400870527d8cef26108a22393f584fa29cba2149928329665c8#npm:19.0.2"],\
           ["@types/react-slick", "npm:0.23.13"],\
@@ -1890,6 +1896,8 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:9.17.0"],\
           ["eslint-config-next", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:15.1.1"],\
           ["next", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:15.1.1"],\
+          ["prismjs", "npm:1.29.0"],\
+          ["prosemirror-transform", "npm:1.10.2"],\
           ["react", "npm:19.0.0"],\
           ["react-dom", "virtual:0773bb82f172f12f2a27510f3b4d2152276a2ca450e4d53c96c6e44fdb56ae9f311e56eaf285d400870527d8cef26108a22393f584fa29cba2149928329665c8#npm:19.0.0"],\
           ["react-slick", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:0.30.3"],\
@@ -4517,6 +4525,77 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@toast-ui/editor", [\
+      ["npm:3.2.2", {\
+        "packageLocation": "./.yarn/cache/@toast-ui-editor-npm-3.2.2-8b6a9786fd-f7b2be4d49.zip/node_modules/@toast-ui/editor/",\
+        "packageDependencies": [\
+          ["@toast-ui/editor", "npm:3.2.2"],\
+          ["dompurify", "npm:2.5.8"],\
+          ["prosemirror-commands", "npm:1.6.2"],\
+          ["prosemirror-history", "npm:1.4.1"],\
+          ["prosemirror-inputrules", "npm:1.4.0"],\
+          ["prosemirror-keymap", "npm:1.2.2"],\
+          ["prosemirror-model", "npm:1.24.1"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-transform", "npm:1.10.2"],\
+          ["prosemirror-view", "npm:1.37.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@toast-ui/editor-plugin-code-syntax-highlight", [\
+      ["npm:3.1.0", {\
+        "packageLocation": "./.yarn/cache/@toast-ui-editor-plugin-code-syntax-highlight-npm-3.1.0-c1ad588de9-3cc75815f6.zip/node_modules/@toast-ui/editor-plugin-code-syntax-highlight/",\
+        "packageDependencies": [\
+          ["@toast-ui/editor-plugin-code-syntax-highlight", "npm:3.1.0"],\
+          ["prismjs", "npm:1.29.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@toast-ui/editor-plugin-color-syntax", [\
+      ["npm:3.1.0", {\
+        "packageLocation": "./.yarn/cache/@toast-ui-editor-plugin-color-syntax-npm-3.1.0-1688766a0c-3187308ed6.zip/node_modules/@toast-ui/editor-plugin-color-syntax/",\
+        "packageDependencies": [\
+          ["@toast-ui/editor-plugin-color-syntax", "npm:3.1.0"],\
+          ["tui-color-picker", "npm:2.2.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@toast-ui/editor-plugin-table-merged-cell", [\
+      ["npm:3.1.0", {\
+        "packageLocation": "./.yarn/cache/@toast-ui-editor-plugin-table-merged-cell-npm-3.1.0-5d381a9972-1d9a9f5017.zip/node_modules/@toast-ui/editor-plugin-table-merged-cell/",\
+        "packageDependencies": [\
+          ["@toast-ui/editor-plugin-table-merged-cell", "npm:3.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@toast-ui/react-editor", [\
+      ["npm:3.2.3", {\
+        "packageLocation": "./.yarn/cache/@toast-ui-react-editor-npm-3.2.3-aed61aa676-9850ee4b85.zip/node_modules/@toast-ui/react-editor/",\
+        "packageDependencies": [\
+          ["@toast-ui/react-editor", "npm:3.2.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:3.2.3", {\
+        "packageLocation": "./.yarn/__virtual__/@toast-ui-react-editor-virtual-fc986e6a07/0/cache/@toast-ui-react-editor-npm-3.2.3-aed61aa676-9850ee4b85.zip/node_modules/@toast-ui/react-editor/",\
+        "packageDependencies": [\
+          ["@toast-ui/react-editor", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:3.2.3"],\
+          ["@toast-ui/editor", "npm:3.2.2"],\
+          ["@types/react", "npm:19.0.2"],\
+          ["prosemirror-transform", "npm:1.10.2"],\
+          ["react", "npm:19.0.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@tsconfig/node10", [\
       ["npm:1.0.11", {\
         "packageLocation": "./.yarn/cache/@tsconfig-node10-npm-1.0.11-ab23db00e2-28a0710e5d.zip/node_modules/@tsconfig/node10/",\
@@ -4916,6 +4995,15 @@ const RAW_RUNTIME_STATE =
           ["@types/passport-strategy", "npm:0.2.38"],\
           ["@types/express", "npm:5.0.0"],\
           ["@types/passport", "npm:1.0.17"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/prismjs", [\
+      ["npm:1.26.5", {\
+        "packageLocation": "./.yarn/cache/@types-prismjs-npm-1.26.5-5c39951991-5619cb449e.zip/node_modules/@types/prismjs/",\
+        "packageDependencies": [\
+          ["@types/prismjs", "npm:1.26.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8172,6 +8260,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["dompurify", [\
+      ["npm:2.5.8", {\
+        "packageLocation": "./.yarn/cache/dompurify-npm-2.5.8-e124d1b8e9-4101708d19.zip/node_modules/dompurify/",\
+        "packageDependencies": [\
+          ["dompurify", "npm:2.5.8"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.2.3", {\
         "packageLocation": "./.yarn/cache/dompurify-npm-3.2.3-4fa119eef7-0ce5cb89b7.zip/node_modules/dompurify/",\
         "packageDependencies": [\
@@ -13315,6 +13410,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["orderedmap", [\
+      ["npm:2.1.1", {\
+        "packageLocation": "./.yarn/cache/orderedmap-npm-2.1.1-64b8a0684f-8d7d266659.zip/node_modules/orderedmap/",\
+        "packageDependencies": [\
+          ["orderedmap", "npm:2.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["os-tmpdir", [\
       ["npm:1.0.2", {\
         "packageLocation": "./.yarn/cache/os-tmpdir-npm-1.0.2-e305b0689b-f438450224.zip/node_modules/os-tmpdir/",\
@@ -13834,6 +13938,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["prismjs", [\
+      ["npm:1.29.0", {\
+        "packageLocation": "./.yarn/cache/prismjs-npm-1.29.0-6faa5b04b8-d906c4c4d0.zip/node_modules/prismjs/",\
+        "packageDependencies": [\
+          ["prismjs", "npm:1.29.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["proc-log", [\
       ["npm:5.0.0", {\
         "packageLocation": "./.yarn/cache/proc-log-npm-5.0.0-405173f9b4-bbe5edb944.zip/node_modules/proc-log/",\
@@ -13891,6 +14004,97 @@ const RAW_RUNTIME_STATE =
           ["loose-envify", "npm:1.4.0"],\
           ["object-assign", "npm:4.1.1"],\
           ["react-is", "npm:16.13.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-commands", [\
+      ["npm:1.6.2", {\
+        "packageLocation": "./.yarn/cache/prosemirror-commands-npm-1.6.2-2dd28f94d5-3504d884d4.zip/node_modules/prosemirror-commands/",\
+        "packageDependencies": [\
+          ["prosemirror-commands", "npm:1.6.2"],\
+          ["prosemirror-model", "npm:1.24.1"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-transform", "npm:1.10.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-history", [\
+      ["npm:1.4.1", {\
+        "packageLocation": "./.yarn/cache/prosemirror-history-npm-1.4.1-ad68c86bb7-fd2dfae5fb.zip/node_modules/prosemirror-history/",\
+        "packageDependencies": [\
+          ["prosemirror-history", "npm:1.4.1"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-transform", "npm:1.10.2"],\
+          ["prosemirror-view", "npm:1.37.1"],\
+          ["rope-sequence", "npm:1.3.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-inputrules", [\
+      ["npm:1.4.0", {\
+        "packageLocation": "./.yarn/cache/prosemirror-inputrules-npm-1.4.0-14c674c300-8ec72b6c29.zip/node_modules/prosemirror-inputrules/",\
+        "packageDependencies": [\
+          ["prosemirror-inputrules", "npm:1.4.0"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-transform", "npm:1.10.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-keymap", [\
+      ["npm:1.2.2", {\
+        "packageLocation": "./.yarn/cache/prosemirror-keymap-npm-1.2.2-efb8276b00-7aa28c731e.zip/node_modules/prosemirror-keymap/",\
+        "packageDependencies": [\
+          ["prosemirror-keymap", "npm:1.2.2"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["w3c-keyname", "npm:2.2.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-model", [\
+      ["npm:1.24.1", {\
+        "packageLocation": "./.yarn/cache/prosemirror-model-npm-1.24.1-6467e55b40-d09e1aac3c.zip/node_modules/prosemirror-model/",\
+        "packageDependencies": [\
+          ["prosemirror-model", "npm:1.24.1"],\
+          ["orderedmap", "npm:2.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-state", [\
+      ["npm:1.4.3", {\
+        "packageLocation": "./.yarn/cache/prosemirror-state-npm-1.4.3-d6540e44ad-e34dc9b1a6.zip/node_modules/prosemirror-state/",\
+        "packageDependencies": [\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-model", "npm:1.24.1"],\
+          ["prosemirror-transform", "npm:1.10.2"],\
+          ["prosemirror-view", "npm:1.37.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-transform", [\
+      ["npm:1.10.2", {\
+        "packageLocation": "./.yarn/cache/prosemirror-transform-npm-1.10.2-1c2da9123e-4b63879bab.zip/node_modules/prosemirror-transform/",\
+        "packageDependencies": [\
+          ["prosemirror-transform", "npm:1.10.2"],\
+          ["prosemirror-model", "npm:1.24.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prosemirror-view", [\
+      ["npm:1.37.1", {\
+        "packageLocation": "./.yarn/cache/prosemirror-view-npm-1.37.1-0a018fc5ec-1955216244.zip/node_modules/prosemirror-view/",\
+        "packageDependencies": [\
+          ["prosemirror-view", "npm:1.37.1"],\
+          ["prosemirror-model", "npm:1.24.1"],\
+          ["prosemirror-state", "npm:1.4.3"],\
+          ["prosemirror-transform", "npm:1.10.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14482,6 +14686,15 @@ const RAW_RUNTIME_STATE =
           ["@rollup/rollup-win32-x64-msvc", "npm:4.28.1"],\
           ["@types/estree", "npm:1.0.6"],\
           ["fsevents", "patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rope-sequence", [\
+      ["npm:1.3.4", {\
+        "packageLocation": "./.yarn/cache/rope-sequence-npm-1.3.4-3b09587e5f-caa90be3d7.zip/node_modules/rope-sequence/",\
+        "packageDependencies": [\
+          ["rope-sequence", "npm:1.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15773,6 +15986,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["tui-color-picker", [\
+      ["npm:2.2.8", {\
+        "packageLocation": "./.yarn/cache/tui-color-picker-npm-2.2.8-cd63eccaa5-041f648df1.zip/node_modules/tui-color-picker/",\
+        "packageDependencies": [\
+          ["tui-color-picker", "npm:2.2.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["tween-functions", [\
       ["npm:1.2.0", {\
         "packageLocation": "./.yarn/cache/tween-functions-npm-1.2.0-4c24ac77a5-7e59295b8b.zip/node_modules/tween-functions/",\
@@ -16369,6 +16591,15 @@ const RAW_RUNTIME_STATE =
           ["pathe", "npm:1.1.2"],\
           ["picocolors", "npm:1.1.1"],\
           ["vite", "virtual:2c30557d8ca5e7c67e7558d45bc44bef6c7a622b34a97fa8102f3235f92769c87777d34ed37059c12d8f3a21841ea06cf4badc5dc796697b0f765c17db6e24e5#npm:5.4.11"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["w3c-keyname", [\
+      ["npm:2.2.8", {\
+        "packageLocation": "./.yarn/cache/w3c-keyname-npm-2.2.8-66d7d5317a-37cf335c90.zip/node_modules/w3c-keyname/",\
+        "packageDependencies": [\
+          ["w3c-keyname", "npm:2.2.8"]\
         ],\
         "linkType": "HARD"\
       }]\

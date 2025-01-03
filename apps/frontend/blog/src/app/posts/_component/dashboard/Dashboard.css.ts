@@ -19,3 +19,12 @@ export const dashboardSection = style({
   width: "100%",
   height: "100%",
 });
+
+export const dashboardArticle = style({
+  borderBottom: "1px solid #dbdbdb",
+  selectors: {
+    "&:nth-last-of-type(1)": {
+      borderBottom: "none",
+    },
+  },
+});

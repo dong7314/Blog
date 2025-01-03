@@ -6,6 +6,7 @@ export default interface PrePost {
   author: string;
   likes: number;
   comment: number;
+  tags: string[];
   thumbnail: string;
   createdDate: Date;
 }

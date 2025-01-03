@@ -15,14 +15,17 @@ export const postContainer = style({
 
 export const image = style({
   borderRadius: "12px",
+  boxShadow:
+    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
 });
 
 export const infoContainer = style({
   display: "flex",
   flexDirection: "column",
+  justifyContent: "space-between",
   width: "100%",
   marginLeft: "32px",
-  paddingBlock: "6px",
+  paddingTop: "6px",
 });
 
 export const author = style([
@@ -73,10 +76,15 @@ export const details = style([
 export const tags = style([flexCenter]);
 
 export const tag = style({
-  marginLeft: "6px",
+  marginLeft: "8px",
   ":hover": {
     cursor: "pointer",
     color: "#262626 !important",
+  },
+  selectors: {
+    "&:nth-of-type(1)": {
+      marginLeft: "4px",
+    },
   },
 });
 

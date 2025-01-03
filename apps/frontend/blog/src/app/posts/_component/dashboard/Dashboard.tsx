@@ -27,7 +27,16 @@ export default function Dashboard() {
         </HeaderItem>
       </header>
       <section className={styles.dashboardSection}>
-        <DashboardPost />
+        {exampleData.map((post) => {
+          return (
+            <article
+              className={styles.dashboardArticle}
+              key={`dashboard-post-${post.id}`}
+            >
+              <DashboardPost data={post} />
+            </article>
+          );
+        })}
       </section>
     </div>
   );

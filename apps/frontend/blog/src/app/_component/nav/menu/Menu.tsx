@@ -3,6 +3,7 @@ import * as styles from "./Menu.css";
 import MenuData from "./model/MenuData";
 
 import MenuItem from "./item/MenuItem";
+import MenuButtons from "./buttons/MenuButtons";
 
 export default async function Menu() {
   /* 
@@ -17,11 +18,16 @@ export default async function Menu() {
   ];
 
   return (
-    <ul className={styles.menu}>
-      {menuData &&
-        menuData.map((data, index) => {
-          return <MenuItem data={data} key={index} />;
-        })}
-    </ul>
+    <div className={styles.menuBar}>
+      <ul className={styles.menu}>
+        {menuData &&
+          menuData.map((data, index) => {
+            return <MenuItem data={data} key={index} />;
+          })}
+      </ul>
+      <div className={styles.menuButtons}>
+        <MenuButtons />
+      </div>
+    </div>
   );
 }
