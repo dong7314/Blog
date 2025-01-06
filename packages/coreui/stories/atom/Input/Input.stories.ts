@@ -53,8 +53,9 @@ export const Error: Story = {
     type: "text",
     label: "Email",
     pattern: "[a-zA-Z0-9.]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*",
-    error: "이메일 양식으로 입력해 주세요.",
+    error: true,
     size: "m",
+    children: "이메일 양식으로 입력해 주세요.",
   },
 };
 
@@ -79,6 +80,7 @@ export const MaxLength: Story = {
 export const Placeholder: Story = {
   args: {
     type: "text",
+    label: "Placeholder",
     placeholder: "Placeholder",
     size: "m",
   },

@@ -31,18 +31,27 @@ export const outlineError = style({
 
 export const label = style({
   display: "inline-flex",
-  position: "absolute",
-  paddingInline: "4px",
-  left: "10px",
-  top: "50%",
-  transform: "translateY(-50%)",
   color: "#A5A5A5",
+  paddingInline: "4px",
   fontSize: "0.875rem",
   fontFamily: "Pretendard",
   fontWeight: 400,
   transition: "all .1s ease-out",
   backgroundColor: "#fff",
   zIndex: 1,
+});
+
+export const hasPlaceholder = style({
+  color: "#262626",
+  marginLeft: "2px",
+  marginBottom: "4px",
+});
+
+export const withoutPlaceholder = style({
+  position: "absolute",
+  left: "10px",
+  top: "50%",
+  transform: "translateY(-50%)",
 });
 
 export const labelFocus = style({

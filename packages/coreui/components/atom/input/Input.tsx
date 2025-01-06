@@ -8,6 +8,8 @@ import React, {
   useImperativeHandle,
   forwardRef,
   useId,
+  ReactNode,
+  useEffect,
 } from "react";
 import { composeStyles } from "@vanilla-extract/css";
 
@@ -32,12 +34,14 @@ export interface InputProps {
   minLength?: number;
   /** 인풋 최대 글자 수 */
   maxLength?: number;
-  /** 패턴 관련하여 에러 발생 시 출력할 문자열 */
-  error?: string;
+  /** 에러 여부 설정 */
+  error?: boolean;
   /** 인풋 미리보기기 */
   placeholder?: string;
   /** 인풋 라운드 효과 설정 */
   rounded?: boolean;
+  /** 인풋 에러 발생 시 출력할 문자열 */
+  children?: ReactNode;
   /** input value 변경 시 동작할 함수 */
   onChange?: (value: string) => void;
   /** input에 style 커스텀 설정 */
@@ -56,15 +60,16 @@ export const Input = forwardRef<InputRef, InputProps>(
       pattern,
       minLength,
       maxLength,
-      error,
+      error = false,
       placeholder,
+      children,
       onChange,
       className,
     }: InputProps,
     ref,
   ) => {
     const uuid = useId();
-    const [currentError, setCurrentError] = useState(false);
+    const [currentError, setCurrentError] = useState(error);
     const [value, setValue] = useState("");
     const [focus, setFocus] = useState(false);
     const [inputType, setInputType] = useState(type);
@@ -80,7 +85,8 @@ export const Input = forwardRef<InputRef, InputProps>(
       styles.label,
       focus ? styles.labelFocus : "",
       currentError ? styles.labelError : "",
-      focus || value ? styles.labelInValue : "",
+      (focus || value) && !placeholder ? styles.labelInValue : "",
+      placeholder ? styles.hasPlaceholder : styles.withoutPlaceholder,
     );
     const inlineInputStyle = composeStyles(
       styles.inlineInput,
@@ -118,12 +124,21 @@ export const Input = forwardRef<InputRef, InputProps>(
       clearValue: () => setValue(""),
     }));
 
+    useEffect(() => {
+      setCurrentError(error);
+    }, [error]);
+
     return (
       <div className={styles.inputBox}>
+        {placeholder && label && (
+          <label className={labelStyle} htmlFor={uuid}>
+            {label}
+          </label>
+        )}
         <div className={outlineInputStyle}>
-          {label && (
+          {!placeholder && label && (
             <label className={labelStyle} htmlFor={uuid}>
-              {!placeholder && label}
+              {label}
             </label>
           )}
           <input
@@ -166,10 +181,10 @@ export const Input = forwardRef<InputRef, InputProps>(
             </div>
           )}
         </div>
-        {currentError && error ? (
+        {currentError && children ? (
           <div className={styles.inputError}>
             <Text size="xs" color="#FC6969">
-              {error}
+              {children}
             </Text>
           </div>
         ) : undefined}
