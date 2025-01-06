@@ -1,6 +1,6 @@
 import * as styles from "./page.css";
 
-import Signup from "@/app/_component/signup/Signup";
+import Signup from "@/app/(auth)/_component/signup/Signup";
 
 export default function SignupPage() {
   return (

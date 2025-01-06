@@ -1,6 +1,6 @@
 import * as styles from "./page.css";
 
-import Login from "../../_component/login/Login";
+import Login from "../_component/login/Login";
 
 export default function LoginPage() {
   return (

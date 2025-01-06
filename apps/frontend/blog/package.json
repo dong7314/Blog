@@ -11,10 +11,10 @@
   "dependencies": {
     "@frontend/coreui": "^1.0.0",
     "@toast-ui/editor": "^3.2.2",
-    "@toast-ui/react-editor": "^3.2.3",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
+    "@toast-ui/react-editor": "^3.2.3",
     "@vanilla-extract/babel-plugin": "^1.2.0",
     "@vanilla-extract/css": "^1.16.1",
     "@vanilla-extract/next-plugin": "^2.4.7",

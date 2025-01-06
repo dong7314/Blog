@@ -69,6 +69,7 @@ export const content = style({
 export const details = style([
   flexCenter,
   {
+    paddingBottom: "4px",
     justifyContent: "space-between",
   },
 ]);

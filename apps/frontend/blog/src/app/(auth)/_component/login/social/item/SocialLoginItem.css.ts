@@ -10,7 +10,7 @@ export const item = style({
   transition: "all .15s ease-out",
   ":hover": {
     cursor: "pointer",
-    filter: "brightness(0.85)",
+    filter: "brightness(0.92)",
   },
   selectors: {
     "&:nth-last-of-type(1)": {

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import * as styles from "./Login.css";
 
-import LogoImage from "../../../../public/Logo.png";
+import LogoImage from "../../../../../public/Logo.png";
 import SocialLogin from "./social/SocialLogin";
 import { Button, Input, Text, TextButton } from "@frontend/coreui";
 
@@ -37,9 +37,10 @@ export default function Login({ modal = false }: Props) {
               type="text"
               name={"email"}
               label={"이메일 주소"}
-              error={"유효한 이메일 주소를 입력해 주세요."}
               pattern={"[a-zA-Z0-9.]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"}
-            />
+            >
+              <span>유효한 이메일 주소를 입력해 주세요.</span>
+            </Input>
           </div>
           <div className={styles.loginInput}>
             <Input
@@ -47,13 +48,15 @@ export default function Login({ modal = false }: Props) {
               type="password"
               name={"password"}
               label={"비밀번호"}
-              error={
-                "비밀번호는 8자 이상으로 영문자, 숫자, 특수기호를 조합하여 입력해 주세요."
-              }
               pattern={
                 "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$"
               }
-            />
+            >
+              <span>
+                비밀번호는 8자 이상으로 영문자, 숫자, 특수기호를 조합하여 입력해
+                주세요.
+              </span>
+            </Input>
           </div>
           <div className={styles.loginButton}>
             <Button size="xl" type="primary">

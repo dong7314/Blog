@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 
 import * as styles from "./ToastUiEditor.css";
 
@@ -13,9 +13,12 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import { Editor } from "@toast-ui/react-editor";
 
-export default function ToastUiEditor() {
-  const [content, setContent] = useState("");
+type Props = {
+  content: string;
+  editorRef: React.MutableRefObject<any>;
+};
 
+export default function ToastUiEditor({ content, editorRef }: Props) {
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
@@ -29,10 +32,11 @@ export default function ToastUiEditor() {
   return (
     <div className={styles.editor}>
       <Editor
+        ref={editorRef}
         initialValue={content || " "} // 글 수정 시 사용
         initialEditType="markdown"
         previewStyle="tab"
-        height="calc(100% - 10rem)"
+        height="100%"
         theme={""} // '' & 'dark'
         toolbarItems={toolbarItems}
         useCommandShortcut={true}
