@@ -11,6 +11,8 @@ export type IconType =
   | "favorite"
   | "left"
   | "right"
-  | "comment";
+  | "comment"
+  | "plus"
+  | "plus_circle";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";
