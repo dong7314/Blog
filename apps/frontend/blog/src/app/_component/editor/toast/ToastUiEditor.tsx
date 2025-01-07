@@ -32,7 +32,6 @@ export default function ToastUiEditor({ content, editorRef, onChange }: Props) {
     const editorInstance = editorRef.current.getInstance();
 
     if (onChange) {
-      console.log(editorInstance.getMarkdown());
       onChange(editorInstance.getMarkdown());
     }
   };

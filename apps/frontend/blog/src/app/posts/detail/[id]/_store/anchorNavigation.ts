@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface AnchorNavigation {
+export interface AnchorNavigation {
   id: string;
   name: string;
   type: "h1" | "h2" | "h3";
@@ -9,14 +9,17 @@ interface AnchorNavigation {
 interface AnchorNavigationState {
   navList: AnchorNavigation[];
   navSet: Set<string>;
+  navPositionList: number[];
   reset(): void;
   addNavList(nav: AnchorNavigation): void;
+  setNavPositionList(position: number): void;
 }
 
 export const useAnchorNavigationStore = create<AnchorNavigationState>(
   (set, get) => ({
     navList: [],
     navSet: new Set(),
+    navPositionList: [],
     reset() {
       set({
         navList: [],
@@ -30,6 +33,15 @@ export const useAnchorNavigationStore = create<AnchorNavigationState>(
         set({
           navList: [...navList, nav],
           navSet: updateNavSet,
+        });
+      }
+    },
+    setNavPositionList(position: number) {
+      const { navPositionList } = get();
+      if (!navPositionList.includes(position)) {
+        const updateList = [...navPositionList, position].sort((a, b) => a - b);
+        set({
+          navPositionList: updateList,
         });
       }
     },
