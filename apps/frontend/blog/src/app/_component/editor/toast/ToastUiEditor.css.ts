@@ -26,3 +26,17 @@ globalStyle(`${editor} .toastui-editor-tabs`, {
 globalStyle(`${editor} .toastui-editor-defaultUI`, {
   border: "1px solid #dbdbdb",
 });
+
+globalStyle(`${editor} .ProseMirror::-webkit-scrollbar`, {
+  width: "5px !important",
+});
+
+globalStyle(`${editor} .ProseMirror::-webkit-scrollbar-track`, {
+  backgroundColor: "transparent !important",
+});
+
+globalStyle(`${editor} .ProseMirror::-webkit-scrollbar-thumb`, {
+  background: "#a5a5a5 !important",
+  borderRadius: "2.5px !important",
+  transition: "all 0.2s ease-out !important",
+});

@@ -6,8 +6,10 @@ import * as styles from "./Modal.css";
 
 import IconButton from "../iconButton/IconButton";
 import { composeStyles } from "@vanilla-extract/css";
+import Text from "../../atom/text/Text";
 
 export interface ModalProps {
+  title?: string;
   /** 모달 너비 */
   width: string;
   /** 모달 높이 */
@@ -18,7 +20,13 @@ export interface ModalProps {
   back?: () => void;
 }
 
-export const Modal = ({ width, height, children, back }: ModalProps) => {
+export const Modal = ({
+  title = "",
+  width,
+  height,
+  children,
+  back,
+}: ModalProps) => {
   const [isMouseDownInside, setIsMouseDownInside] = useState(false);
   const [modalContainerStyle, setModalContainerStyle] = useState(
     styles.modalContainer,
@@ -55,9 +63,12 @@ export const Modal = ({ width, height, children, back }: ModalProps) => {
         style={{ width, height }}
       >
         <div className={styles.modalHeader}>
+          <Text size="xl" weight={700} className={styles.modalTitle}>
+            {title}
+          </Text>
           <IconButton onClick={handleBackFn} type="close" size="l" />
         </div>
-        {children}
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </div>
   );

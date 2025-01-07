@@ -77,7 +77,7 @@ export const Textarea = ({
     setValue(newValue);
 
     if (onChange) {
-      onChange(newValue);
+      onChange(e.target.value);
     }
   };
 

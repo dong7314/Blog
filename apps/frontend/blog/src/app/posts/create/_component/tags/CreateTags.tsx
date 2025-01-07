@@ -4,8 +4,10 @@ import { useState } from "react";
 import * as styles from "./CreateTags.css";
 
 import { IconButton, Text } from "@frontend/coreui";
+import { usePostStore } from "../../_store/post";
 
 export default function CreateTags() {
+  const postStore = usePostStore();
   const [value, setValue] = useState("");
   const [tagList, setTagList] = useState<string[]>([]);
   const [creating, setCreating] = useState<boolean>(false);
@@ -17,8 +19,10 @@ export default function CreateTags() {
   const addTagList = () => {
     if (value.trim() !== "") {
       if (!tagList.includes(value)) {
+        postStore.setTags([value, ...tagList]);
         setTagList((prev) => {
-          return [value, ...prev];
+          const updateTagList = [value, ...prev];
+          return updateTagList;
         });
       }
     }
@@ -30,7 +34,7 @@ export default function CreateTags() {
     const updateTagList = tagList.filter((tag) => {
       return tag !== tagValue;
     });
-
+    postStore.setTags(updateTagList);
     setTagList(updateTagList);
   };
 

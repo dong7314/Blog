@@ -1,7 +1,5 @@
 "use client";
 
-import { ChangeEventHandler, useEffect, useState } from "react";
-
 import * as styles from "./ToastUiEditor.css";
 
 import "prismjs/themes/prism.css";
@@ -16,9 +14,10 @@ import { Editor } from "@toast-ui/react-editor";
 type Props = {
   content: string;
   editorRef: React.MutableRefObject<any>;
+  onChange?: (value: string) => void;
 };
 
-export default function ToastUiEditor({ content, editorRef }: Props) {
+export default function ToastUiEditor({ content, editorRef, onChange }: Props) {
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
@@ -29,6 +28,15 @@ export default function ToastUiEditor({ content, editorRef }: Props) {
     ["scrollSync"],
   ];
 
+  const handleChange = () => {
+    const editorInstance = editorRef.current.getInstance();
+
+    if (onChange) {
+      console.log(editorInstance.getMarkdown());
+      onChange(editorInstance.getMarkdown());
+    }
+  };
+
   return (
     <div className={styles.editor}>
       <Editor
@@ -36,6 +44,7 @@ export default function ToastUiEditor({ content, editorRef }: Props) {
         initialValue={content || " "} // 글 수정 시 사용
         initialEditType="markdown"
         previewStyle="tab"
+        placeholder="게시글을 작성해 주세요."
         height="100%"
         theme={""} // '' & 'dark'
         toolbarItems={toolbarItems}
@@ -43,6 +52,10 @@ export default function ToastUiEditor({ content, editorRef }: Props) {
         hideModeSwitch={true}
         language="ko-KR"
         plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+        options={{
+          headingAnchor: true, // 제목에 자동으로 id를 추가하여 앵커 링크 기능 활성화
+        }}
+        onChange={handleChange}
       />
     </div>
   );

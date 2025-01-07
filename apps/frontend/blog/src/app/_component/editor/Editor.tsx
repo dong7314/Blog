@@ -12,12 +12,17 @@ const ToastUiEditor = dynamic(
 type Props = {
   content: string;
   editorRef: React.MutableRefObject<any>;
+  onChange?: (value: string) => void;
 };
 
-export default function Editor({ content, editorRef }: Props) {
+export default function Editor({ content, editorRef, onChange }: Props) {
   return (
     <>
-      <ToastUiEditor content={content} editorRef={editorRef} />
+      <ToastUiEditor
+        content={content}
+        editorRef={editorRef}
+        onChange={onChange}
+      />
     </>
   );
 }

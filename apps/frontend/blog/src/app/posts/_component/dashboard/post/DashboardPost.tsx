@@ -7,6 +7,7 @@ import * as styles from "./DashboardPost.css";
 
 import { Icon, Text, TextButton } from "@frontend/coreui";
 import PrePost from "@/app/home/model/Post";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -54,14 +55,16 @@ export default function DashboardPost({ data }: Props) {
               {convertDate(data.createdDate)}
             </Text>
           </div>
-          <div className={styles.title}>
-            <Text weight={600} size="dxl">
-              {data.title}
+          <Link href={`/posts/detail/${data.id}`} className={styles.postLink}>
+            <div className={styles.title}>
+              <Text weight={600} size="dxl">
+                {data.title}
+              </Text>
+            </div>
+            <Text color="#595959">
+              <div className={styles.content}>{data.content}</div>
             </Text>
-          </div>
-          <Text color="#595959">
-            <div className={styles.content}>{data.content}</div>
-          </Text>
+          </Link>
         </div>
         <div className={styles.details}>
           <div className={styles.tags}>

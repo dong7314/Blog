@@ -66,6 +66,10 @@ export const content = style({
   lineHeight: "140%",
 });
 
+export const postLink = style({
+  flexDirection: "column",
+});
+
 export const details = style([
   flexCenter,
   {

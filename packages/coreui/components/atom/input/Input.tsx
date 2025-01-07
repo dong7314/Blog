@@ -36,7 +36,7 @@ export interface InputProps {
   maxLength?: number;
   /** 에러 여부 설정 */
   error?: boolean;
-  /** 인풋 미리보기기 */
+  /** 인풋 미리보기 */
   placeholder?: string;
   /** 인풋 라운드 효과 설정 */
   rounded?: boolean;
@@ -112,7 +112,7 @@ export const Input = forwardRef<InputRef, InputProps>(
       setCurrentError(e.target.validity.patternMismatch);
 
       if (onChange) {
-        onChange(newValue);
+        onChange(e.target.value);
       }
     };
 

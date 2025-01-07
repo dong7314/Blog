@@ -25,7 +25,8 @@
     "prosemirror-transform": "^1.10.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-slick": "^0.30.3"
+    "react-slick": "^0.30.3",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -33,6 +33,27 @@ export const modal = style({
 
 export const modalHeader = style({
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "space-between",
   marginBottom: "16px",
+});
+
+export const modalTitle = style({
+  lineHeight: "150%",
+});
+
+export const modalContent = style({
+  display: "flex",
+  height: "100%",
+  overflowY: "auto",
+  "::-webkit-scrollbar": {
+    width: "5px",
+  },
+  "::-webkit-scrollbar-track": {
+    backgroundColor: "transparent",
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#a5a5a5",
+    borderRadius: "2.5px",
+    transition: "all 0.2s ease-out",
+  },
 });

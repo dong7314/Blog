@@ -1,7 +1,10 @@
 "use client";
 
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+
 import * as styles from "./ImagePicker.css";
+
+import { Text } from "@frontend/coreui";
 
 export default function ImagePicker() {
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -95,10 +98,14 @@ export default function ImagePicker() {
           htmlFor="thumbnailUpload"
           ref={dragRef}
         >
-          파일 첨부
+          <Text color="#a5a5a5" size="s" className={styles.labelText}>
+            썸네일 첨부를 위해
+          </Text>
+          <Text color="#a5a5a5" size="s">
+            이미지를 드래그 하거나 여기를 클릭해 주세요.
+          </Text>
         </label>
       </div>
-      <div>{file?.name}</div>
     </>
   );
 }

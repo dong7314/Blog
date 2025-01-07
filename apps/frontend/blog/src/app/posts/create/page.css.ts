@@ -47,3 +47,9 @@ export const createLabel = style({
   marginLeft: "2px",
   marginBottom: "6px",
 });
+
+export const exampleSeries = style({
+  height: "300px",
+  border: "1px solid #dbdbdb",
+  borderRadius: "4px",
+});

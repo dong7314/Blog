@@ -20,7 +20,7 @@ export const tagInputBox = style({
   display: "inline-flex",
   alignItems: "center",
   marginLeft: "4px",
-  marginBlock: "4px",
+  marginBlock: "3px",
   borderRadius: "18px",
   backgroundColor: "#f2f2f2",
   padding: "4px 6px",
@@ -45,7 +45,7 @@ export const tag = style({
   display: "flex",
   padding: "4px 8px",
   marginLeft: "8px",
-  marginBlock: "4px",
+  marginBlock: "3px",
   borderRadius: "19px",
   backgroundColor: "#EBF3FF",
 });
