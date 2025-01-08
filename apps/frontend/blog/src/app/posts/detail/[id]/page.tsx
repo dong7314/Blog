@@ -1,7 +1,16 @@
-import Viewer from "@/app/_component/editor/Viewer";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+
 import * as styles from "./page.css";
+
 import Anchor from "./_component/anchor/Anchor";
 import DetailViewer from "./_component/viewer/DetailViewer";
+import { Icon, Text, TextButton } from "@frontend/coreui";
+import DetailTags from "./_component/tags/DetailTags";
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 export default function DetailPage() {
   const data = {
@@ -68,17 +77,58 @@ REST-API에서 데이터의 요청과 응답을 위해 axios를 사용하여 비
     author: "HyunHo Lee",
     likes: 55,
     comment: 3,
-    tags: ["회고", "추억"],
-    thumbnail: "/example1.jpg",
+    tags: ["회고", "추억", "일기장"],
+    series: {
+      title: "회사생활",
+      list: [
+        "평범한 1년차 개발자의 회고글",
+        "평범한 2년차 개발자의 회고글",
+        "평범한 3년차 개발자의 회고글",
+      ],
+    },
+    thumbnail: "/example3.jpg",
     createdDate: new Date(2024, 11, 16),
+  };
+
+  const convertDate = (date: Date) => {
+    const givenDate = dayjs(date);
+    const oneDayAgo = dayjs().subtract(1, "day");
+    return givenDate.isBefore(oneDayAgo)
+      ? givenDate.format("YYYY년 MM월 DD일")
+      : givenDate.fromNow();
   };
 
   return (
     <div className={styles.detail}>
+      <div className={styles.header}>
+        <div className={styles.title}>
+          <Text size="xh" weight={700}>
+            {data.title}
+          </Text>
+        </div>
+        <div className={styles.info}>
+          <span className={styles.infoSpan}>
+            <TextButton weight={600}>{data.author}</TextButton>
+            <Text color="#595959">
+              &nbsp;&nbsp;•&nbsp;&nbsp;{convertDate(data.createdDate)}
+            </Text>
+          </span>
+          <span className={styles.infoSpan}>
+            <Icon type="secret_open"></Icon>
+            <Text color="#595959">&nbsp;116</Text>
+          </span>
+        </div>
+        {data.tags.length > 0 && (
+          <div className={styles.tags}>
+            <DetailTags tags={data.tags} />
+          </div>
+        )}
+      </div>
       <div className={styles.content}>
-        <DetailViewer content={data.content} />
+        <DetailViewer content={data.content} imgUrl={data.thumbnail} />
         <Anchor />
       </div>
+      <div className={styles.favorites}></div>
     </div>
   );
 }

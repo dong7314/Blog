@@ -12,48 +12,48 @@ globalStyle(`${viewer} .toastui-editor-contents`, {
 globalStyle(`${viewer} .toastui-editor-contents h1`, {
   fontSize: "36px",
   borderBottom: "none",
-  marginTop: "40px",
-  marginBottom: "16px",
+  paddingTop: "30px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents > h1:first-of-type`, {
-  marginBottom: "40px",
+  paddingTop: "16px",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents h2`, {
   fontSize: "30px",
   borderBottom: "none",
-  marginTop: "36px",
-  marginBottom: "16px",
+  paddingTop: "24px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents h3`, {
   fontSize: "24px",
-  marginTop: "30px",
-  marginBottom: "16px",
+  paddingTop: "18px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents h4`, {
   fontSize: "22px",
-  marginTop: "28px",
-  marginBottom: "16px",
+  paddingTop: "16px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents h5`, {
   fontSize: "20px",
-  marginTop: "26px",
-  marginBottom: "16px",
+  paddingTop: "14px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents h6`, {
   fontSize: "18px",
-  marginTop: "24px",
-  marginBottom: "16px",
+  paddingTop: "24px",
+  marginBlock: "16px",
   lineHeight: "100%",
 });
 
