@@ -9,9 +9,9 @@ async function bootstrap() {
   // cookie parser
   app.use(cookieParser());
   // swagger 세팅 진행
-  setupSwagger(app);  
+  setupSwagger(app);
   // dto validator 추가
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 8080);
 }
 bootstrap();

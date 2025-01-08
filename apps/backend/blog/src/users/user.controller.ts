@@ -1,4 +1,18 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Query, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Query,
+  Req,
+  Res,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ConfigType } from '@nestjs/config';
 
@@ -20,12 +34,11 @@ import { UserAuthorityEnum } from './entity/enum/user.authority.enum';
 
 @Controller('api.user')
 export class UserController {
-
   constructor(
     private userService: UserService,
     private authService: AuthService,
     @Inject(urlConfig.KEY) private config: ConfigType<typeof urlConfig>,
-  ) { }
+  ) {}
 
   @Post()
   async createUser(@Body() dto: CreateUserDto): Promise<void> {
@@ -34,7 +47,10 @@ export class UserController {
   }
 
   @Post('/email-verify')
-  async verifyEmail(@Query() dto: VerifyEmailDto, @Res() res: Response,): Promise<void> {
+  async verifyEmail(
+    @Query() dto: VerifyEmailDto,
+    @Res() res: Response,
+  ): Promise<void> {
     const { signupVerifyToken } = dto;
 
     await this.userService.verifyEmail(signupVerifyToken);
@@ -50,7 +66,7 @@ export class UserController {
     const user = await this.userService.getUserByEmail(email);
     const jwt = await this.userService.login(email, password);
 
-    await this.userService.setCurrentRefreshToken(jwt.refresh_token, user.id);
+    await this.userService.setCurrentRefreshToken(jwt.refresh_token, user);
 
     res.setHeader('Authorization', 'Bearer ' + jwt.access_token);
     res.cookie('access_token', jwt.access_token, { httpOnly: true });
@@ -67,7 +83,7 @@ export class UserController {
     res.clearCookie('access_token');
     res.clearCookie('refresh_token');
     return res.send({
-      message: 'logout success'
+      message: 'logout success',
     });
   }
 
@@ -77,11 +93,12 @@ export class UserController {
     @Res({ passthrough: true }) res: Response,
   ) {
     try {
-      const newAccessToken = (await this.authService.refresh(refreshTokenDto)).accessToken;
+      const newAccessToken = (await this.authService.refresh(refreshTokenDto))
+        .accessToken;
       res.setHeader('Authorization', 'Bearer ' + newAccessToken);
       res.cookie('access_token', newAccessToken, { httpOnly: true });
-      res.send({newAccessToken});
-    } catch(err) {
+      res.send({ newAccessToken });
+    } catch (err) {
       throw new UnauthorizedException('refresh-token이 유효하지 않습니다.');
     }
   }
@@ -98,6 +115,6 @@ export class UserController {
   @Roles(UserAuthorityEnum.GUEST)
   adminRoleCheck(@Req() req: Request): any {
     const user: any = req.user;
-    return user
+    return user;
   }
 }
