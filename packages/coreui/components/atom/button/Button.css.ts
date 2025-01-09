@@ -49,6 +49,24 @@ export const type = styleVariants({
   },
 });
 
+export const rounded = styleVariants({
+  t: {
+    borderRadius: "12px",
+  },
+  s: {
+    borderRadius: "14px",
+  },
+  m: {
+    borderRadius: "16px",
+  },
+  l: {
+    borderRadius: "18px",
+  },
+  xl: {
+    borderRadius: "20px",
+  },
+});
+
 export const size = styleVariants({
   t: {
     height: "24px",

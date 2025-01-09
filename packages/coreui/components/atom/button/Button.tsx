@@ -19,6 +19,8 @@ export interface ButtonProps {
   disabled?: boolean;
   /** 버튼 텍스트 */
   children: ReactNode;
+  /** 라운디 버튼 텍스트 */
+  rounded?: boolean;
   /** 클릭 시 동작할 함수 */
   onClick?: () => void;
 }
@@ -28,6 +30,7 @@ export const Button = ({
   type = "tertiary",
   size = "m",
   disabled = false,
+  rounded = false,
   onClick,
   children,
 }: ButtonProps) => {
@@ -70,6 +73,7 @@ export const Button = ({
     styles.base,
     styles.size[size],
     styles.type[type],
+    rounded ? styles.rounded[size] : "",
     disabled ? styles.disabled[type] : "",
   );
 

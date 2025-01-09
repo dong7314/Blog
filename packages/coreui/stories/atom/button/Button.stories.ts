@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 
-import { Button } from '../../../components/atom/button/Button';
+import { Button } from "../../../components/atom/button/Button";
 
 const meta = {
-  title: 'Atomic/Button',
+  title: "Atomic/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -17,40 +17,49 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    type: 'primary',
-    size: 'm',
-    children: 'Button',
+    type: "primary",
+    size: "m",
+    children: "Button",
   },
 };
 
 export const Size: Story = {
   args: {
-    type: 'primary',
-    size: 'm',
-    children: 'Medium',
+    type: "primary",
+    size: "l",
+    children: "Medium",
   },
 };
 
 export const Type: Story = {
   args: {
-    type: 'tertiary',
-    children: 'Button',
+    type: "tertiary",
+    children: "Button",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    type: 'primary',
+    type: "primary",
     disabled: true,
-    children: 'Button',
+    children: "Button",
+  },
+};
+
+export const Rounded: Story = {
+  args: {
+    size: "m",
+    rounded: true,
+    children: "Button",
   },
 };
 
 export const onClick: Story = {
   args: {
-    type: 'primary',
-    onClick: fn(() => { alert('click!'); }),
-    children: 'Button',
+    type: "primary",
+    onClick: fn(() => {
+      alert("click!");
+    }),
+    children: "Button",
   },
 };
-
