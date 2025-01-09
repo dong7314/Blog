@@ -9,6 +9,7 @@ import {
   UseGuards,
   Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 
 import { AuthGuard } from 'src/guard/auth.guard';
 
@@ -16,9 +17,9 @@ import { JwtService } from '@nestjs/jwt';
 import { PostService } from './post.service';
 
 import { PostDto } from './dto/create-post.dto';
-import { Post as PostEntity } from './entity/post.entity';
+import { PostDao } from './dao/post.dao';
 
-@Controller('api.posts')
+@Controller('api.post')
 export class PostController {
   constructor(
     private readonly postService: PostService,
@@ -27,21 +28,14 @@ export class PostController {
 
   @Post()
   @UseGuards(AuthGuard)
-  async createPost(@Body() data: PostDto, @Req() req): Promise<PostEntity> {
-    const token = req.headers.authorization.split(' ')[1]; // "Bearer {token}"에서 token 추출
-    const decoded = this.jwtService.decode(token) as { userId: number };
-
-    if (!decoded || !decoded.userId) {
-      throw new Error('토큰이 유효하지 않습니다.');
-    }
-
-    const userId = decoded.userId;
+  async createPost(@Body() data: PostDto, @Req() req): Promise<PostDao> {
+    const userId = this.getUserId(req);
 
     return this.postService.createPost(data, userId);
   }
 
   @Get(':id')
-  async getPostById(@Param('id') id: number): Promise<PostEntity> {
+  async getPostById(@Param('id') id: number): Promise<PostDao> {
     return this.postService.getPostById(id);
   }
 
@@ -51,22 +45,28 @@ export class PostController {
     @Param('id') id: number,
     @Body() data: PostDto,
     @Req() req,
-  ): Promise<PostEntity> {
-    const token = req.headers.authorization.split(' ')[1]; // "Bearer {token}"에서 token 추출
-    const decoded = this.jwtService.decode(token) as { userId: number };
-
-    if (!decoded || !decoded.userId) {
-      throw new Error('토큰이 유효하지 않습니다.');
-    }
-
-    const userId = decoded.userId;
+  ): Promise<PostDao> {
+    const userId = this.getUserId(req);
 
     return this.postService.updatePost(id, data, userId);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  async deletePost(@Param('id') id: number): Promise<void> {
-    return this.postService.deletePost(id);
+  async deletePost(@Param('id') id: number, @Req() req): Promise<void> {
+    const userId = this.getUserId(req);
+
+    return this.postService.deletePost(id, userId);
+  }
+
+  getUserId(req: Request) {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = this.jwtService.decode(token) as { id: number };
+
+    if (!decoded || !decoded.id) {
+      throw new Error('토큰이 유효하지 않습니다.');
+    }
+
+    return decoded.id;
   }
 }

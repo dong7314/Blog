@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Series } from './entity/series.entity';
@@ -13,15 +17,31 @@ export class SeriesService {
     private readonly seriesRepository: Repository<Series>,
     @InjectRepository(Post)
     private readonly postRepository: Repository<Post>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
 
   async createSeries(
     createSeriesDto: SeriesDto,
-    user: UserEntity,
+    userId: number,
   ): Promise<Series> {
+    // user 처리
+    const author = await this.userRepository.findOne({ where: { id: userId } });
+    if (!author) {
+      throw new NotFoundException('유저가 존재하지 않습니다.');
+    }
+
+    const existingSeries = await this.seriesRepository.find({
+      where: { author: { id: userId }, title: createSeriesDto.title },
+    });
+
+    if (existingSeries) {
+      throw new ConflictException('존재하는 시리즈 타이틀 입니다.');
+    }
+
     const series = this.seriesRepository.create({
       ...createSeriesDto,
-      author: user,
+      author,
     });
     return this.seriesRepository.save(series);
   }
@@ -39,7 +59,7 @@ export class SeriesService {
       relations: ['posts'],
     });
     if (!series) {
-      throw new NotFoundException('Series not found');
+      throw new NotFoundException('시리즈를 찾을 수 없습니다.');
     }
     return series;
   }
@@ -51,10 +71,9 @@ export class SeriesService {
   ): Promise<Series> {
     const series = await this.getSeriesById(seriesId);
     if (series.author.id !== userId) {
-      throw new NotFoundException(
-        'You do not have permission to update this series',
-      );
+      throw new NotFoundException('시리즈를 변경할 권한이 없습니다.');
     }
+
     Object.assign(series, updateSeriesDto);
     return this.seriesRepository.save(series);
   }
@@ -62,9 +81,7 @@ export class SeriesService {
   async deleteSeries(seriesId: number, userId: number): Promise<void> {
     const series = await this.getSeriesById(seriesId);
     if (series.author.id !== userId) {
-      throw new NotFoundException(
-        'You do not have permission to delete this series',
-      );
+      throw new NotFoundException('시리즈를 삭제할 권한이 없습니다.');
     }
     await this.seriesRepository.remove(series);
   }

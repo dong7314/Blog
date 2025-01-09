@@ -8,24 +8,32 @@ import {
   Param,
   Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 
+import { JwtService } from '@nestjs/jwt';
 import { SeriesService } from './series.service';
+
 import { SeriesDto } from './dto/series.dto';
 
-@Controller('series')
+@Controller('api.series')
 export class SeriesController {
-  constructor(private readonly seriesService: SeriesService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly seriesService: SeriesService,
+  ) {}
 
-  @Post()
+  @Post('')
   createSeries(@Body() createSeriesDto: SeriesDto, @Req() req) {
-    const user = req.user;
-    return this.seriesService.createSeries(createSeriesDto, user);
+    const userId = this.getUserId(req);
+
+    return this.seriesService.createSeries(createSeriesDto, userId);
   }
 
-  @Get('/user')
+  @Get('')
   getUserSeries(@Req() req) {
-    const user = req.user;
-    return this.seriesService.getUserSeries(user.id);
+    const userId = this.getUserId(req);
+
+    return this.seriesService.getUserSeries(userId);
   }
 
   @Get('/:seriesId')
@@ -55,5 +63,16 @@ export class SeriesController {
     @Param('postId') postId: number,
   ) {
     return this.seriesService.removePostFromSeries(seriesId, postId);
+  }
+
+  getUserId(req: Request) {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = this.jwtService.decode(token) as { id: number };
+
+    if (!decoded || !decoded.id) {
+      throw new Error('토큰이 유효하지 않습니다.');
+    }
+
+    return decoded.id;
   }
 }

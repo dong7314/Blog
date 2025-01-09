@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './users/user.module';
+import { LikeModule } from './like/like.module';
+import { PostModule } from './post/post.module';
+import { SeriesModule } from './series/series.module';
 import { ConfigModule } from '@nestjs/config';
 import { FollowModule } from './follow/follow.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -30,7 +33,10 @@ import { validationSchema } from './config/validation.schema';
       synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
     }),
     UserModule,
+    LikeModule,
     FollowModule,
+    SeriesModule,
+    PostModule,
   ],
   controllers: [],
   providers: [],

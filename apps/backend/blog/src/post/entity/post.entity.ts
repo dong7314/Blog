@@ -55,6 +55,7 @@ export class Post {
   @ManyToOne(() => Series, (series) => series.posts, {
     nullable: true,
     onDelete: 'SET NULL',
+    eager: true,
   })
   series: Series;
 

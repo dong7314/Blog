@@ -11,5 +11,5 @@ export class Tag {
   name: string;
 
   @ManyToMany(() => Post, (post) => post.tags)
-  posts: Post[];
+  posts: Tag[];
 }

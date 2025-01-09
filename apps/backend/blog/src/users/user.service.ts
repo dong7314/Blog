@@ -43,6 +43,7 @@ export class UserService {
       name,
       email,
       password,
+      '',
       signupVerifyToken,
     );
     await this.saveAuthority(createdUser, 'guest');
@@ -225,6 +226,7 @@ export class UserService {
     name: string,
     email: string,
     password: string,
+    description: string,
     signupVerifyToken: string,
   ): Promise<UserEntity> {
     let savedUser: UserEntity;
@@ -233,6 +235,7 @@ export class UserService {
       const user = new UserEntity();
       user.name = name;
       user.email = email;
+      user.description = description;
       user.password = await bcrypt.hash(password, 10);
       user.signupVerifyToken = signupVerifyToken;
 

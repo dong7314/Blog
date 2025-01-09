@@ -3,9 +3,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './passport/passport.jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 
+import { UserModule } from 'src/users/user.module';
 import { AuthService } from './auth.service';
 import { ConfigService } from '@nestjs/config';
-import { UserModule } from 'src/users/user.module';
 import { JwtRefreshStrategy } from './passport/passport.jwt.refresh.strategy';
 
 @Module({
@@ -14,7 +14,7 @@ import { JwtRefreshStrategy } from './passport/passport.jwt.refresh.strategy';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         secret: config.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '300s' },
+        signOptions: { expiresIn: '30d' },
       }),
     }),
     PassportModule,
@@ -22,6 +22,6 @@ import { JwtRefreshStrategy } from './passport/passport.jwt.refresh.strategy';
   ],
   controllers: [],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
-  exports: [AuthService, JwtStrategy, JwtRefreshStrategy]
+  exports: [AuthService, JwtStrategy, JwtRefreshStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

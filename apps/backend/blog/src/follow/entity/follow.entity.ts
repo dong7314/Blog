@@ -6,9 +6,13 @@ export class Follow {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.following, { onDelete: 'CASCADE' })
+  @ManyToOne(() => UserEntity, (user) => user.following, {
+    onDelete: 'CASCADE',
+  })
   follower: UserEntity; // 팔로우를 건 사용자
 
-  @ManyToOne(() => UserEntity, (user) => user.followers, { onDelete: 'CASCADE' })
+  @ManyToOne(() => UserEntity, (user) => user.followers, {
+    onDelete: 'CASCADE',
+  })
   following: UserEntity; // 팔로우된 사용자
 }

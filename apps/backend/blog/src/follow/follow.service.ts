@@ -4,7 +4,7 @@ import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
 
 import { Follow } from './entity/follow.entity';
-import { UserDao } from './dao/user.dao';
+import { UserDao } from '../users/dao/user.dao';
 import { UserEntity } from 'src/users/entity/user.entity';
 
 @Injectable()

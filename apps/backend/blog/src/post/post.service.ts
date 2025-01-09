@@ -11,6 +11,8 @@ import { Post } from './entity/post.entity';
 import { PostDto } from './dto/create-post.dto';
 import { UserEntity } from 'src/users/entity/user.entity';
 import { Series } from 'src/series/entity/series.entity';
+import { PostDao } from './dao/post.dao';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class PostService {
@@ -25,7 +27,7 @@ export class PostService {
     private seriesRepository: Repository<Series>,
   ) {}
 
-  async createPost(data: PostDto, userId: number): Promise<Post> {
+  async createPost(data: PostDto, userId: number): Promise<PostDao> {
     // author 처리
     const author = await this.userRepository.findOne({ where: { id: userId } });
     if (!author) {
@@ -82,21 +84,29 @@ export class PostService {
       post.seriesOrder = maxOrder + 1;
     }
 
-    return this.postRepository.save(post);
+    return plainToInstance(PostDao, this.postRepository.save(post), {
+      excludeExtraneousValues: true,
+    });
   }
 
-  async getPostById(postId: number): Promise<Post> {
-    return this.postRepository.findOne({
+  async getPostById(postId: number): Promise<PostDao> {
+    const post = this.postRepository.findOne({
       where: { id: postId },
       relations: ['author', 'tags', 'likes', 'comments', 'series'],
     });
+
+    if (!post) {
+      throw new NotFoundException('포스트가 존재하지 않습니다.');
+    }
+
+    return plainToInstance(PostDao, post, { excludeExtraneousValues: true });
   }
 
   async updatePost(
     postId: number,
     data: PostDto,
     userId: number,
-  ): Promise<Post> {
+  ): Promise<PostDao> {
     const post = await this.postRepository.findOne({
       where: { id: postId },
       relations: ['author', 'series'],
@@ -134,10 +144,21 @@ export class PostService {
     }
 
     Object.assign(post, data);
-    return this.postRepository.save(post);
+    return plainToInstance(PostDao, this.postRepository.save(post), {
+      excludeExtraneousValues: true,
+    });
   }
 
-  async deletePost(postId: number): Promise<void> {
+  async deletePost(postId: number, userId: number): Promise<void> {
+    const post = await this.postRepository.findOne({
+      where: { id: postId },
+      relations: ['author', 'series'],
+    });
+
+    if (post.author.id !== userId) {
+      throw new UnauthorizedException('포스트를 삭제할 권한이 없습니다.');
+    }
+
     await this.postRepository.delete(postId);
   }
 }
