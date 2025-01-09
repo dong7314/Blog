@@ -1,3 +1,4 @@
+import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -108,14 +109,22 @@ REST-API에서 데이터의 요청과 응답을 위해 axios를 사용하여 비
         </div>
         <div className={styles.info}>
           <span className={styles.infoSpan}>
+            <Image
+              src={"/profile.png"}
+              alt={"profile-icon"}
+              width={24}
+              height={24}
+              className={styles.profileIcon}
+            />
             <TextButton weight={600}>{data.author}</TextButton>
-            <Text color="#595959">
-              &nbsp;&nbsp;•&nbsp;&nbsp;{convertDate(data.createdDate)}
-            </Text>
           </span>
           <span className={styles.infoSpan}>
-            <Icon type="secret_open"></Icon>
-            <Text color="#595959">&nbsp;116</Text>
+            <Text color="#595959" lineHeight="150%">
+              {convertDate(data.createdDate)}
+            </Text>
+            <Text color="#595959" lineHeight="150%">
+              &nbsp;&nbsp;•&nbsp;&nbsp;116 읽음
+            </Text>
           </span>
         </div>
         {data.tags.length > 0 && (
@@ -129,6 +138,18 @@ REST-API에서 데이터의 요청과 응답을 위해 axios를 사용하여 비
         <Anchor />
       </div>
       <div className={styles.favorites}></div>
+      <div className={styles.profileSeriesBox}>
+        <div className={styles.seriesContainer}>
+          <div>
+            <Text weight={400} color="#c9c9c9" size="s">
+              DPOST 시리즈
+            </Text>
+            <Text weight={500} size="xl">
+              React 학습기
+            </Text>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -13,7 +13,12 @@ export const header = style({
   justifyContent: "center",
   flexDirection: "column",
   width: "800px",
-  marginBlock: "64px",
+  marginTop: "64px",
+  marginBottom: "48px",
+});
+
+export const profileIcon = style({
+  marginRight: "8px",
 });
 
 export const title = style({
@@ -31,7 +36,7 @@ export const by = style({
 
 export const info = style({
   display: "flex",
-  height: "20px",
+  height: "24px",
   justifyContent: "space-between",
 });
 
@@ -56,4 +61,23 @@ export const content = style({
 export const favorites = style({
   display: "flex",
   justifyContent: "center",
+});
+
+export const profileSeriesBox = style({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "cenater",
+  width: "800px",
+  marginBottom: "32px",
+});
+
+export const seriesContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "300px",
+  border: "1px solid #dbdbdb",
+  borderRadius: "6px",
+  padding: "24px",
+  boxSizing: "border-box",
 });
