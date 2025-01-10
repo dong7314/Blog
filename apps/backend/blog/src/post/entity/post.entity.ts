@@ -33,7 +33,7 @@ export class Post {
   @ManyToOne(() => UserEntity, (user) => user.posts, { onDelete: 'CASCADE' })
   author: UserEntity;
 
-  @ManyToMany(() => Tag, { cascade: true })
+  @ManyToMany(() => Tag, (tag) => tag.posts, { cascade: true })
   @JoinTable()
   tags: Tag[];
 
@@ -55,10 +55,12 @@ export class Post {
   @ManyToOne(() => Series, (series) => series.posts, {
     nullable: true,
     onDelete: 'SET NULL',
-    eager: true,
   })
   series: Series;
 
   @Column({ nullable: true })
   seriesOrder: number;
+
+  @Column({ default: 0 })
+  viewCount: number;
 }

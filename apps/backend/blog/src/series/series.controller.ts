@@ -14,6 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SeriesService } from './series.service';
 
 import { SeriesDto } from './dto/series.dto';
+import { SeriesDao } from './dao/series.dao';
 
 @Controller('api.series')
 export class SeriesController {
@@ -23,22 +24,26 @@ export class SeriesController {
   ) {}
 
   @Post('')
-  createSeries(@Body() createSeriesDto: SeriesDto, @Req() req) {
+  createSeries(
+    @Body() createSeriesDto: SeriesDto,
+    @Req() req,
+  ): Promise<SeriesDao> {
     const userId = this.getUserId(req);
 
     return this.seriesService.createSeries(createSeriesDto, userId);
   }
 
-  @Get('')
-  getUserSeries(@Req() req) {
-    const userId = this.getUserId(req);
-
-    return this.seriesService.getUserSeries(userId);
+  @Get('/:seriesId')
+  getSeriesById(@Param('seriesId') seriesId: number): Promise<SeriesDao> {
+    return this.seriesService.getSeriesById(seriesId);
   }
 
-  @Get('/:seriesId')
-  getSeriesById(@Param('seriesId') seriesId: number) {
-    return this.seriesService.getSeriesById(seriesId);
+  @Get('/author/:userId')
+  getUserSeries(
+    @Param('userId') userId: number,
+    @Req() req,
+  ): Promise<SeriesDao[]> {
+    return this.seriesService.getUserSeries(userId);
   }
 
   @Put('/:seriesId')
@@ -46,23 +51,25 @@ export class SeriesController {
     @Param('seriesId') seriesId: number,
     @Body() updateSeriesDto: SeriesDto,
     @Req() req,
-  ) {
-    const user = req.user;
-    return this.seriesService.updateSeries(seriesId, updateSeriesDto, user.id);
+  ): Promise<SeriesDao> {
+    const userId = this.getUserId(req);
+    return this.seriesService.updateSeries(seriesId, updateSeriesDto, userId);
   }
 
   @Delete('/:seriesId')
   deleteSeries(@Param('seriesId') seriesId: number, @Req() req) {
-    const user = req.user;
-    return this.seriesService.deleteSeries(seriesId, user.id);
+    const userId = this.getUserId(req);
+    return this.seriesService.deleteSeries(seriesId, userId);
   }
 
   @Delete('/:seriesId/posts/:postId')
   removePostFromSeries(
     @Param('seriesId') seriesId: number,
     @Param('postId') postId: number,
+    @Req() req,
   ) {
-    return this.seriesService.removePostFromSeries(seriesId, postId);
+    const userId = this.getUserId(req);
+    return this.seriesService.removePostFromSeries(seriesId, postId, userId);
   }
 
   getUserId(req: Request) {

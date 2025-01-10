@@ -1,10 +1,9 @@
 import { Expose, Type } from 'class-transformer';
 
-import { Tag } from 'src/tag/entity/tag.entity';
-import { Series } from 'src/series/entity/series.entity';
+import { TagDao } from 'src/tag/dao/tag.dao';
 import { UserDao } from 'src/users/dao/user.dao';
 import { LikeDao } from 'src/like/dao/like.dao';
-import { TagDao } from 'src/tag/dao/tag.dao';
+import { SeriesDao } from 'src/series/dao/series.dao';
 
 export class PostDao {
   @Expose()
@@ -19,6 +18,9 @@ export class PostDao {
   @Expose()
   content: string;
 
+  @Expose()
+  thumbnail: string;
+
   @Type(() => UserDao)
   @Expose()
   author: UserDao;
@@ -27,12 +29,19 @@ export class PostDao {
   @Expose()
   tags: TagDao[];
 
-  @Expose()
   @Type(() => LikeDao)
+  @Expose()
   likes: LikeDao[];
 
+  @Type(() => SeriesDao)
   @Expose()
-  series: Series;
+  series: SeriesDao;
+
+  @Expose()
+  seriesOrder: number;
+
+  @Expose()
+  viewCount: number;
 
   @Expose()
   createdDate: Date;

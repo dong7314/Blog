@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { Post } from 'src/post/entity/post.entity';
 import { UserEntity } from 'src/users/entity/user.entity';
@@ -17,7 +25,7 @@ export class Series {
   @ManyToOne(() => UserEntity, (user) => user.series, { onDelete: 'CASCADE' })
   author: UserEntity;
 
-  @OneToMany(() => Post, (post) => post.series)
+  @OneToMany(() => Post, (post) => post.series, { eager: true })
   posts: Post[];
 
   @CreateDateColumn()

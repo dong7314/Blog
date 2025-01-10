@@ -8,6 +8,7 @@ import {
   Body,
   UseGuards,
   Req,
+  Res,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -16,7 +17,7 @@ import { AuthGuard } from 'src/guard/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { PostService } from './post.service';
 
-import { PostDto } from './dto/create-post.dto';
+import { PostDto } from './dto/post.dto';
 import { PostDao } from './dao/post.dao';
 
 @Controller('api.post')
@@ -35,8 +36,14 @@ export class PostController {
   }
 
   @Get(':id')
-  async getPostById(@Param('id') id: number): Promise<PostDao> {
-    return this.postService.getPostById(id);
+  async getPostById(
+    @Param('id') id: number,
+    @Req() req,
+    @Res() res,
+  ): Promise<void> {
+    await this.postService.incrementPostView(id, req, res);
+    const post = await this.postService.getPostById(id);
+    res.json(post);
   }
 
   @Put(':id')

@@ -5,6 +5,7 @@ import { PostModule } from './post/post.module';
 import { SeriesModule } from './series/series.module';
 import { ConfigModule } from '@nestjs/config';
 import { FollowModule } from './follow/follow.module';
+import { CommentModule } from './comment/comment.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 
@@ -36,6 +37,7 @@ import { validationSchema } from './config/validation.schema';
     LikeModule,
     FollowModule,
     SeriesModule,
+    CommentModule,
     PostModule,
   ],
   controllers: [],
