@@ -9,6 +9,7 @@ import {
   UseGuards,
   Req,
   Res,
+  Query,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -33,6 +34,61 @@ export class PostController {
     const userId = this.getUserId(req);
 
     return this.postService.createPost(data, userId);
+  }
+
+  @Get('popular')
+  async getPostsBylPopular(
+    @Query('limit') limit: string = '10',
+    @Query('offset') offset: string = '0',
+    @Query('period') period: 'day' | 'week' | 'month' | 'year' = 'week',
+  ) {
+    return this.postService.getPopularPosts(
+      parseInt(limit),
+      parseInt(offset),
+      period,
+    );
+  }
+
+  @Get('recent')
+  async getPostsByRecent(
+    @Query('limit') limit: string = '10',
+    @Query('offset') offset: string = '0',
+  ) {
+    return this.postService.getRecentPosts(parseInt(limit), parseInt(offset));
+  }
+
+  @Get('followed')
+  async getPostsByFollowed(
+    @Query('limit') limit: string = '10',
+    @Query('offset') offset: string = '0',
+    @Req() req,
+  ) {
+    const userId = this.getUserId(req);
+    return this.postService.getFollowedPosts(
+      userId,
+      parseInt(limit),
+      parseInt(offset),
+    );
+  }
+
+  @Get('by-tags')
+  async getPostsByTags(
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+    @Query('tags') tags: string = '',
+  ) {
+    // "태그1,태그2" 형태
+    const tagArray = tags.split(',');
+    return this.postService.findPostsByTags(tagArray, limit, offset);
+  }
+
+  @Get('search')
+  async getPostsBySearch(
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+    @Query('keyword') keyword: string = '',
+  ) {
+    return this.postService.findPostsBySearchKeyword(keyword, limit, offset);
   }
 
   @Get(':id')

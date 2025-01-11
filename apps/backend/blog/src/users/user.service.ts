@@ -236,6 +236,7 @@ export class UserService {
       user.name = name;
       user.email = email;
       user.description = description;
+      user.thumbnail = '';
       user.password = await bcrypt.hash(password, 10);
       user.signupVerifyToken = signupVerifyToken;
 

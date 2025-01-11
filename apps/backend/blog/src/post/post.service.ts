@@ -6,16 +6,16 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
+import { plainToInstance } from 'class-transformer';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Request, Response } from 'express';
 
 import { Tag } from 'src/tag/entity/tag.entity';
 import { Post } from './entity/post.entity';
-import { PostDto } from './dto/post.dto';
-import { UserEntity } from 'src/users/entity/user.entity';
 import { Series } from 'src/series/entity/series.entity';
+import { PostDto } from './dto/post.dto';
 import { PostDao } from './dao/post.dao';
-import { plainToInstance } from 'class-transformer';
-import { Request, Response } from 'express';
+import { UserEntity } from 'src/users/entity/user.entity';
 
 @Injectable()
 export class PostService {
@@ -211,5 +211,163 @@ export class PostService {
 
     // 쿠키에 기록 (1시간 동안 유지)
     res.cookie(cookieName, true, { maxAge: 3600000, httpOnly: true });
+  }
+
+  // 인기 순 조회
+  async getPopularPosts(
+    limit: number,
+    offset: number,
+    period: 'day' | 'week' | 'month' | 'year',
+  ): Promise<Post[]> {
+    return this.findPostsByPopular(limit, offset, period);
+  }
+
+  // 최신 순 조회
+  async getRecentPosts(limit: number, offset: number): Promise<Post[]> {
+    return this.findPostsByRecent(limit, offset);
+  }
+
+  // 팔로우 포스트 조회
+  async getFollowedPosts(
+    userId: number,
+    limit: number,
+    offset: number,
+  ): Promise<Post[]> {
+    return this.findPostsByFollowedUsers(userId, limit, offset);
+  }
+
+  // 인기 순 조회
+  async findPostsByPopular(
+    limit: number,
+    offset: number,
+    period: 'day' | 'week' | 'month' | 'year',
+  ): Promise<Post[]> {
+    console.log(period);
+    const query = this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.author', 'author')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .leftJoinAndSelect('post.comments', 'comments')
+      .orderBy('popularity', 'DESC')
+      .take(limit)
+      .skip(offset);
+
+    // 기간 필터링
+    if (period) {
+      const startDate = this.getStartDateForPeriod(period);
+      query.andWhere('post.createdDate >= :startDate', { startDate });
+    }
+
+    // 가중치 기반 인기 정렬
+    query.addSelect('COUNT(likes.id) * 2 + post.viewCount', 'popularity');
+    // GROUP BY에 필요한 모든 컬럼 추가
+    query.groupBy('post.id, author.id, tags.id, comments.id, likes.id');
+
+    return query.getMany();
+  }
+
+  // 최신 순 조회
+  async findPostsByRecent(limit: number, offset: number): Promise<Post[]> {
+    return this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.author', 'author')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .leftJoinAndSelect('post.comments', 'comments')
+      .orderBy('post.createdDate', 'DESC')
+      .take(limit)
+      .skip(offset)
+      .getMany();
+  }
+
+  // 팔로우한 사용자의 포스트 조회
+  async findPostsByFollowedUsers(
+    userId: number,
+    limit: number,
+    offset: number,
+  ): Promise<Post[]> {
+    return this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.author', 'author')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .leftJoinAndSelect('post.comments', 'comments')
+      .leftJoin('author.followers', 'followers')
+      .where('followers.id = :userId', { userId })
+      .orderBy('post.createdDate', 'DESC')
+      .take(limit)
+      .skip(offset)
+      .getMany();
+  }
+
+  // 태그 포함 조회
+  async findPostsByTags(
+    tags: string[],
+    limit: number,
+    offset: number,
+  ): Promise<Post[]> {
+    if (!tags || tags.length === 0) {
+      throw new Error('Tags array must not be empty.');
+    }
+
+    const query = this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.author', 'author')
+      .leftJoinAndSelect('post.tags', 'tags') // 모든 태그를 가져옴
+      .leftJoinAndSelect('post.likes', 'likes')
+      .where((qb) => {
+        const subQuery = qb
+          .subQuery()
+          .select('post.id')
+          .from('post', 'post')
+          .leftJoin('post.tags', 'tags')
+          .where('tags.name IN (:...tagNames)', { tagNames: tags })
+          .groupBy('post.id')
+          .getQuery();
+        return `post.id IN ${subQuery}`;
+      })
+      .orderBy('post.createdDate', 'DESC')
+      .take(limit)
+      .skip(offset);
+
+    return query.getMany();
+  }
+
+  async findPostsBySearchKeyword(
+    keyword: string,
+    limit: number,
+    offset: number,
+  ): Promise<Post[]> {
+    const query = this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.author', 'author')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .where('post.title LIKE :keyword', { keyword: `%${keyword}%` })
+      .orWhere('post.content LIKE :keyword', { keyword: `%${keyword}%` })
+      .orderBy('post.createdDate', 'DESC')
+      .take(limit)
+      .skip(offset);
+
+    return query.getMany();
+  }
+
+  private getStartDateForPeriod(
+    period: 'day' | 'week' | 'month' | 'year',
+  ): Date {
+    const now = new Date();
+    switch (period) {
+      case 'day':
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      case 'week':
+        return new Date(now.setDate(now.getDate() - now.getDay()));
+      case 'month':
+        return new Date(now.getFullYear(), now.getMonth(), 1);
+      case 'year':
+        return new Date(now.getFullYear(), 0, 1);
+      default:
+        return new Date(); // 기본값: 현재 날짜
+    }
   }
 }
