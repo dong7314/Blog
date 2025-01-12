@@ -58,26 +58,14 @@ export const content = style({
   marginBottom: "96px",
 });
 
+export const subContent = style({
+  display: "flex",
+  flexDirection: "column",
+  width: "800px",
+});
+
 export const favorites = style({
   display: "flex",
   justifyContent: "center",
-});
-
-export const profileSeriesBox = style({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "cenater",
-  width: "800px",
-  marginBottom: "32px",
-});
-
-export const seriesContainer = style({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  height: "300px",
-  border: "1px solid #dbdbdb",
-  borderRadius: "6px",
-  padding: "24px",
-  boxSizing: "border-box",
+  marginBottom: "96px",
 });

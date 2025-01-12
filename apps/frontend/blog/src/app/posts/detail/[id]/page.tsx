@@ -9,6 +9,9 @@ import Anchor from "./_component/anchor/Anchor";
 import DetailViewer from "./_component/viewer/DetailViewer";
 import { Icon, Text, TextButton } from "@frontend/coreui";
 import DetailTags from "./_component/tags/DetailTags";
+import DetailSeries from "./_component/series/DetailSeries";
+import DetailProfile from "./_component/profile/DetailProfile";
+import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -137,18 +140,12 @@ REST-API에서 데이터의 요청과 응답을 위해 axios를 사용하여 비
         <DetailViewer content={data.content} imgUrl={data.thumbnail} />
         <Anchor />
       </div>
-      <div className={styles.favorites}></div>
-      <div className={styles.profileSeriesBox}>
-        <div className={styles.seriesContainer}>
-          <div>
-            <Text weight={400} color="#c9c9c9" size="s">
-              DPOST 시리즈
-            </Text>
-            <Text weight={500} size="xl">
-              React 학습기
-            </Text>
-          </div>
+      <div className={styles.subContent}>
+        <div className={styles.favorites}>
+          <DetailFavoritesButton />
         </div>
+        <DetailProfile />
+        <DetailSeries />
       </div>
     </div>
   );
