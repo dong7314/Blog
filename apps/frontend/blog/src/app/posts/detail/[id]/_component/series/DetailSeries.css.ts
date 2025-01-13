@@ -8,9 +8,8 @@ export const display = style({
 export const profileSeriesBox = style({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "cenater",
   width: "100%",
-  marginBottom: "32px",
+  marginBottom: "48px",
 });
 
 export const seriesContainer = style({
@@ -18,7 +17,7 @@ export const seriesContainer = style({
   flexDirection: "column",
   width: "100%",
   border: "1px solid #dbdbdb",
-  borderRadius: "6px",
+  borderRadius: "4px",
   padding: "24px 24px 14px",
   boxSizing: "border-box",
 });

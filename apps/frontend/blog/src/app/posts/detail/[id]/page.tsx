@@ -12,6 +12,7 @@ import DetailTags from "./_component/tags/DetailTags";
 import DetailSeries from "./_component/series/DetailSeries";
 import DetailProfile from "./_component/profile/DetailProfile";
 import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
+import DetailComments from "./_component/comments/DetailComments";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -146,6 +147,7 @@ REST-API에서 데이터의 요청과 응답을 위해 axios를 사용하여 비
         </div>
         <DetailProfile />
         <DetailSeries />
+        <DetailComments />
       </div>
     </div>
   );

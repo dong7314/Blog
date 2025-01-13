@@ -34,7 +34,7 @@ export default function DetailProfile() {
           </div>
         </div>
         <div className={styles.followButtonBox}>
-          <Button rounded={true} type="primary">
+          <Button rounded={true} type="primary" size="l">
             팔로우
           </Button>
         </div>
