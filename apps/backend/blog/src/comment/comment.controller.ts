@@ -9,13 +9,16 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { CommentService } from './comment.service';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { CommentDto } from './dto/comment.dto';
+
 import { AuthGuard } from 'src/guard/auth.guard';
+import { JwtService } from '@nestjs/jwt';
+import { CommentService } from './comment.service';
+
+import { CommentDto } from './dto/comment.dto';
 import { CommentDao } from './dao/comment.dao';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { CustomCommentDao } from './dao/custom-comment.dao';
 
 @Controller('api.comment')
 export class CommentController {
@@ -28,7 +31,7 @@ export class CommentController {
   getComments(
     @Param('postId') postId: number,
     @Req() req: any,
-  ): Promise<CommentDao[]> {
+  ): Promise<CustomCommentDao> {
     const userId = this.getUserId(req);
     return this.commentService.getCommentsByPost(postId, userId);
   }

@@ -12,6 +12,7 @@ import { Comment } from './entity/comment.entity';
 import { UserEntity } from 'src/users/entity/user.entity';
 import { CommentDao } from './dao/comment.dao';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { CustomCommentDao } from './dao/custom-comment.dao';
 
 @Injectable()
 export class CommentService {
@@ -82,7 +83,7 @@ export class CommentService {
   async getCommentsByPost(
     postId: number,
     userId?: number,
-  ): Promise<CommentDao[]> {
+  ): Promise<CustomCommentDao> {
     const post = await this.postRepository.findOne({
       where: { id: postId },
       relations: ['author'],
@@ -90,6 +91,11 @@ export class CommentService {
     if (!post) {
       throw new NotFoundException('포스트가 존재하지 않습니다.');
     }
+
+    const totalComments = await this.commentRepository
+      .createQueryBuilder('comment')
+      .where('comment.postId = :postId', { postId })
+      .getCount();
 
     const comments = await this.commentRepository
       .createQueryBuilder('comment')
@@ -99,18 +105,23 @@ export class CommentService {
       .leftJoinAndSelect('replies.replies', 'repliesReplies')
       .where('comment.postId = :postId', { postId })
       .andWhere('comment.parent IS NULL') // 최상위 댓글만
+      .orderBy('comment.createdDate', 'DESC')
       .getMany();
 
-    // 비밀 댓글 필터링 및 계층 구조 생성
-    return plainToInstance(
-      CommentDao,
-      comments.map((comment) =>
-        this.mapCommentWithReplies(comment, post.author.id, userId),
+    const convertComment: CustomCommentDao = {
+      comments: plainToInstance(
+        CommentDao,
+        comments.map((comment) =>
+          this.mapCommentWithReplies(comment, post.author.id, userId),
+        ),
+        {
+          excludeExtraneousValues: true,
+        },
       ),
-      {
-        excludeExtraneousValues: true,
-      },
-    );
+      count: totalComments,
+    };
+
+    return convertComment;
   }
 
   private mapCommentWithReplies(
