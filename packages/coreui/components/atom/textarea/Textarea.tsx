@@ -32,6 +32,8 @@ export interface TextareaProps {
   children?: ReactNode;
   /** textarea value 변경 시 동작할 함수 */
   onChange?: (value: string) => void;
+  /** textarea에 style 커스텀 설정 */
+  className?: string;
 }
 
 /** Primary UI component for user interaction */
@@ -44,6 +46,7 @@ export const Textarea = ({
   placeholder,
   children,
   onChange,
+  className,
 }: TextareaProps) => {
   const uuid = useId();
   const [value, setValue] = useState("");
@@ -61,6 +64,10 @@ export const Textarea = ({
     currentError ? styles.labelError : "",
     (focus || value) && !placeholder ? styles.labelInValue : "",
     placeholder ? styles.hasPlaceholder : styles.withoutPlaceholder,
+  );
+  const textareaStyle = composeStyles(
+    styles.inlineTextarea,
+    className ? className : "",
   );
 
   const handleFocus: FocusEventHandler<HTMLTextAreaElement> = (e) => {
@@ -102,7 +109,7 @@ export const Textarea = ({
           style={{ resize }}
           id={uuid}
           name={name}
-          className={styles.inlineTextarea}
+          className={textareaStyle}
           placeholder={placeholder}
           maxLength={maxLength}
           onBlur={handleBlur}

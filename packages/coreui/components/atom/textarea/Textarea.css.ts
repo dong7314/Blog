@@ -82,6 +82,17 @@ export const inlineTextarea = style({
   "::placeholder": {
     color: "#a5a5a5",
   },
+  "::-webkit-scrollbar": {
+    width: "6px",
+  },
+  "::-webkit-scrollbar-track": {
+    backgroundColor: "transparent",
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#a5a5a5",
+    borderRadius: "3px",
+    transition: "all 0.2s ease-out",
+  },
 });
 
 export const textareaInfo = style({
