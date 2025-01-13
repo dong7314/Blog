@@ -19,10 +19,21 @@ export default function Anchor() {
     let low = 0;
     let high = arr.length - 1;
 
+    if (target < arr[0]) {
+      return -1;
+    }
+
+    if (target > arr[high]) {
+      return high;
+    }
+
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
 
-      if (target >= arr[mid] && target < arr[mid + 1]) {
+      if (
+        target >= arr[mid] &&
+        (mid === arr.length - 1 || target < arr[mid + 1])
+      ) {
         return mid;
       } else if (target < arr[mid]) {
         high = mid - 1;
@@ -30,7 +41,8 @@ export default function Anchor() {
         low = mid + 1;
       }
     }
-    return -1; // target이 범위 밖인 경우
+
+    return -1; // 여기에 도달하지 않음 (모든 경우 처리됨)
   };
 
   useEffect(() => {
