@@ -1,6 +1,8 @@
 import * as styles from "./DetailComments.css";
 
 import { Text } from "@frontend/coreui";
+import { Comment } from "@/app/_model/Comment.model";
+import DetailComment from "./comment/DetailComment";
 import DetailCommentTextarea from "./textarea/DetailCommentTextarea";
 
 export default function DetailComments() {
@@ -17,9 +19,9 @@ export default function DetailComments() {
           email: "eaea7314@naver.com",
           thumbnail: "",
         },
-        replies: [],
-        createdDate: "2025-01-13T07:15:48.986Z",
-        updatedDate: "2025-01-13T07:15:48.986Z",
+        replies: [] as Comment[],
+        createdDate: new Date("2025-01-13T07:15:48.986Z"),
+        updatedDate: new Date("2025-01-14T07:15:48.986Z"),
       },
       {
         id: 1,
@@ -49,12 +51,12 @@ export default function DetailComments() {
                 id: 6,
                 content: "좋은 글의 대댓글의 대댓글 입니다.",
                 isSecret: false,
-                createdDate: "2025-01-10T06:40:00.092Z",
-                updatedDate: "2025-01-10T06:40:00.092Z",
+                createdDate: new Date("2025-01-10T06:40:00.092Z"),
+                updatedDate: new Date("2025-01-10T06:40:00.092Z"),
               },
             ],
-            createdDate: "2025-01-10T06:11:01.707Z",
-            updatedDate: "2025-01-10T06:11:01.707Z",
+            createdDate: new Date("2025-01-10T06:11:01.707Z"),
+            updatedDate: new Date("2025-01-10T06:11:01.707Z"),
           },
           {
             id: 7,
@@ -68,14 +70,14 @@ export default function DetailComments() {
               thumbnail: "",
             },
             replies: [],
-            createdDate: "2025-01-10T06:42:51.930Z",
-            updatedDate: "2025-01-10T06:42:51.930Z",
+            createdDate: new Date("2025-01-10T06:42:51.930Z"),
+            updatedDate: new Date("2025-01-10T06:42:51.930Z"),
           },
         ],
-        createdDate: "2025-01-10T05:37:07.492Z",
-        updatedDate: "2025-01-10T06:53:57.000Z",
+        createdDate: new Date("2025-01-10T05:37:07.492Z"),
+        updatedDate: new Date("2025-01-10T05:39:07.492Z"),
       },
-    ],
+    ] as Comment[],
     count: 5,
   };
 
@@ -84,7 +86,12 @@ export default function DetailComments() {
       <Text size="xl" weight={500} className={styles.detailCommentsCount}>
         {data.count}개의 댓글
       </Text>
-      <DetailCommentTextarea />
+      <DetailCommentTextarea type={"comment"} />
+      {data.comments.map((comment: Comment) => {
+        return (
+          <DetailComment key={`comment-id-${comment.id}`} comment={comment} />
+        );
+      })}
     </div>
   );
 }

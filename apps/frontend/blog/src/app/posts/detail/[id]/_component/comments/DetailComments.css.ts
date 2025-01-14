@@ -5,6 +5,7 @@ export const detailCommentsContainer = style({
   flexDirection: "column",
   width: "100%",
   marginTop: "16px",
+  marginBottom: "96px",
 });
 
 export const detailCommentsCount = style({

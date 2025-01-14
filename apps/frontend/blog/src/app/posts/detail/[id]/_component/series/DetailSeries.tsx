@@ -9,14 +9,14 @@ import { composeStyles } from "@vanilla-extract/css";
 
 export default function DetailSeries() {
   const [seriesPosts, setSeriesPosts] = useState<Post[]>([]);
-  const postId = 3;
+  const postId = 342;
   const data = {
     id: 1,
     title: "시리즈 테스트",
     description: "시리즈 테스트입니다.",
     posts: [
       {
-        id: 1,
+        id: 101,
         title: "왜 멀쩡하던 것도 반영만 했다하면 항상 문제가 터지는가..",
         description: "포스트 업데이트1 입니다.",
         content: "# header ## hihih ### update hi man",
@@ -27,7 +27,7 @@ export default function DetailSeries() {
         updatedDate: "2025-01-11T15:44:24.000Z",
       },
       {
-        id: 2,
+        id: 203,
         title:
           "코드만 잘 짜면 된다고? 신입/주니어 개발자가 알아야 할 100가지 필수 꿀팁 - 1",
         description: "포스트 업데이트2 입니다.",
@@ -39,7 +39,7 @@ export default function DetailSeries() {
         updatedDate: "2025-01-11T15:44:24.000Z",
       },
       {
-        id: 3,
+        id: 342,
         title:
           "코드만 잘 짜면 된다고? 신입/주니어 개발자가 알아야 할 100가지 필수 꿀팁 - 2",
         description: "포스트 업데이트3 입니다.",
@@ -51,7 +51,7 @@ export default function DetailSeries() {
         updatedDate: "2025-01-11T15:44:24.000Z",
       },
       {
-        id: 4,
+        id: 411,
         title: "신입 개발자의 꿀팁은 무엇인가?",
         description: "포스트 업데이트4 입니다.",
         content: "# header ## hihih ### update hi man",
@@ -62,7 +62,7 @@ export default function DetailSeries() {
         updatedDate: "2025-01-11T15:44:24.000Z",
       },
       {
-        id: 5,
+        id: 556,
         title: "신입 개발자의 리액트 변모 과정 체험하기.",
         description: "포스트 업데이트5 입니다.",
         content: "# header ## hihih ### update hi man",
@@ -112,7 +112,7 @@ export default function DetailSeries() {
           {seriesPosts.map((post) => {
             return (
               <div
-                key={post.id}
+                key={`series-id-${post.id}`}
                 className={composeStyles(
                   styles.seriesPost,
                   post.id === postId ? styles.active : "",
