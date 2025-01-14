@@ -13,6 +13,9 @@ export type IconType =
   | "right"
   | "comment"
   | "plus"
-  | "plus_circle";
+  | "minus"
+  | "plus_circle"
+  | "lock"
+  | "enter_arrow";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";
