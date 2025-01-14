@@ -8,7 +8,7 @@ import "dayjs/locale/ko";
 import * as styles from "./DetailComment.css";
 
 import { Comment } from "@/app/_model/Comment.model";
-import { Icon, Text, TextButton } from "@frontend/coreui";
+import { Button, Icon, Text, TextButton } from "@frontend/coreui";
 import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
 import { composeStyles } from "@vanilla-extract/css";
 
@@ -134,30 +134,27 @@ export default function DetailComment({ comment }: Props) {
         <Text>{comment.content}</Text>
       </div>
       <div className={styles.addButton}>
-        {comment.replies.length === 0 && (
-          <div className={styles.button} onClick={handleTextarea}>
-            <Icon type={openReplyTextarea ? "minus" : "plus"} color="#262626" />
-            <Text size="s" weight={600} className={styles.textButton}>
-              {openReplyTextarea ? "숨기기" : "답글 달기"}
-            </Text>
-          </div>
-        )}
-        {comment.replies.length !== 0 && (
-          <div className={styles.button} onClick={handleComments}>
-            <span className={styles.arrowIcon}>
-              <Icon
-                type={openReplyComments ? "minus" : "enter_arrow"}
-                color="#262626"
-                size="s"
-              />
-            </span>
-            <Text size="s" weight={600} className={styles.textButton}>
-              {openReplyComments
-                ? "숨기기"
-                : `${comment.replies.length}개의 답글 보기`}
-            </Text>
-          </div>
-        )}
+        <div className={styles.button} onClick={handleComments}>
+          {comment.replies.length !== 0 && (
+            <>
+              <span className={styles.arrowIcon}>
+                <Icon
+                  type={openReplyComments ? "minus" : "enter_arrow"}
+                  color="#262626"
+                  size="s"
+                />
+              </span>
+              <Text size="s" weight={600} className={styles.textButton}>
+                {openReplyComments
+                  ? "숨기기"
+                  : `${comment.replies.length}개의 답글 보기`}
+              </Text>
+            </>
+          )}
+        </div>
+        <div className={styles.button} onClick={handleTextarea}>
+          <Button size="s">답글 달기</Button>
+        </div>
       </div>
       {openReplyTextarea && (
         <div className={styles.subFunctions}>
@@ -165,7 +162,9 @@ export default function DetailComment({ comment }: Props) {
         </div>
       )}
       {openReplyComments && (
-        <div className={composeStyles(styles.subFunctions, styles.commentReplies)}>
+        <div
+          className={composeStyles(styles.subFunctions, styles.commentReplies)}
+        >
           {data.comments.map((comment) => {
             return (
               <DetailComment

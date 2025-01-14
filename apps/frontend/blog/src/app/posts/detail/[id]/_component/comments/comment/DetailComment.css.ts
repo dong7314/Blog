@@ -53,6 +53,7 @@ export const content = style({
 
 export const addButton = style({
   display: "flex",
+  justifyContent: "space-between",
 });
 
 export const button = style({
