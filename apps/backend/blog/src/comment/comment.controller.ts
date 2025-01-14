@@ -36,6 +36,15 @@ export class CommentController {
     return this.commentService.getCommentsByPost(postId, userId);
   }
 
+  @Get('/:commentId/replies')
+  getReplies(
+    @Param('commentId') commentId: number,
+    @Req() req: any,
+  ): Promise<CustomCommentDao> {
+    const userId = this.getUserId(req);
+    return this.commentService.getRepliesByComment(commentId, userId);
+  }
+
   @Post('/:postId/comments')
   @UseGuards(AuthGuard)
   createComment(

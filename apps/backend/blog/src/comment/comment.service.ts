@@ -102,7 +102,6 @@ export class CommentService {
       .leftJoinAndSelect('comment.author', 'author')
       .leftJoinAndSelect('comment.replies', 'replies')
       .leftJoinAndSelect('replies.author', 'repliesAuthor')
-      .leftJoinAndSelect('replies.replies', 'repliesReplies')
       .where('comment.postId = :postId', { postId })
       .andWhere('comment.parent IS NULL') // 최상위 댓글만
       .orderBy('comment.createdDate', 'DESC')
@@ -122,6 +121,52 @@ export class CommentService {
     };
 
     return convertComment;
+  }
+
+  async getRepliesByComment(
+    commentId: number,
+    userId?: number,
+  ): Promise<CustomCommentDao> {
+    // 해당 댓글이 존재하는지 확인
+    const comment = await this.commentRepository.findOne({
+      where: { id: commentId },
+      relations: ['author'],
+    });
+  
+    if (!comment) {
+      throw new NotFoundException('댓글이 존재하지 않습니다.');
+    }
+  
+    // 해당 댓글에 대한 대댓글을 조회하는 쿼리
+    const totalReplies = await this.commentRepository
+      .createQueryBuilder('comment')
+      .where('comment.parentId = :commentId', { commentId })
+      .getCount();
+  
+    // 대댓글을 가져오기 위한 쿼리
+    const replies = await this.commentRepository
+      .createQueryBuilder('comment')
+      .leftJoinAndSelect('comment.author', 'author') // 대댓글의 작성자
+      .leftJoinAndSelect('comment.replies', 'replies') // 대댓글의 대댓글
+      .leftJoinAndSelect('replies.author', 'repliesAuthor') // 대댓글의 대댓글 작성자
+      .where('comment.parentId = :commentId', { commentId }) // 해당 댓글의 대댓글만 가져오기
+      .orderBy('comment.createdDate', 'DESC')
+      .getMany();
+  
+    const convertReplies: CustomCommentDao = {
+      comments: plainToInstance(
+        CommentDao,
+        replies.map((reply) =>
+          this.mapCommentWithReplies(reply, comment.author.id, userId),
+        ),
+        {
+          excludeExtraneousValues: true,
+        },
+      ),
+      count: totalReplies,
+    };
+  
+    return convertReplies;
   }
 
   private mapCommentWithReplies(

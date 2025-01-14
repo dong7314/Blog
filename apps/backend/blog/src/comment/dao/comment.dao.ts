@@ -22,6 +22,7 @@ export class CommentDao {
   post: PostDao;
 
   @Expose()
+  @Type(() => CommentDao)
   replies: CommentDao[];
 
   @Expose()
