@@ -98,6 +98,7 @@ export class UserService {
       id: user.id,
       name: user.name,
       email: user.email,
+      thumbnail: user.thumbnail,
       authorities: user.authorities,
     });
 
