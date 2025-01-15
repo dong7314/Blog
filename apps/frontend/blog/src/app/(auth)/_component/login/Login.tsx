@@ -1,8 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import Form from "next/form";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useFormStatus } from "react-dom";
+import { useActionState, useEffect } from "react";
 
 import * as styles from "./Login.css";
 
+import onSubmit from "../../_lib/login";
 import LogoImage from "../../../../../public/Logo.png";
 import SocialLogin from "./social/SocialLogin";
 import { Button, Input, Text, TextButton } from "@frontend/coreui";
@@ -10,8 +18,19 @@ import { Button, Input, Text, TextButton } from "@frontend/coreui";
 type Props = {
   modal?: boolean;
 };
-
 export default function Login({ modal = false }: Props) {
+  const router = useRouter();
+  const { update } = useSession();
+  const [state, formAction] = useActionState(onSubmit, { message: "" });
+  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.message === null) {
+      router.back();
+      update();
+    }
+  }, [state.message, router]);
+
   return (
     <section className={styles.loginSection}>
       <div className={styles.emailLogin}>
@@ -30,7 +49,7 @@ export default function Login({ modal = false }: Props) {
             </Text>
           </span>
         )}
-        <form className={styles.loginForm}>
+        <Form className={styles.loginForm} action={formAction}>
           <div className={styles.loginInput}>
             <Input
               size="l"
@@ -49,7 +68,7 @@ export default function Login({ modal = false }: Props) {
               name={"password"}
               label={"비밀번호"}
               pattern={
-                "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$"
+                "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$"
               }
             >
               <span>
@@ -59,11 +78,21 @@ export default function Login({ modal = false }: Props) {
             </Input>
           </div>
           <div className={styles.loginButton}>
-            <Button size="xl" type="primary">
+            <Button
+              size="xl"
+              type="primary"
+              feature="submit"
+              disabled={pending}
+            >
               로그인
             </Button>
+            {state.message !== "" && state.message !== null && (
+              <Text size="xs" color="#FC6969" className={styles.loginError}>
+                {state.message}
+              </Text>
+            )}
           </div>
-        </form>
+        </Form>
         <div className={styles.loginTextButton}>
           <Link href="/signup">
             <TextButton size="xs" color="#595959">

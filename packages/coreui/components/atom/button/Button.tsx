@@ -21,6 +21,8 @@ export interface ButtonProps {
   children: ReactNode;
   /** 라운디 버튼 텍스트 */
   rounded?: boolean;
+  /** 버튼 기능 */
+  feature?: "button" | "reset" | "submit";
   /** 클릭 시 동작할 함수 */
   onClick?: () => void;
 }
@@ -31,6 +33,7 @@ export const Button = ({
   size = "m",
   disabled = false,
   rounded = false,
+  feature = "button",
   onClick,
   children,
 }: ButtonProps) => {
@@ -78,7 +81,7 @@ export const Button = ({
   );
 
   return (
-    <button type="button" onClick={handleClick} className={buttonStyle}>
+    <button type={feature} onClick={handleClick} className={buttonStyle}>
       <Text color={fontColor} size={fontSize} weight={500}>
         {children}
       </Text>

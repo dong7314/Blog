@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./_component/nav/Nav";
 import { ReactNode } from "react";
+import { NextAuthSession } from "./_component/auth/NextAuthSession";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -48,11 +48,13 @@ export default function RootLayout({ children, modal }: Props) {
         ></link>
       </head>
       <body>
-        <Nav />
-        <main id="main">
-          <div className="container">{children}</div>
-          {modal}
-        </main>
+        <NextAuthSession>
+          <Nav />
+          <main id="main">
+            <div className="container">{children}</div>
+            {modal}
+          </main>
+        </NextAuthSession>
       </body>
     </html>
   );

@@ -43,8 +43,15 @@ export const loginTextButton = style({
 
 export const loginButton = style({
   display: "flex",
+  flexDirection: "column",
   width: "calc(100% - 2px)",
   marginTop: "16px",
+});
+
+export const loginError = style({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "8px",
 });
 
 export const seperator = style({

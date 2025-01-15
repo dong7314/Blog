@@ -1,4 +1,5 @@
 import { composeStyles } from "@vanilla-extract/css";
+
 import * as styles from "./Nav.css";
 
 import Logo from "./logo/Logo";

@@ -23,12 +23,15 @@ export const textarea = style({
 export const textButton = style({
   position: "absolute",
   display: "inline-flex",
-  right: "20px",
-  bottom: "14px",
+  padding: "6px 10px",
+  right: "14px",
+  bottom: "12px",
   overflow: "hidden",
-});
-
-export const cancelTextButton = style({
-  right: "90px",
-  bottom: "14px",
+  borderRadius: "6px",
+  backgroundColor: "transparent",
+  transition: "background-color .2s ease-out",
+  ":hover": {
+    cursor: "pointer",
+    backgroundColor: "rgba(0, 0, 0, 0.08)",
+  },
 });
