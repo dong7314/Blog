@@ -6,13 +6,13 @@ import "dayjs/locale/ko";
 import * as styles from "./Post.css";
 
 import { Icon, Text, TextButton } from "@frontend/coreui";
-import PrePost from "../../model/Post";
+import { Post as IPost } from "@/app/_model/Post.model";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 type Props = {
-  data: PrePost;
+  data: IPost;
 };
 
 export default function Post({ data }: Props) {
@@ -34,11 +34,12 @@ export default function Post({ data }: Props) {
     <div className={styles.postContainer}>
       <div className={styles.imageContainer}>
         <Image
-          src={data.thumbnail}
+          src={data.thumbnail.trim() !== "" ? data.thumbnail : "/thumbnail.png"}
           alt={data.title}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
+          priority
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={styles.imageHover}
         />
       </div>
@@ -56,22 +57,22 @@ export default function Post({ data }: Props) {
                 weight={500}
                 color="#F9595F"
               >
-                {data.likes}
+                {data.likes.length}
               </Text>
             </span>
           </div>
           <Text size="s" className={styles.description} color="#595959">
-            {data.postDescription ? data.postDescription : data.content}
+            {data.description ? data.description : data.content}
           </Text>
         </div>
         <div className={styles.details}>
           <Text size="xs" color="#a5a5a5">
-            {convertDate(data.createdDate)} • {data.comment}개의 댓글
+            {convertDate(data.createdDate)} • {data.comments.length}개의 댓글
           </Text>
           <div className={styles.author}>
             <span className={styles.by}>by</span>
             <TextButton size="xs" weight={600}>
-              {data.author}
+              {data.author.name}
             </TextButton>
           </div>
         </div>

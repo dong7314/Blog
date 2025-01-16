@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "./_component/nav/Nav";
 import { ReactNode } from "react";
 import { NextAuthSession } from "./_component/auth/NextAuthSession";
+import RQProvider from "./_component/provider/RQProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -51,7 +52,9 @@ export default function RootLayout({ children, modal }: Props) {
         <NextAuthSession>
           <Nav />
           <main id="main">
-            <div className="container">{children}</div>
+            <RQProvider>
+              <div className="container">{children}</div>
+            </RQProvider>
             {modal}
           </main>
         </NextAuthSession>

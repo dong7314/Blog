@@ -10,15 +10,17 @@ import Link from "next/link";
 export default function Toolbar() {
   const { data, update } = useSession();
 
-  console.log(data);
-
   return (
     <div className={styles.toolbar}>
       <div className={styles.searchBar}>
         <SearchBar />
       </div>
-      <IconButton type="bell" size="xl" />
-      <IconButton type="light" size="xl" />
+      <div className={styles.iconButton}>
+        <IconButton type="bell" size="xl" />
+      </div>
+      <div className={styles.iconButton}>
+        <IconButton type="light" size="xl" />
+      </div>
       <div className={styles.loginButton}>
         {!data && (
           <Link href="/login">
@@ -29,7 +31,6 @@ export default function Toolbar() {
           <Button
             onClick={() => {
               signOut({ redirect: false });
-              update();
             }}
           >
             로그아웃

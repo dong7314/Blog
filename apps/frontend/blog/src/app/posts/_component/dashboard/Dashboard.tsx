@@ -8,6 +8,7 @@ import { PrePostDataList } from "@/app/home/data/PrePostDataEx";
 import { Text } from "@frontend/coreui";
 import HeaderItem from "./headerItem/HeaderItem";
 import DashboardPost from "./post/DashboardPost";
+import DashboardTabDecider from "./tab/DashboardTabDecider";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState(0);
@@ -27,16 +28,7 @@ export default function Dashboard() {
         </HeaderItem>
       </header>
       <section className={styles.dashboardSection}>
-        {exampleData.map((post) => {
-          return (
-            <article
-              className={styles.dashboardArticle}
-              key={`dashboard-post-${post.id}`}
-            >
-              <DashboardPost data={post} />
-            </article>
-          );
-        })}
+        <DashboardTabDecider index={activeTab} />
       </section>
     </div>
   );

@@ -6,14 +6,16 @@ import { usePathname } from "next/navigation";
 import * as styles from "./MenuButtons.css";
 
 import { Button } from "@frontend/coreui";
+import { useSession } from "next-auth/react";
 
 export default function MenuButtons() {
   // 현재 path 주소
   const path = usePathname();
+  const { data } = useSession();
 
   return (
     <>
-      {path === "/posts" && (
+      {path === "/posts" && data && (
         <Link href={"/posts/create"}>
           <Button type="tertiary">새 글 작성</Button>
         </Link>

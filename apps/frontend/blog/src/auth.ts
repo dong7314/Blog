@@ -67,7 +67,6 @@ export const {
   },
 });
 
-
 export async function loginApi(email: string, password: string) {
   return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api.user/login`, {
     method: "POST",

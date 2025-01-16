@@ -5,6 +5,15 @@ export const flexCenter = style({
   alignItems: "center",
 });
 
+export const article = style({
+  borderBottom: "1px solid #dbdbdb",
+  selectors: {
+    "&:nth-last-of-type(1)": {
+      borderBottom: "none",
+    },
+  },
+});
+
 export const postContainer = style({
   display: "flex",
   width: "100%",

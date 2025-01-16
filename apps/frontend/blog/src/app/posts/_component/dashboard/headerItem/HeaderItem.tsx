@@ -5,6 +5,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import * as styles from "./HeaderItem.css";
 
 import { Text } from "@frontend/coreui";
+import { composeStyles } from "@vanilla-extract/css";
 
 type Props = {
   index: number;
@@ -20,9 +21,9 @@ export default function HeaderItem({
   setActiveTab,
 }: Props) {
   return (
-    <div className={styles.headerItem} onClick={() => setActiveTab(index)}>
+    <div className={composeStyles(styles.headerItem, activeTab === index ? styles.active : "")} onClick={() => setActiveTab(index)}>
       <Text
-        size="m"
+        size="s"
         color={activeTab === index ? "#262626" : "#a5a5a5"}
         weight={activeTab === index ? 600 : 400}
       >

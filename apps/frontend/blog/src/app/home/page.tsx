@@ -2,8 +2,10 @@ import * as styles from "./page.css";
 
 import { Text } from "@frontend/coreui";
 import PostCarousel from "./_component/carousel/PostCarousel";
+import PostsPopularity from "./_component/popularity/PostsPopularity";
+import PostsRecently from "./_component/recently/PostsRecently";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <div className={styles.home}>
       <section className={styles.section}>
@@ -12,7 +14,7 @@ export default function HomePage() {
             인기 포스트
           </Text>
         </h2>
-        <PostCarousel />
+        <PostsPopularity />
       </section>
       <section className={styles.section}>
         <h2 className={styles.title}>
@@ -20,7 +22,7 @@ export default function HomePage() {
             최신 포스트
           </Text>
         </h2>
-        <PostCarousel />
+        <PostsRecently />
       </section>
     </div>
   );

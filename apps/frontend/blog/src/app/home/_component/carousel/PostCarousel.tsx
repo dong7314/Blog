@@ -5,13 +5,13 @@ import Slider from "react-slick";
 import * as styles from "./PostCarousel.css";
 
 import Post from "../post/Post";
-import PrePost from "../../model/Post";
-import { PrePostDataList } from "../../data/PrePostDataEx";
+import { Post as IPost } from "@/app/_model/Post.model";
 import { PostNextArrow, PostPrevArrow } from "./arrow/PostArrows";
 
-export default function PostCarousel() {
-  const exampleData = PrePostDataList;
-
+type Props = {
+  posts: IPost[];
+};
+export default function PostCarousel({ posts }: Props) {
   const settings = {
     dots: true,
     infinite: false,
@@ -24,13 +24,17 @@ export default function PostCarousel() {
 
   return (
     <Slider {...settings}>
-      {exampleData.map((data: PrePost) => {
-        return (
-          <div key={data.id} className={styles.postContainer}>
-            <Post data={data} />
-          </div>
-        );
-      })}
+      {posts &&
+        posts.map((post: IPost) => {
+          return (
+            <div
+              key={`${post?.title}-${post?.id}`}
+              className={styles.postContainer}
+            >
+              <Post data={post} />
+            </div>
+          );
+        })}
     </Slider>
   );
 }

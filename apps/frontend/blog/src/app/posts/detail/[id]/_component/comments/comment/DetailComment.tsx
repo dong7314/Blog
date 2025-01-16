@@ -153,7 +153,9 @@ export default function DetailComment({ comment }: Props) {
           )}
         </div>
         <div className={styles.button} onClick={handleTextarea}>
-          <Button size="s">답글 달기</Button>
+          <Button size="s">
+            {openReplyTextarea ? "작성 취소" : "답글 달기"}
+          </Button>
         </div>
       </div>
       {openReplyTextarea && (
