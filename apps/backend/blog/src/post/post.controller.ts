@@ -40,7 +40,7 @@ export class PostController {
   async getPostsBylPopular(
     @Query('limit') limit: string = '10',
     @Query('offset') offset: string = '0',
-    @Query('period') period: 'day' | 'week' | 'month' | 'year' = 'week',
+    @Query('period') period: 'day' | 'week' | 'month' | 'year' = 'month',
   ) {
     return this.postService.getPopularPosts(
       parseInt(limit),

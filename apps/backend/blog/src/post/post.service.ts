@@ -218,12 +218,12 @@ export class PostService {
     limit: number,
     offset: number,
     period: 'day' | 'week' | 'month' | 'year',
-  ): Promise<Post[]> {
+  ): Promise<PostDao[]> {
     return this.findPostsByPopular(limit, offset, period);
   }
 
   // 최신 순 조회
-  async getRecentPosts(limit: number, offset: number): Promise<Post[]> {
+  async getRecentPosts(limit: number, offset: number): Promise<PostDao[]> {
     return this.findPostsByRecent(limit, offset);
   }
 
@@ -232,7 +232,7 @@ export class PostService {
     userId: number,
     limit: number,
     offset: number,
-  ): Promise<Post[]> {
+  ): Promise<PostDao[]> {
     return this.findPostsByFollowedUsers(userId, limit, offset);
   }
 
@@ -241,8 +241,7 @@ export class PostService {
     limit: number,
     offset: number,
     period: 'day' | 'week' | 'month' | 'year',
-  ): Promise<Post[]> {
-    console.log(period);
+  ): Promise<PostDao[]> {
     const query = this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.author', 'author')
@@ -264,12 +263,16 @@ export class PostService {
     // GROUP BY에 필요한 모든 컬럼 추가
     query.groupBy('post.id, author.id, tags.id, comments.id, likes.id');
 
-    return query.getMany();
+    const results = await query.getMany();
+
+    return plainToInstance(PostDao, results, {
+      excludeExtraneousValues: true,
+    });
   }
 
   // 최신 순 조회
-  async findPostsByRecent(limit: number, offset: number): Promise<Post[]> {
-    return this.postRepository
+  async findPostsByRecent(limit: number, offset: number): Promise<PostDao[]> {
+    const results = await this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.author', 'author')
       .leftJoinAndSelect('post.tags', 'tags')
@@ -279,6 +282,10 @@ export class PostService {
       .take(limit)
       .skip(offset)
       .getMany();
+
+    return plainToInstance(PostDao, results, {
+      excludeExtraneousValues: true,
+    });
   }
 
   // 팔로우한 사용자의 포스트 조회
@@ -286,8 +293,8 @@ export class PostService {
     userId: number,
     limit: number,
     offset: number,
-  ): Promise<Post[]> {
-    return this.postRepository
+  ): Promise<PostDao[]> {
+    const results = await this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.author', 'author')
       .leftJoinAndSelect('post.tags', 'tags')
@@ -299,6 +306,10 @@ export class PostService {
       .take(limit)
       .skip(offset)
       .getMany();
+
+    return plainToInstance(PostDao, results, {
+      excludeExtraneousValues: true,
+    });
   }
 
   // 태그 포함 조회
@@ -306,7 +317,7 @@ export class PostService {
     tags: string[],
     limit: number,
     offset: number,
-  ): Promise<Post[]> {
+  ): Promise<PostDao[]> {
     if (!tags || tags.length === 0) {
       throw new Error('Tags array must not be empty.');
     }
@@ -331,14 +342,18 @@ export class PostService {
       .take(limit)
       .skip(offset);
 
-    return query.getMany();
+    const results = await query.getMany();
+
+    return plainToInstance(PostDao, results, {
+      excludeExtraneousValues: true,
+    });
   }
 
   async findPostsBySearchKeyword(
     keyword: string,
     limit: number,
     offset: number,
-  ): Promise<Post[]> {
+  ): Promise<PostDao[]> {
     const query = this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.author', 'author')
@@ -350,7 +365,11 @@ export class PostService {
       .take(limit)
       .skip(offset);
 
-    return query.getMany();
+    const results = await query.getMany();
+
+    return plainToInstance(PostDao, results, {
+      excludeExtraneousValues: true,
+    });
   }
 
   private getStartDateForPeriod(

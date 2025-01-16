@@ -4,6 +4,7 @@ import { TagDao } from 'src/tag/dao/tag.dao';
 import { UserDao } from 'src/users/dao/user.dao';
 import { LikeDao } from 'src/like/dao/like.dao';
 import { SeriesDao } from 'src/series/dao/series.dao';
+import { CommentDao } from 'src/comment/dao/comment.dao';
 
 export class PostDao {
   @Expose()
@@ -36,6 +37,10 @@ export class PostDao {
   @Type(() => SeriesDao)
   @Expose()
   series: SeriesDao;
+
+  @Type(() => CommentDao)
+  @Expose()
+  comments: CommentDao[];
 
   @Expose()
   seriesOrder: number;

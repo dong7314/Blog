@@ -27,7 +27,7 @@ export class Post {
   @Column({ nullable: true, length: 150 })
   description?: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   content: string;
 
   @ManyToOne(() => UserEntity, (user) => user.posts, { onDelete: 'CASCADE' })
