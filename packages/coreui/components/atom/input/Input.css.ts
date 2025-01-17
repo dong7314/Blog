@@ -77,8 +77,12 @@ export const inlineInput = style({
   boxSizing: "border-box",
   fontFamily: "Pretendard",
   zIndex: 0,
+  transition: "border-color .2s ease-out",
   "::placeholder": {
     color: "#a5a5a5",
+  },
+  ":hover": {
+    borderColor: "#A5A5A5",
   },
 });
 
