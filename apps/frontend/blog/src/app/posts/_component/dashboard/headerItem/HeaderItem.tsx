@@ -21,7 +21,13 @@ export default function HeaderItem({
   setActiveTab,
 }: Props) {
   return (
-    <div className={composeStyles(styles.headerItem, activeTab === index ? styles.active : "")} onClick={() => setActiveTab(index)}>
+    <div
+      className={composeStyles(
+        styles.headerItem,
+        activeTab === index ? styles.active : "",
+      )}
+      onClick={() => setActiveTab(index)}
+    >
       <Text
         size="s"
         color={activeTab === index ? "#262626" : "#a5a5a5"}

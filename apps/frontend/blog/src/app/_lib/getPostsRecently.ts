@@ -16,7 +16,7 @@ export async function getPostsRecently() {
 
 export async function getPostsRecentlyInfinite({ pageParam = 0 }: Props) {
   const response = await get("api.post/recent", ["posts", "recently"], {
-    limit: 10,
+    limit: 6,
     offset: pageParam,
   });
 

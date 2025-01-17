@@ -15,12 +15,19 @@ export async function getPostsPopularity() {
   return await response.json();
 }
 
-export async function getPostsPopularityInfinite({ pageParam = 0 }: Props) {
-  const response = await get("api.post/popular", ["posts", "popularity"], {
-    limit: 10,
-    offset: pageParam,
-    period: "month",
-  });
+export async function getPostsPopularityInfinite(
+  pageParam = 0,
+  period: string,
+) {
+  const response = await get(
+    "api.post/popular",
+    ["posts", "dashboard", "popularity"],
+    {
+      limit: 6,
+      offset: pageParam,
+      period: period,
+    },
+  );
 
   if (!response.ok) {
     throw new Error("데이터를 가져오는데 실패하였습니다.");

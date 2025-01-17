@@ -6,6 +6,8 @@ export const flexCenter = style({
 });
 
 export const article = style({
+  display: "flex",
+  width: "100%",
   borderBottom: "1px solid #dbdbdb",
   selectors: {
     "&:nth-last-of-type(1)": {

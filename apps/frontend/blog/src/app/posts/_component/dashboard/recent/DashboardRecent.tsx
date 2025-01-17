@@ -6,29 +6,24 @@ import {
   useInfiniteQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getPostsPopularityInfinite } from "@/app/_lib/getPostsPopularity";
+import { getPostsRecentlyInfinite } from "@/app/_lib/getPostsRecently";
 
 import { Post as IPost } from "@/app/_model/Post.model";
 import { Fragment, useEffect } from "react";
 import DashboardPost from "../post/DashboardPost";
-import { Period } from "../Dashboard";
 import { Loading, Text } from "@frontend/coreui";
 
-type Props = {
-  period: Period;
-};
-export default function DashboardTrend({ period }: Props) {
+export default function DashboardRecent() {
   const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
     IPost[],
     Object,
     InfiniteData<IPost[]>,
-    [_1: string, _2: string, _3: string, _4: string],
+    [_1: string, _2: string, _3: string],
     number
   >({
-    queryKey: ["posts", "dashboard", "popularity", period],
-    queryFn: ({ pageParam = 0 }) =>
-      getPostsPopularityInfinite(pageParam, period),
+    queryKey: ["posts", "dashboard", "recently"],
+    queryFn: getPostsRecentlyInfinite,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length < 6) return null;
       return allPages.length;
@@ -50,7 +45,7 @@ export default function DashboardTrend({ period }: Props) {
   useEffect(() => {
     return () => {
       queryClient.removeQueries({
-        queryKey: ["posts", "dashboard", "popularity"],
+        queryKey: ["posts", "dashboard", "recently"],
       });
     };
   }, []);
@@ -66,9 +61,7 @@ export default function DashboardTrend({ period }: Props) {
               );
             })}
             {page.length === 0 && (
-              <Text color="#595959" size="s">
-                게시글이 존재하지 않습니다.
-              </Text>
+              <Text color="#595959">게시글이 존재하지 않습니다.</Text>
             )}
           </Fragment>
         );

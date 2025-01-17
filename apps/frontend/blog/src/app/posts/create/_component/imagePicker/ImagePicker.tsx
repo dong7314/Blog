@@ -21,7 +21,6 @@ export default function ImagePicker() {
       } else {
         selectFile = e.target.files[0];
       }
-      console.log(selectFile);
 
       setFile(selectFile);
     },
