@@ -36,7 +36,7 @@ export class AuthService {
   async removeExpiredTokens() {
     const currentTime = new Date().getTime();
     const expiredTokens = await this.userService.findExpiredTokens(currentTime);
-    console.log(expiredTokens);
+
     for (const token of expiredTokens) {
       if (token.currentRefreshToken) {
         await this.userService.removeRefreshToken(token.userId);

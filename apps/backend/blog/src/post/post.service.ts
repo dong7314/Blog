@@ -250,7 +250,7 @@ export class PostService {
       .leftJoinAndSelect('post.comments', 'comments')
       .orderBy('popularity', 'DESC')
       .take(limit)
-      .skip(offset);
+      .skip(offset * limit);
 
     // 기간 필터링
     if (period) {
@@ -280,7 +280,7 @@ export class PostService {
       .leftJoinAndSelect('post.comments', 'comments')
       .orderBy('post.createdDate', 'DESC')
       .take(limit)
-      .skip(offset)
+      .skip(offset * limit)
       .getMany();
 
     return plainToInstance(PostDao, results, {
@@ -304,7 +304,7 @@ export class PostService {
       .where('followers.id = :userId', { userId })
       .orderBy('post.createdDate', 'DESC')
       .take(limit)
-      .skip(offset)
+      .skip(offset * limit)
       .getMany();
 
     return plainToInstance(PostDao, results, {
@@ -340,7 +340,7 @@ export class PostService {
       })
       .orderBy('post.createdDate', 'DESC')
       .take(limit)
-      .skip(offset);
+      .skip(offset * limit);
 
     const results = await query.getMany();
 
@@ -363,7 +363,7 @@ export class PostService {
       .orWhere('post.content LIKE :keyword', { keyword: `%${keyword}%` })
       .orderBy('post.createdDate', 'DESC')
       .take(limit)
-      .skip(offset);
+      .skip(offset * limit);
 
     const results = await query.getMany();
 

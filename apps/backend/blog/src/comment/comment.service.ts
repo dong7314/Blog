@@ -50,7 +50,7 @@ export class CommentService {
       parent = await this.commentRepository.findOne({
         where: { id: parentId },
       });
-      console.log(parent);
+      
       if (!parent) {
         throw new NotFoundException('부모 댓글이 존재하지 않습니다.');
       }
