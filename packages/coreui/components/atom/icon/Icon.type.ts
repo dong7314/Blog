@@ -11,6 +11,8 @@ export type IconType =
   | "favorite"
   | "left"
   | "right"
+  | "up"
+  | "down"
   | "comment"
   | "plus"
   | "minus"
