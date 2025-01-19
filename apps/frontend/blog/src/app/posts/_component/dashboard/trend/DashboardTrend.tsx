@@ -29,7 +29,7 @@ export default function DashboardTrend({ period }: Props) {
     queryKey: ["posts", "dashboard", "popularity", period],
     queryFn: ({ pageParam = 0 }) =>
       getPostsPopularityInfinite(pageParam, period),
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage: any, allPages: any) => {
       if (lastPage.length < 6) return null;
       return allPages.length;
     },
@@ -57,10 +57,10 @@ export default function DashboardTrend({ period }: Props) {
 
   return (
     <>
-      {data?.pages.map((page, index) => {
+      {data?.pages.map((page: any, index: number) => {
         return (
           <Fragment key={index}>
-            {page.map((post) => {
+            {page.map((post: IPost) => {
               return (
                 <DashboardPost key={`dashboard-post-${post.id}`} data={post} />
               );
@@ -73,7 +73,7 @@ export default function DashboardTrend({ period }: Props) {
           </Fragment>
         );
       })}
-      {isFetching && <Loading />}
+      {isFetching && <Loading size="l" />}
       {hasNextPage && <div ref={ref} style={{ height: 10 }}></div>}
     </>
   );

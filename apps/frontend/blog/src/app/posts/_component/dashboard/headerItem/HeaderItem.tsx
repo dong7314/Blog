@@ -30,7 +30,7 @@ export default function HeaderItem({
     >
       <Text
         size="s"
-        color={activeTab === index ? "#262626" : "#a5a5a5"}
+        color={activeTab === index ? "#595959" : "#a5a5a5"}
         weight={activeTab === index ? 600 : 400}
       >
         {children}

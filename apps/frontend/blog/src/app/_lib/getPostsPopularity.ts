@@ -21,7 +21,7 @@ export async function getPostsPopularityInfinite(
 ) {
   const response = await get(
     "api.post/popular",
-    ["posts", "dashboard", "popularity"],
+    ["posts", "dashboard", "popularity", period],
     {
       limit: 6,
       offset: pageParam,

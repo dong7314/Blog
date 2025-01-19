@@ -50,7 +50,6 @@ export default function Dashboard() {
           <div className={styles.period}>
             <Select
               name="period"
-              size="s"
               options={[
                 { value: "day", label: "오늘" },
                 { value: "week", label: "이번 주" },

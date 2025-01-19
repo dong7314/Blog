@@ -66,7 +66,7 @@ export default function DashboardRecent() {
           </Fragment>
         );
       })}
-      {isFetching && <Loading />}
+      {isFetching && <Loading size="l" />}
       {hasNextPage && <div ref={ref} style={{ height: 10 }}></div>}
     </>
   );
