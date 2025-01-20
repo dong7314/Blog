@@ -15,7 +15,7 @@ export class LikeController {
 
   @Post(':postId')
   @UseGuards(AuthGuard)
-  async toggleLike(@Param('postId') postId: number, @Req() req: Request) {
+  async toggleLike(@Param('postId') postId: string, @Req() req: Request) {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = this.jwtService.decode(token) as { id: number };
 
@@ -25,7 +25,7 @@ export class LikeController {
 
     const userId = decoded.id;
 
-    return this.likeService.toggleLike(postId, userId);
+    return this.likeService.toggleLike(parseInt(postId), userId);
   }
 
   @Get(':postId')

@@ -21,7 +21,7 @@ export class LikeService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async toggleLike(postId: number, userId: number): Promise<string> {
+  async toggleLike(postId: number, userId: number): Promise<LikeDao[]> {
     // 게시물이 존재하는지 확인
     const post = await this.postRepository.findOne({ where: { id: postId } });
     if (!post) {
@@ -42,13 +42,13 @@ export class LikeService {
     if (existingLike) {
       // 좋아요 취소
       await this.likeRepository.remove(existingLike);
-      return '좋아요가 취소되었습니다.';
     } else {
       // 좋아요 추가
       const newLike = this.likeRepository.create({ post, user });
       await this.likeRepository.save(newLike);
-      return '좋아요가 추가되었습니다.';
     }
+
+    return this.getPostLikes(postId);
   }
 
   async getPostLikes(postId: number): Promise<LikeDao[]> {
