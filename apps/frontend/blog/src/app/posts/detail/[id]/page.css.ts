@@ -13,7 +13,7 @@ export const header = style({
   justifyContent: "center",
   flexDirection: "column",
   width: "800px",
-  marginTop: "64px",
+  marginTop: "96px",
   marginBottom: "48px",
 });
 
@@ -25,7 +25,7 @@ export const title = style({
   display: "flex",
   justifyContent: "center",
   width: "100%",
-  marginBottom: "48px",
+  marginBottom: "64px",
 });
 
 export const by = style({

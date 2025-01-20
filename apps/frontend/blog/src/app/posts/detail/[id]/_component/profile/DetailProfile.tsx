@@ -1,147 +1,24 @@
 "use client";
 import Image from "next/image";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { Button, Text, TextButton } from "@frontend/coreui";
 
 import * as styles from "./DetailProfile.css";
 
-import { Button, Text, TextButton } from "@frontend/coreui";
-import { User as IUser, User } from "@/app/_model/User.model";
-import { getFollowers } from "../../_lib/getFollowers";
-import { useEffect, useState } from "react";
-import followUser from "../../_lib/followUser";
-import unfollowUser from "../../_lib/unfollowUser";
+import useFollow from "./useFollow";
+import FollowButton from "./button/FollowButton";
+import { User as IUser } from "@/app/_model/User.model";
 
 type Props = {
   author: IUser;
 };
+
 export default function DetailProfile({ author }: Props) {
   const session = useSession();
-  const queryClient = useQueryClient();
-
-  const { data: followers = [] } = useQuery({
-    queryKey: ["follow", "followers", `${author.id}`],
-    queryFn: () => getFollowers(author.id),
-  });
-
-  const followMutation = useMutation({
-    mutationFn: ({
-      userId,
-      followId,
-      token,
-    }: {
-      userId: number;
-      followId: number;
-      token: string;
-    }) => followUser(userId, followId, token),
-    onMutate: async ({ userId, followId }) => {
-      await queryClient.cancelQueries({
-        queryKey: ["follow", "followers", `${followId}`],
-      });
-      const previousFollowers = queryClient.getQueryData<User[]>([
-        "follow",
-        "followers",
-        `${userId}`,
-      ]);
-
-      queryClient.setQueryData<User[]>(
-        ["follow", "followers", `${followId}`],
-        (old) =>
-          old
-            ? [
-                ...old,
-                {
-                  id: userId,
-                  name: "",
-                  email: "",
-                  description: "",
-                  thumbnail: "",
-                },
-              ]
-            : [],
-      );
-
-      return { previousFollowers };
-    },
-    onError: (_error, _variables, context) => {
-      queryClient.setQueryData(
-        ["follow", "followers", `${_variables.followId}`],
-        context?.previousFollowers,
-      );
-    },
-    onSettled: (_data, _error, _variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["follow", "followers", `${_variables.followId}`],
-      });
-    },
-  });
-
-  const unfollowMutation = useMutation({
-    mutationFn: ({
-      userId,
-      followId,
-      token,
-    }: {
-      userId: number;
-      followId: number;
-      token: string;
-    }) => unfollowUser(userId, followId, token),
-    onMutate: async ({ userId, followId }) => {
-      // Optimistic Update 시작
-      await queryClient.cancelQueries({
-        queryKey: ["follow", "followers", `${followId}`],
-      });
-
-      const previousFollowers = queryClient.getQueryData<User[]>([
-        "follow",
-        "followers",
-        `${userId}`,
-      ]);
-
-      queryClient.setQueryData<User[]>(
-        ["follow", "followers", `${followId}`],
-        (old) => (old ? old.filter((user) => user.id !== userId) : []),
-      );
-
-      return { previousFollowers };
-    },
-    onError: (_err, _variables, context) => {
-      queryClient.setQueryData(
-        ["follow", "followers", `${_variables.followId}`],
-        context?.previousFollowers,
-      );
-    },
-    onSettled: (_data, _error, _variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["follow", "followers", `${_variables.followId}`],
-      });
-    },
-  });
-
-  // 버튼 상태 설정
-  const isFollowing = followers.some(
-    (user: User) => user.id === parseInt(session.data?.user.id || "-1"),
+  const { isFollowing, handleFollow, handleUnfollow } = useFollow(
+    author,
+    session.data,
   );
-
-  const handleFollow = () => {
-    if (session.data) {
-      followMutation.mutate({
-        userId: parseInt(session.data.user.id!),
-        followId: author.id,
-        token: session.data.user.accessToken!,
-      });
-    }
-  };
-
-  const handleUnfollow = () => {
-    if (session.data) {
-      unfollowMutation.mutate({
-        userId: parseInt(session.data.user.id!),
-        followId: author.id,
-        token: session.data.user.accessToken!,
-      });
-    }
-  };
 
   return (
     <div className={styles.profileContainer}>
@@ -165,25 +42,11 @@ export default function DetailProfile({ author }: Props) {
         </div>
         {session.data && author.id !== parseInt(session.data.user.id) && (
           <div className={styles.followButtonBox}>
-            {isFollowing ? (
-              <Button
-                rounded={true}
-                type="tertiary"
-                size="l"
-                onClick={handleUnfollow}
-              >
-                언팔로우
-              </Button>
-            ) : (
-              <Button
-                rounded={true}
-                type="primary"
-                size="l"
-                onClick={handleFollow}
-              >
-                팔로우
-              </Button>
-            )}
+            <FollowButton
+              isFollowing={isFollowing}
+              onFollow={handleFollow}
+              onUnfollow={handleUnfollow}
+            />
           </div>
         )}
       </div>
