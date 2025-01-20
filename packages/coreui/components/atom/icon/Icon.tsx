@@ -54,7 +54,7 @@ export const Icon = ({
         children: React.Children.map(IconComponent.props.children, (child) => {
           if (React.isValidElement(child) && child.type === "path") {
             return React.cloneElement(child, {
-              stroke: strokeColor,
+              stroke: type.includes("favorite") ? "#F9595F" : strokeColor,
               style: { transition: "all .2s ease-out" },
             } as any);
           }

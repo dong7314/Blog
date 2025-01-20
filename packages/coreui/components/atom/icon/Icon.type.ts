@@ -8,6 +8,7 @@ export type IconType =
   | "light"
   | "dark"
   | "check"
+  | "favorite_fill"
   | "favorite"
   | "left"
   | "right"
