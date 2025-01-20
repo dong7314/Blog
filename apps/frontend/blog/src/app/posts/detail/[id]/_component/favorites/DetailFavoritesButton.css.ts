@@ -1,5 +1,9 @@
 import { keyframes, style } from "@vanilla-extract/css";
 
+export const form = style({
+  position: "relative",
+});
+
 export const button = style({
   display: "flex",
   alignItems: "center",
@@ -23,7 +27,15 @@ export const heartIcon = style({
 });
 
 export const favoritesNumber = style({
-  marginTop: "1px",
+  marginTop: "1.5px",
+});
+
+export const preventButtonFilter = style({
+  position: "absolute",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
 });
 
 const appear = keyframes({
@@ -39,4 +51,4 @@ const appear = keyframes({
 
 export const activeHeartIcon = style({
   animation: `${appear} 0.3s cubic-bezier(0.31, 1.76, 0.72, 0.76) 1`,
-})
+});

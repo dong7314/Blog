@@ -68,7 +68,7 @@ export default function DetailFavoritesButton({ postId, favorites }: Props) {
   };
 
   return (
-    <Form action={handleClickFavoriteButton}>
+    <Form action={handleClickFavoriteButton} className={styles.form}>
       <button type="submit" className={styles.button}>
         <span
           className={composeStyles(
@@ -84,18 +84,19 @@ export default function DetailFavoritesButton({ postId, favorites }: Props) {
                 ? "favorite_fill"
                 : "favorite"
             }
-            size="h"
+            size="xl"
           ></Icon>
         </span>
         <Text
           className={styles.favoritesNumber}
-          size="xl"
+          size="l"
           weight={500}
           color="#3F3F3F"
         >
           {optimisticFavorites.length}
         </Text>
       </button>
+      {!data && <div className={styles.preventButtonFilter}></div>}
     </Form>
   );
 }
