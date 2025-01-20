@@ -1,4 +1,4 @@
-export async function get(
+export async function fetchData(
   url: string,
   tags: string[],
   params?: any,
@@ -26,14 +26,15 @@ export async function get(
   return res;
 }
 
-export async function post(
+export async function modifyData(
   url: string,
+  method: "post" | "delete" | "put",
   tags: string[],
   body?: any,
   accessToken?: string,
 ) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${url}}`, {
-    method: "post",
+    method,
     headers: {
       "Content-Type": "application/json",
       Authorization: accessToken ? `Bearer ${accessToken}` : "",

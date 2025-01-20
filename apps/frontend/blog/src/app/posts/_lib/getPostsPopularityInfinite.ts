@@ -1,4 +1,4 @@
-import { get } from "@/app/_lib/restful";
+import { fetchData } from "@/app/_lib/restful";
 
 type Props = { pageParam?: number };
 
@@ -6,7 +6,7 @@ export async function getPostsPopularityInfinite(
   pageParam = 0,
   period: string,
 ) {
-  const response = await get(
+  const response = await fetchData(
     "api.post/popular",
     ["posts", "dashboard", "popularity", period],
     {

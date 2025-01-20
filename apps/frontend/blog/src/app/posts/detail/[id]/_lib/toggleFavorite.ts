@@ -1,10 +1,11 @@
 "use server";
 
-import { post } from "@/app/_lib/restful";
+import { modifyData } from "@/app/_lib/restful";
 
 export default async (postId: number, token: string) => {
-  const res = await post(
+  const res = await modifyData(
     `api.like/${postId}`,
+    "post",
     ["post", "detail", `${postId}`, "like"],
     undefined,
     token,

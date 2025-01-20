@@ -1,12 +1,13 @@
-import { post } from "@/app/_lib/restful";
+import { modifyData } from "@/app/_lib/restful";
 
 export default async function followUser(
   userId: number,
   followId: number,
   token: string,
 ) {
-  const res = await post(
+  const res = await modifyData(
     `api.follow/${userId}/${followId}`,
+    "post",
     ["follow", "following", `${userId}`, `${followId}`],
     undefined,
     token,
@@ -16,5 +17,5 @@ export default async function followUser(
     throw new Error("팔로우가 실패하였습니다..");
   }
 
-  return res.json();
+  return await res.json();
 }

@@ -1,7 +1,7 @@
-import { get } from "@/app/_lib/restful";
+import { fetchData } from "@/app/_lib/restful";
 
 export async function getPostsRecently() {
-  const response = await get("api.post/recent", ["posts", "recently"], {
+  const response = await fetchData("api.post/recent", ["posts", "recently"], {
     limit: 10,
     offset: 0,
   });

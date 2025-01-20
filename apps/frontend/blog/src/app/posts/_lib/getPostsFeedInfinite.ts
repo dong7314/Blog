@@ -1,9 +1,9 @@
-import { get } from "@/app/_lib/restful";
+import { fetchData } from "@/app/_lib/restful";
 
 type Props = { pageParam?: number };
 
 export async function getPostsFeedInfinite(pageParam = 0, token: string) {
-  const response = await get(
+  const response = await fetchData(
     "api.post/followed",
     ["posts", "followed"],
     {

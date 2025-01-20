@@ -1,7 +1,7 @@
-import { get } from "@/app/_lib/restful";
+import { fetchData } from "@/app/_lib/restful";
 
 export async function getPostsPopularity() {
-  const response = await get("api.post/popular", ["posts", "popularity"], {
+  const response = await fetchData("api.post/popular", ["posts", "popularity"], {
     limit: 10,
     offset: 0,
     period: "month",
