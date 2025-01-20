@@ -300,8 +300,12 @@ export class PostService {
       .leftJoinAndSelect('post.tags', 'tags')
       .leftJoinAndSelect('post.likes', 'likes')
       .leftJoinAndSelect('post.comments', 'comments')
-      .leftJoin('author.followers', 'followers')
-      .where('followers.id = :userId', { userId })
+      .innerJoin(
+        'author.followers',
+        'followers',
+        'followers.followerId = :userId',
+        { userId },
+      )
       .orderBy('post.createdDate', 'DESC')
       .take(limit)
       .skip(offset * limit)
