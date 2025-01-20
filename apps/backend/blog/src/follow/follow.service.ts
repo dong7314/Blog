@@ -56,12 +56,16 @@ export class FollowService {
     await this.followRepository.remove(follow);
   }
 
-  async getFollowers(userId: number): Promise<UserEntity[]> {
+  async getFollowers(userId: number): Promise<UserDao[]> {
     const followers = await this.followRepository.find({
       where: { following: { id: userId } },
       relations: ['follower'],
     });
-    return followers.map((follow) => follow.follower);
+    return plainToInstance(
+      UserDao,
+      followers.map((follow) => follow.follower),
+      { excludeExtraneousValues: true },
+    );
   }
 
   async getFollowing(userId: number): Promise<UserDao[]> {

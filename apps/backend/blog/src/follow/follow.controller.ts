@@ -24,33 +24,39 @@ export class FollowController {
   @Post(':followerId/:followingId')
   @UseGuards(AuthGuard)
   async followUser(
-    @Param('followerId') followerId: number,
-    @Param('followingId') followingId: number,
+    @Param('followerId') followerId: string,
+    @Param('followingId') followingId: string,
     @Req() req,
   ): Promise<void> {
     const userId = this.getUserId(req);
 
-    if (userId !== followerId) {
+    if (userId !== parseInt(followerId)) {
       throw new UnauthorizedException('권한이 없는 유저입니다.');
     }
 
-    return this.followService.followUser(followerId, followingId);
+    return this.followService.followUser(
+      parseInt(followerId),
+      parseInt(followingId),
+    );
   }
 
   @Delete(':followerId/:followingId')
   @UseGuards(AuthGuard)
   async unfollowUser(
-    @Param('followerId') followerId: number,
-    @Param('followingId') followingId: number,
+    @Param('followerId') followerId: string,
+    @Param('followingId') followingId: string,
     @Req() req,
   ): Promise<void> {
     const userId = this.getUserId(req);
 
-    if (userId !== followerId) {
+    if (userId !== parseInt(followerId)) {
       throw new UnauthorizedException('권한이 없는 유저입니다.');
     }
 
-    return this.followService.unfollowUser(followerId, followingId);
+    return this.followService.unfollowUser(
+      parseInt(followerId),
+      parseInt(followingId),
+    );
   }
 
   @Get('followers/:userId')
