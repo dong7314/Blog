@@ -4,9 +4,9 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 
-import { Post as IPost } from "@/app/_model/Post.model";
 import PostCarousel from "../carousel/PostCarousel";
-import { getPostsRecently } from "../../../_lib/getPostsRecently";
+import { Post as IPost } from "@/app/_model/Post.model";
+import { getPostsRecently } from "../../_lib/getPostsRecently";
 
 export default async function PostsRecently() {
   const queryClient = new QueryClient();

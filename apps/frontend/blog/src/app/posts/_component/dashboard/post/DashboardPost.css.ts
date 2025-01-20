@@ -107,9 +107,9 @@ export const tag = style({
 export const comments = style([
   flexCenter,
   {
-    padding: "2px",
-    marginRight: "10px",
-    borderRadius: "6px",
+    padding: "2px 4px",
+    marginRight: "8px",
+    borderRadius: "8px",
     backgroundColor: "transparent",
     transition: "background-color .15s ease-out",
     boxSizing: "border-box",
@@ -121,7 +121,8 @@ export const comments = style([
 ]);
 
 export const commentsCounter = style({
-  marginLeft: "4px",
+  marginLeft: "6px",
+  marginTop: "1px",
 });
 
 export const favorites = style([flexCenter]);

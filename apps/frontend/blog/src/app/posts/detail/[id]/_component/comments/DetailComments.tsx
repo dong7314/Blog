@@ -5,7 +5,10 @@ import { Comment } from "@/app/_model/Comment.model";
 import DetailComment from "./comment/DetailComment";
 import DetailCommentTextarea from "./textarea/DetailCommentTextarea";
 
-export default function DetailComments() {
+type Props = {
+  postId: number;
+};
+export default function DetailComments({ postId }: Props) {
   const data = {
     comments: [
       {
@@ -82,7 +85,7 @@ export default function DetailComments() {
   };
 
   return (
-    <div className={styles.detailCommentsContainer}>
+    <div className={styles.detailCommentsContainer} id={`comment-${postId}`}>
       <Text size="xl" weight={500} className={styles.detailCommentsCount}>
         {data.count}개의 댓글
       </Text>

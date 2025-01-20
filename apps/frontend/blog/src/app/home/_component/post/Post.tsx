@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -31,52 +32,56 @@ export default function Post({ data }: Props) {
   };
 
   return (
-    <div className={styles.postContainer}>
-      <div className={styles.imageContainer}>
-        <Image
-          src={data.thumbnail.trim() !== "" ? data.thumbnail : "/thumbnail.png"}
-          alt={data.title}
-          priority
-          fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={styles.imageHover}
-        />
-      </div>
-      <div className={styles.infoContainer}>
-        <div>
-          <div className={styles.header}>
-            <Text className={styles.title} size="l" weight={700}>
-              {data.title}
-            </Text>
-            <span className={styles.favorites}>
-              <Icon type="favorite" size="l" />
-              <Text
-                className={styles.likes}
-                size="s"
-                weight={500}
-                color="#F9595F"
-              >
-                {data.likes.length}
+    <Link href={`/posts/detail/${data.id}`}>
+      <div className={styles.postContainer}>
+        <div className={styles.imageContainer}>
+          <Image
+            src={
+              data.thumbnail.trim() !== "" ? data.thumbnail : "/thumbnail.png"
+            }
+            alt={data.title}
+            priority
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className={styles.imageHover}
+          />
+        </div>
+        <div className={styles.infoContainer}>
+          <div>
+            <div className={styles.header}>
+              <Text className={styles.title} size="l" weight={700}>
+                {data.title}
               </Text>
-            </span>
+              <span className={styles.favorites}>
+                <Icon type="favorite_fill" size="l" />
+                <Text
+                  className={styles.likes}
+                  size="s"
+                  weight={500}
+                  color="#F9595F"
+                >
+                  {data.likes.length}
+                </Text>
+              </span>
+            </div>
+            <Text size="s" className={styles.description} color="#595959">
+              {data.description ? data.description : data.content}
+            </Text>
           </div>
-          <Text size="s" className={styles.description} color="#595959">
-            {data.description ? data.description : data.content}
-          </Text>
-        </div>
-        <div className={styles.details}>
-          <Text size="xs" color="#a5a5a5">
-            {convertDate(data.createdDate)} • {data.comments.length}개의 댓글
-          </Text>
-          <div className={styles.author}>
-            <span className={styles.by}>by</span>
-            <TextButton size="xs" weight={600}>
-              {data.author.name}
-            </TextButton>
+          <div className={styles.details}>
+            <Text size="xs" color="#a5a5a5">
+              {convertDate(data.createdDate)} • {data.comments.length}개의 댓글
+            </Text>
+            <div className={styles.author}>
+              <span className={styles.by}>by</span>
+              <TextButton size="xs" weight={600}>
+                {data.author.name}
+              </TextButton>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

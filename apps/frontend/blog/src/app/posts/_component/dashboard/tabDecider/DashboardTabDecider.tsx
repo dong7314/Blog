@@ -1,8 +1,9 @@
 "use client";
 
 import { Period } from "../Dashboard";
-import DashboardRecent from "../recent/DashboardRecent";
-import DashboardTrend from "../trend/DashboardTrend";
+import DashboardFeed from "../tab/feed/DashboardFeed";
+import DashboardTrend from "../tab/trend/DashboardTrend";
+import DashboardRecent from "../tab/recent/DashboardRecent";
 
 type Props = {
   index: number;
@@ -10,10 +11,10 @@ type Props = {
 };
 export default function DashboardTabDecider({ index, period }: Props) {
   if (index === 0) {
-    return <DashboardTrend period={period}/>;
+    return <DashboardTrend period={period} />;
   } else if (index === 1) {
     return <DashboardRecent />;
   } else {
-    return <></>;
+    return <DashboardFeed />;
   }
 }

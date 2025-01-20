@@ -63,6 +63,12 @@ export default function Anchor() {
     };
   }, [anchorNavigationStore.navPositionList]);
 
+  useEffect(() => {
+    return () => {
+      anchorNavigationStore.reset();
+    };
+  }, []);
+
   return (
     <div className={styles.anchorContainer}>
       {anchorNavigationStore.navList.map((nav: any, index: number) => {

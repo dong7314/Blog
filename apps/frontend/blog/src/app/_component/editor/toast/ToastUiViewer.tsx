@@ -26,11 +26,14 @@ export default function ToastUiViewer({ content = "" }: Props) {
       // 제목 텍스트를 가져와 공백을 -로 변환하여 id로 사용
       const id: string = getChildrenText(node).trim().replace(/\s+/g, "-");
       if (["h1", "h2", "h3"].includes(tagName)) {
-        anchorNavigationStore.addNavList({
-          id,
-          name: getChildrenText(node),
-          type: tagName as "h1" | "h2",
-        });
+        const name = getChildrenText(node);
+        if (name) {
+          anchorNavigationStore.addNavList({
+            id,
+            name: getChildrenText(node),
+            type: tagName as "h1" | "h2" | "h3",
+          });
+        }
       }
       if (entering) {
         return {

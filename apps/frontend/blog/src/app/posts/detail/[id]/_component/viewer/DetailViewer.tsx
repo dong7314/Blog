@@ -17,6 +17,7 @@ export default function DetailViewer({ content, imgUrl }: Props) {
         height={0}
         src={imgUrl}
         alt={imgUrl}
+        priority
         style={{
           height: "auto",
           width: "100%",

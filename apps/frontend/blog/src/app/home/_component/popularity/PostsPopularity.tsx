@@ -4,9 +4,9 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 
-import { Post as IPost } from "@/app/_model/Post.model";
 import PostCarousel from "../carousel/PostCarousel";
-import { getPostsPopularity } from "../../../_lib/getPostsPopularity";
+import { Post as IPost } from "@/app/_model/Post.model";
+import { getPostsPopularity } from "../../_lib/getPostsPopularity";
 
 export default async function PostsPopularity() {
   const queryClient = new QueryClient();

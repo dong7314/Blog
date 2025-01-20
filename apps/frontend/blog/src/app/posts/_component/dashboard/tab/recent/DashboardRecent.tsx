@@ -6,30 +6,25 @@ import {
   useInfiniteQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getPostsPopularityInfinite } from "@/app/_lib/getPostsPopularity";
+import { getPostsRecentlyInfinite } from "@/app/posts/_lib/getPostsRecentlyInfinite";
 
 import { Post as IPost } from "@/app/_model/Post.model";
 import { Fragment, useEffect } from "react";
-import DashboardPost from "../post/DashboardPost";
-import { Period } from "../Dashboard";
+import DashboardPost from "../../post/DashboardPost";
 import { Loading, Text } from "@frontend/coreui";
 
-type Props = {
-  period: Period;
-};
-export default function DashboardTrend({ period }: Props) {
+export default function DashboardRecent() {
   const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
     IPost[],
     Object,
     InfiniteData<IPost[]>,
-    [_1: string, _2: string, _3: string, _4: string],
+    [_1: string, _2: string, _3: string],
     number
   >({
-    queryKey: ["posts", "dashboard", "popularity", period],
-    queryFn: ({ pageParam = 0 }) =>
-      getPostsPopularityInfinite(pageParam, period),
-    getNextPageParam: (lastPage: any, allPages: any) => {
+    queryKey: ["posts", "dashboard", "recently"],
+    queryFn: getPostsRecentlyInfinite,
+    getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length < 6) return null;
       return allPages.length;
     },
@@ -50,30 +45,28 @@ export default function DashboardTrend({ period }: Props) {
   useEffect(() => {
     return () => {
       queryClient.removeQueries({
-        queryKey: ["posts", "dashboard", "popularity"],
+        queryKey: ["posts", "dashboard", "recently"],
       });
     };
   }, []);
 
   return (
     <>
-      {data?.pages.map((page: any, index: number) => {
+      {data?.pages.map((page, index) => {
         return (
           <Fragment key={index}>
-            {page.map((post: IPost) => {
+            {page.map((post) => {
               return (
                 <DashboardPost key={`dashboard-post-${post.id}`} data={post} />
               );
             })}
             {page.length === 0 && (
-              <Text color="#595959" size="s">
-                게시글이 존재하지 않습니다.
-              </Text>
+              <Text color="#595959">게시글이 존재하지 않습니다.</Text>
             )}
           </Fragment>
         );
       })}
-      {isFetching && <Loading size="l" />}
+      {isFetching && <Loading />}
       {hasNextPage && <div ref={ref} style={{ height: 10 }}></div>}
     </>
   );

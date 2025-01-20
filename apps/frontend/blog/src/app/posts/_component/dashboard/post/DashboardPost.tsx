@@ -90,14 +90,16 @@ export default function DashboardPost({ data }: Props) {
               })}
             </div>
             <div className={styles.flexCenter}>
-              <div className={styles.comments}>
-                <Icon type="comment" size="l" />
-                <Text className={styles.commentsCounter} color="#595959">
-                  {data.comments.length}
-                </Text>
-              </div>
+              <Link href={`/posts/detail/${data.id}#comment-${data.id}`}>
+                <div className={styles.comments}>
+                  <Icon type="comment" size="l" />
+                  <Text className={styles.commentsCounter} color="#595959">
+                    {data.comments.length}
+                  </Text>
+                </div>
+              </Link>
               <div className={styles.favorites}>
-                <Icon type="favorite" size="xl" />
+                <Icon type="favorite_fill" size="xl" />
                 <Text className={styles.commentsCounter} color="#F9595F">
                   {data.likes.length}
                 </Text>

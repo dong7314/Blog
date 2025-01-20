@@ -6,8 +6,6 @@ export default async (
   prevState: { message: string | null },
   formData: FormData,
 ) => {
-  "use server";
-
   if (!formData.get("email")) {
     return { message: "이메일을 정확히 입력해 주세요." };
   }

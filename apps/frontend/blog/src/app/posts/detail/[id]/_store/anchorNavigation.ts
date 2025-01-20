@@ -24,6 +24,7 @@ export const useAnchorNavigationStore = create<AnchorNavigationState>(
       set({
         navList: [],
         navSet: new Set(),
+        navPositionList: [],
       });
     },
     addNavList(nav: AnchorNavigation) {

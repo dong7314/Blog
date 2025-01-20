@@ -24,7 +24,7 @@ export default function AnchorItem({ data, index, active }: Props) {
   const itemStyle = composeStyles(
     styles.anchorItem,
     (styles as any)[data.type],
-    index === active ? styles.active : ""
+    index === active ? styles.active : "",
   );
 
   useEffect(() => {

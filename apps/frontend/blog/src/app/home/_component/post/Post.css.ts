@@ -56,7 +56,8 @@ export const favorites = style({
 });
 
 export const likes = style({
-  marginLeft: "3px",
+  marginLeft: "6px",
+  marginTop: "1.5px",
 });
 
 export const title = style({

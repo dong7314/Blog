@@ -1,16 +1,99 @@
+"use client";
 import Image from "next/image";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 import * as styles from "./DetailProfile.css";
 
 import { Button, Text, TextButton } from "@frontend/coreui";
+import { User as IUser, User } from "@/app/_model/User.model";
+import { getFollowers } from "../../_lib/getFollowers";
+import { useEffect, useState } from "react";
+import followUser from "../../_lib/followUser";
 
-export default function DetailProfile() {
-  const data = {
-    id: 1,
-    name: "administrator",
-    description: "안녕하세요 항상 도전하고 배우고 있는 프론트 개발자입니다!",
-    email: "eaea7314@naver.com",
-    thumbnail: "",
+type Props = {
+  author: IUser;
+};
+export default function DetailProfile({ author }: Props) {
+  const session = useSession();
+  const queryClient = useQueryClient();
+
+  const { data: followers = [] } = useQuery({
+    queryKey: ["follow", "followers", `${author.id}`],
+    queryFn: () => getFollowers(author.id),
+  });
+
+  const followMutation = useMutation({
+    mutationFn: ({
+      userId,
+      followId,
+      token,
+    }: {
+      userId: number;
+      followId: number;
+      token: string;
+    }) => followUser(userId, followId, token),
+    onMutate: async ({ userId, followId }) => {
+      await queryClient.cancelQueries({
+        queryKey: ["follow", "followers", `${followId}`],
+      });
+      const previousFollowers = queryClient.getQueryData<User[]>([
+        "follow",
+        "followers",
+        `${userId}`,
+      ]);
+
+      queryClient.setQueryData<User[]>(
+        ["follow", "followers", `${followId}`],
+        (old) =>
+          old
+            ? [
+                ...old,
+                {
+                  id: userId,
+                  name: "",
+                  email: "",
+                  description: "",
+                  thumbnail: "",
+                },
+              ]
+            : [],
+      );
+
+      return { previousFollowers };
+    },
+    onError: (_error, _variables, context) => {
+      queryClient.setQueryData(
+        ["follow", "followers", `${_variables.followId}`],
+        context?.previousFollowers,
+      );
+    },
+    onSettled: (_data, _error, _variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["follow", "followers", `${_variables.followId}`],
+      });
+    },
+  });
+
+  // 버튼 상태 설정
+  const isFollowing = followers.some(
+    (user: User) => user.id === parseInt(session.data?.user.id || "-1"),
+  );
+
+  const handleFollow = () => {
+    if (session.data) {
+      followMutation.mutate({
+        userId: parseInt(session.data.user.id!),
+        followId: author.id,
+        token: session.data.user.accessToken!,
+      });
+    }
+  };
+
+  const handleUnfollow = () => {
+    // if (session.data) {
+    //   unfollowMutation.mutate(parseInt(session.data.user.id));
+    // }
   };
 
   return (
@@ -26,21 +109,39 @@ export default function DetailProfile() {
           />
           <div className={styles.profileUser}>
             <TextButton size="dxl" weight={600}>
-              {data.name}
+              {author.name}
             </TextButton>
             <Text color="#7F7F7F" size="s" className={styles.email}>
-              {data.email}
+              {author.email}
             </Text>
           </div>
         </div>
-        <div className={styles.followButtonBox}>
-          <Button rounded={true} type="primary" size="l">
-            팔로우
-          </Button>
-        </div>
+        {session.data && author.id !== parseInt(session.data.user.id) && (
+          <div className={styles.followButtonBox}>
+            {isFollowing ? (
+              <Button
+                rounded={true}
+                type="tertiary"
+                size="l"
+                onClick={handleUnfollow}
+              >
+                언팔로우
+              </Button>
+            ) : (
+              <Button
+                rounded={true}
+                type="primary"
+                size="l"
+                onClick={handleFollow}
+              >
+                팔로우
+              </Button>
+            )}
+          </div>
+        )}
       </div>
       <div className={styles.profileDescription}>
-        <Text color="#595959">{data.description}</Text>
+        <Text color="#595959">{author.description}</Text>
       </div>
     </div>
   );

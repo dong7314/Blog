@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 
 import * as styles from "./Dashboard.css";
 
-import { PrePostDataList } from "@/app/home/data/PrePostDataEx";
-import { Select, Text } from "@frontend/coreui";
+import { Select } from "@frontend/coreui";
 import HeaderItem from "./headerItem/HeaderItem";
-import DashboardPost from "./post/DashboardPost";
-import DashboardTabDecider from "./tab/DashboardTabDecider";
+import DashboardTabDecider from "./tabDecider/DashboardTabDecider";
 
 export type Period = "day" | "week" | "month" | "year";
 

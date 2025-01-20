@@ -8,7 +8,7 @@ import { Button, IconButton, SearchBar } from "@frontend/coreui";
 import Link from "next/link";
 
 export default function Toolbar() {
-  const { data, update } = useSession();
+  const { data } = useSession();
 
   return (
     <div className={styles.toolbar}>

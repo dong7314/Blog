@@ -6,25 +6,30 @@ import {
   useInfiniteQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getPostsRecentlyInfinite } from "@/app/_lib/getPostsRecently";
+import { getPostsPopularityInfinite } from "@/app/posts/_lib/getPostsPopularityInfinite";
 
 import { Post as IPost } from "@/app/_model/Post.model";
 import { Fragment, useEffect } from "react";
-import DashboardPost from "../post/DashboardPost";
+import DashboardPost from "../../post/DashboardPost";
+import { Period } from "../../Dashboard";
 import { Loading, Text } from "@frontend/coreui";
 
-export default function DashboardRecent() {
+type Props = {
+  period: Period;
+};
+export default function DashboardTrend({ period }: Props) {
   const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
     IPost[],
     Object,
     InfiniteData<IPost[]>,
-    [_1: string, _2: string, _3: string],
+    [_1: string, _2: string, _3: string, _4: string],
     number
   >({
-    queryKey: ["posts", "dashboard", "recently"],
-    queryFn: getPostsRecentlyInfinite,
-    getNextPageParam: (lastPage, allPages) => {
+    queryKey: ["posts", "dashboard", "popularity", period],
+    queryFn: ({ pageParam = 0 }) =>
+      getPostsPopularityInfinite(pageParam, period),
+    getNextPageParam: (lastPage: any, allPages: any) => {
       if (lastPage.length < 6) return null;
       return allPages.length;
     },
@@ -45,17 +50,17 @@ export default function DashboardRecent() {
   useEffect(() => {
     return () => {
       queryClient.removeQueries({
-        queryKey: ["posts", "dashboard", "recently"],
+        queryKey: ["posts", "dashboard", "popularity"],
       });
     };
   }, []);
 
   return (
     <>
-      {data?.pages.map((page, index) => {
+      {data?.pages.map((page: any, index: number) => {
         return (
           <Fragment key={index}>
-            {page.map((post) => {
+            {page.map((post: IPost) => {
               return (
                 <DashboardPost key={`dashboard-post-${post.id}`} data={post} />
               );
@@ -66,7 +71,7 @@ export default function DashboardRecent() {
           </Fragment>
         );
       })}
-      {isFetching && <Loading size="l" />}
+      {isFetching && <Loading />}
       {hasNextPage && <div ref={ref} style={{ height: 10 }}></div>}
     </>
   );
