@@ -2,6 +2,7 @@ import { User } from "./User.model";
 import { Tag } from "./Tag.model";
 import { Like } from "./Like.model";
 import { Comment } from "./Comment.model";
+import { Series } from "./Series.model";
 
 export interface Post {
   id: number;
@@ -13,7 +14,7 @@ export interface Post {
   tags: Tag[];
   likes: Like[];
   comments: Comment[];
-  series: number | null;
+  series: Series;
   seriesOrder: number | null;
   viewCount: number | null;
   createdDate: Date;
