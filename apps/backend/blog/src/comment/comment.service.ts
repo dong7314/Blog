@@ -13,6 +13,7 @@ import { UserEntity } from 'src/users/entity/user.entity';
 import { CommentDao } from './dao/comment.dao';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CustomCommentDao } from './dao/custom-comment.dao';
+import { delay } from 'rxjs';
 
 @Injectable()
 export class CommentService {
@@ -33,7 +34,10 @@ export class CommentService {
     parentId?: number,
   ): Promise<CommentDao> {
     // 포스트 존재 여부 확인
-    const post = await this.postRepository.findOne({ where: { id: postId } });
+    const post = await this.postRepository.findOne({
+      where: { id: postId },
+      relations: ['author'],
+    });
     if (!post) {
       throw new NotFoundException('포스트가 존재하지 않습니다.');
     }
@@ -50,7 +54,7 @@ export class CommentService {
       parent = await this.commentRepository.findOne({
         where: { id: parentId },
       });
-      
+
       if (!parent) {
         throw new NotFoundException('부모 댓글이 존재하지 않습니다.');
       }
@@ -132,17 +136,17 @@ export class CommentService {
       where: { id: commentId },
       relations: ['author'],
     });
-  
+
     if (!comment) {
       throw new NotFoundException('댓글이 존재하지 않습니다.');
     }
-  
+
     // 해당 댓글에 대한 대댓글을 조회하는 쿼리
     const totalReplies = await this.commentRepository
       .createQueryBuilder('comment')
       .where('comment.parentId = :commentId', { commentId })
       .getCount();
-  
+
     // 대댓글을 가져오기 위한 쿼리
     const replies = await this.commentRepository
       .createQueryBuilder('comment')
@@ -152,7 +156,7 @@ export class CommentService {
       .where('comment.parentId = :commentId', { commentId }) // 해당 댓글의 대댓글만 가져오기
       .orderBy('comment.createdDate', 'DESC')
       .getMany();
-  
+
     const convertReplies: CustomCommentDao = {
       comments: plainToInstance(
         CommentDao,
@@ -165,7 +169,7 @@ export class CommentService {
       ),
       count: totalReplies,
     };
-  
+
     return convertReplies;
   }
 
