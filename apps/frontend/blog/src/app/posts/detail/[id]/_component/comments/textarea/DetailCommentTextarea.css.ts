@@ -6,6 +6,14 @@ export const commentTextarea = style({
   width: "100%",
 });
 
+export const commentFilter = style({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+});
+
 export const comment = style({
   height: "180px",
   marginBottom: "32px",
@@ -20,12 +28,27 @@ export const textarea = style({
   scrollPadding: "48px",
 });
 
+export const form = style({
+  display: "inline-flex",
+  ":hover": {
+    cursor: "pointer",
+  },
+});
+
+export const submitButton = style({
+  margin: 0,
+  padding: 0,
+  border: "none",
+  background: "transparent",
+  ":hover": {
+    cursor: "pointer",
+  },
+});
+
 export const textButton = style({
   position: "absolute",
   display: "inline-flex",
   padding: "6px 10px",
-  right: "14px",
-  bottom: "12px",
   overflow: "hidden",
   borderRadius: "6px",
   backgroundColor: "transparent",
@@ -35,3 +58,24 @@ export const textButton = style({
     backgroundColor: "rgba(0, 0, 0, 0.08)",
   },
 });
+
+export const first = style([
+  textButton,
+  {
+    right: "60px",
+    bottom: "12px",
+  },
+]);
+
+export const firstButtonText = style({
+  marginLeft: "4px",
+  transition: "none !important",
+});
+
+export const second = style([
+  textButton,
+  {
+    right: "14px",
+    bottom: "12px",
+  },
+]);

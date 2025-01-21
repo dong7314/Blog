@@ -46,8 +46,24 @@ export const functions = style({
   boxSizing: "border-box",
 });
 
+export const authorFunctions = style({
+  display: "flex",
+  alignItems: "center",
+  marginLeft: "12px",
+});
+
+export const status = style({
+  display: "flex",
+  alignItems: "center",
+});
+
+export const seperate = style({
+  marginInline: "4px",
+});
+
 export const content = style({
   display: "flex",
+  paddingLeft: "4px",
   marginBottom: "24px",
 });
 
@@ -76,6 +92,7 @@ export const arrowIcon = style({
   width: "16px",
   height: "16px",
   padding: "1px",
+  marginLeft: "4px",
   boxSizing: "border-box",
 });
 

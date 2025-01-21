@@ -56,17 +56,20 @@ export const seriesPostContainer = style({
 
 export const seriesPost = style({
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   alignItems: "center",
-  paddingLeft: "8px",
+  padding: "8px",
   marginBlock: "2px",
-  paddingBlock: "8px",
   borderRadius: "6px",
   backgroundColor: "transparent",
 });
 
 export const seriesOrder = style({
   minWidth: "22px",
+});
+
+export const flex = style({
+  display: "flex",
 });
 
 export const active = style({

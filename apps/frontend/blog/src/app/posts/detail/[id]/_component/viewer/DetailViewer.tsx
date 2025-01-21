@@ -8,19 +8,18 @@ type Props = {
   imgUrl: string;
   content: string;
 };
-
 export default function DetailViewer({ content, imgUrl }: Props) {
   return (
     <div className={styles.viewer}>
       <Image
         width={800}
-        height={0}
-        src={imgUrl}
-        alt={imgUrl}
+        height={800}
+        src={imgUrl.trim() !== "" ? imgUrl : "/thumbnail.png"}
+        alt={imgUrl.trim() !== "" ? imgUrl : "thumbnail"}
         priority
         style={{
-          height: "auto",
           width: "100%",
+          height: "auto",
           borderRadius: "6px",
           marginBottom: "32px",
         }}

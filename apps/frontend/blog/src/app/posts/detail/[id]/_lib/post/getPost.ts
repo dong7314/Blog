@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { fetchData } from "@/app/_lib/restful";
 
 export async function getPost(id: number) {

@@ -8,7 +8,7 @@ import * as styles from "./DetailFavoritesButton.css";
 
 import { Like } from "@/app/_model/Like.model";
 import { Icon, Text } from "@frontend/coreui";
-import toggleFavorite from "../../_lib/toggleFavorite";
+import toggleFavorite from "../../_lib/like/toggleFavorite";
 
 type Props = {
   postId: number;

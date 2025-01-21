@@ -4,7 +4,7 @@ export const detailCommentsContainer = style({
   display: "flex",
   flexDirection: "column",
   width: "100%",
-  marginTop: "16px",
+  paddingTop: "16px",
   marginBottom: "96px",
 });
 

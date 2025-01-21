@@ -7,10 +7,14 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 import * as styles from "./page.css";
 
-import { getPost } from "./_lib/getPost";
+import { getPost } from "./_lib/post/getPost";
+import { addComma } from "@/app/_lib/addComma";
+import { Post as IPost } from "@/app/_model/Post.model";
 import { Text, TextButton } from "@frontend/coreui";
 
 import Anchor from "./_component/anchor/Anchor";
@@ -20,21 +24,19 @@ import DetailViewer from "./_component/viewer/DetailViewer";
 import DetailProfile from "./_component/profile/DetailProfile";
 import DetailComments from "./_component/comments/DetailComments";
 import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
-import { Post as IPost } from "@/app/_model/Post.model";
-
-dayjs.extend(relativeTime);
-dayjs.locale("ko");
+import DetailCommentsContainer from "./_component/comments/DetailCommentsContainer";
 
 type Props = {
-  params: Promise<{ id: number }>;
+  params: Promise<{ id: string }>;
 };
 export default async function DetailPage({ params }: Props) {
   const { id } = await params;
+  const postId = parseInt(id);
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["post", "detail"],
-    queryFn: () => getPost(id),
+    queryFn: () => getPost(postId),
   });
   const dehydratedState = dehydrate(queryClient);
   // React Query 상태에서 데이터를 직접 추출
@@ -71,10 +73,16 @@ export default async function DetailPage({ params }: Props) {
               </span>
               <span className={styles.infoSpan}>
                 <Text color="#595959" lineHeight="150%">
-                  {convertDate(data.createdDate!)}
+                  <span style={{ letterSpacing: 0.4 }}>
+                    {convertDate(data.createdDate!)}
+                  </span>{" "}
                 </Text>
                 <Text color="#595959" lineHeight="150%">
-                  &nbsp;&nbsp;•&nbsp;&nbsp;{data.viewCount} 읽음
+                  &nbsp;&nbsp;•&nbsp;&nbsp;
+                  <span style={{ letterSpacing: 0.6 }}>
+                    {addComma(data.viewCount)}
+                  </span>{" "}
+                  읽음
                 </Text>
               </span>
             </div>
@@ -90,11 +98,13 @@ export default async function DetailPage({ params }: Props) {
           </div>
           <div className={styles.subContent}>
             <div className={styles.favorites}>
-              <DetailFavoritesButton favorites={data.likes} postId={id} />
+              <DetailFavoritesButton favorites={data.likes} postId={postId} />
             </div>
             <DetailProfile author={data.author} />
-            {/* <DetailSeries /> */}
-            <DetailComments postId={id} />
+            {data.series && (
+              <DetailSeries series={data.series} postId={postId} />
+            )}
+            <DetailCommentsContainer postId={postId} />
           </div>
         </div>
       )}
