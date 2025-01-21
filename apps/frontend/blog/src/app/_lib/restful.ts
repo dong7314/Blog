@@ -33,7 +33,7 @@ export async function modifyData(
   body?: any,
   accessToken?: string,
 ) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${url}}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${url}`, {
     method,
     headers: {
       "Content-Type": "application/json",
