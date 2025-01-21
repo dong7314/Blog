@@ -466,6 +466,50 @@ export const icons = {
   lock: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0,0,256,256"
+      width="48px"
+      height="48px"
+    >
+      <g
+        fill="#595959"
+        stroke="none"
+        strokeWidth="0.8"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDashoffset="0"
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M12,1c-3.32381,0 -6,2.67619 -6,6v1c-1.09306,0 -2,0.90694 -2,2v10c0,1.09306 0.90694,2 2,2h12c1.09306,0 2,-0.90694 2,-2v-10c0,-1.09306 -0.90694,-2 -2,-2v-1c0,-3.32381 -2.67619,-6 -6,-6zM12,3c2.27619,0 4,1.72381 4,4v1h-8v-1c0,-2.27619 1.72381,-4 4,-4zM6,10h12v10h-12zM12,13c-1.1,0 -2,0.9 -2,2c0,1.1 0.9,2 2,2c1.1,0 2,-0.9 2,-2c0,-1.1 -0.9,-2 -2,-2z"></path>
+        </g>
+      </g>
+    </svg>
+  ),
+  lock_open: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0,0,256,256"
+      width="48px"
+      height="48px"
+    >
+      <g
+        fill="#a5a5a5"
+        stroke="none"
+        strokeWidth="0.8"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDashoffset="0"
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M12,1c-2.87222,0 -5.28109,2.04615 -5.87695,4.78711l1.95508,0.42578c0.40414,-1.85904 1.9941,-3.21289 3.92188,-3.21289c2.27619,0 4,1.72381 4,4v1h-10c-1.09306,0 -2,0.90694 -2,2v10c0,1.09306 0.90694,2 2,2h12c1.09306,0 2,-0.90694 2,-2v-10c0,-1.09306 -0.90694,-2 -2,-2v-1c0,-3.32381 -2.67619,-6 -6,-6zM6,10h12v10h-12zM12,13c-1.1,0 -2,0.9 -2,2c0,1.1 0.9,2 2,2c1.1,0 2,-0.9 2,-2c0,-1.1 -0.9,-2 -2,-2z"></path>
+        </g>
+      </g>
+    </svg>
+  ),
+  lock_color: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
       width="16"

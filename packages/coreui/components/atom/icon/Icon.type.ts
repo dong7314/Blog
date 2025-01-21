@@ -19,6 +19,8 @@ export type IconType =
   | "minus"
   | "plus_circle"
   | "lock"
+  | "lock_open"
+  | "lock_color"
   | "enter_arrow";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";
