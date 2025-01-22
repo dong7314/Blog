@@ -30,6 +30,8 @@ export interface TextareaProps {
   placeholder?: string;
   /** 패턴 관련하여 에러 발생 시 출력할 문자열 */
   children?: ReactNode;
+  /** 텍스트에리어 값 세팅 */
+  value?: string;
   /** textarea value 변경 시 동작할 함수 */
   onChange?: (value: string) => void;
   /** textarea에 style 커스텀 설정 */
@@ -40,6 +42,7 @@ export interface TextareaProps {
 export const Textarea = ({
   label,
   name,
+  value = "",
   resize = "both",
   maxLength,
   error,
@@ -49,7 +52,7 @@ export const Textarea = ({
   className,
 }: TextareaProps) => {
   const uuid = useId();
-  const [value, setValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState(value);
   const [focus, setFocus] = useState(false);
   const [currentError, setCurrentError] = useState(error);
 
@@ -62,7 +65,7 @@ export const Textarea = ({
     styles.label,
     focus ? styles.labelFocus : "",
     currentError ? styles.labelError : "",
-    (focus || value) && !placeholder ? styles.labelInValue : "",
+    (focus || textareaValue) && !placeholder ? styles.labelInValue : "",
     placeholder ? styles.hasPlaceholder : styles.withoutPlaceholder,
   );
   const textareaStyle = composeStyles(
@@ -81,12 +84,16 @@ export const Textarea = ({
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     // value 값 세팅
     const newValue = e.target.value;
-    setValue(newValue);
+    setTextareaValue(newValue);
 
     if (onChange) {
       onChange(e.target.value);
     }
   };
+
+  useEffect(() => {
+    setTextareaValue(value);
+  }, [value]);
 
   useEffect(() => {
     setCurrentError(error);
@@ -112,6 +119,7 @@ export const Textarea = ({
           className={textareaStyle}
           placeholder={placeholder}
           maxLength={maxLength}
+          value={textareaValue}
           onBlur={handleBlur}
           onFocus={handleFocus}
           onChange={handleChange}
@@ -133,7 +141,7 @@ export const Textarea = ({
           {maxLength && (
             <div className={styles.maxLength}>
               <Text size="xs" color="#595959">
-                {value.length}/{maxLength}
+                {textareaValue.length}/{maxLength}
               </Text>
             </div>
           )}
