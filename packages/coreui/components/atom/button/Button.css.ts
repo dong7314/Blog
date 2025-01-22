@@ -2,7 +2,6 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 export const base = style({
   display: "inline-flex",
-  width: "100%",
   alignItems: "center",
   justifyContent: "center",
   border: "none",

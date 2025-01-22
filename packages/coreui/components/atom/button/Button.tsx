@@ -25,6 +25,8 @@ export interface ButtonProps {
   feature?: "button" | "reset" | "submit";
   /** 클릭 시 동작할 함수 */
   onClick?: () => void;
+  /** 버튼에 style 커스텀 설정 */
+  className?: string;
 }
 
 /** Primary UI component for user interaction */
@@ -36,6 +38,7 @@ export const Button = ({
   feature = "button",
   onClick,
   children,
+  className,
 }: ButtonProps) => {
   /** Text 컴포넌트에 적용할 폰트 색상을 결정 */
   const getFontColor = (type: ButtonType) =>
@@ -78,6 +81,7 @@ export const Button = ({
     styles.type[type],
     rounded ? styles.rounded[size] : "",
     disabled ? styles.disabled[type] : "",
+    className ?? "",
   );
 
   return (
