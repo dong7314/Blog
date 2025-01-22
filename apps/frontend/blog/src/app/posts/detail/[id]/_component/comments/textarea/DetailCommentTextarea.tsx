@@ -12,18 +12,30 @@ import createComment from "../../../_lib/comment/createComment";
 type Props = {
   type: "comment" | "reply";
   postId: number;
-  parentId: number | null;
+  parentId?: number;
+  commentId: number | null;
+  closeEvent?: Function;
 };
 export default function DetailCommentTextarea({
   type,
   postId,
   parentId,
+  commentId,
+  closeEvent,
 }: Props) {
   const { data } = useSession();
   const queryClient = useQueryClient();
   const [content, setContent] = useState("");
   const [isSecret, setIsSecret] = useState(false);
   const [buttonIsHover, setButtonIsHover] = useState(false);
+
+  const invalidateReplies = (id?: number | null) => {
+    if (id) {
+      queryClient.invalidateQueries({
+        queryKey: ["comment", `${id}`, "replies"],
+      });
+    }
+  };
 
   // Mutation 정의
   const mutation = useMutation({
@@ -38,13 +50,21 @@ export default function DetailCommentTextarea({
         postId,
         content,
         isSecret,
-        parentId,
+        commentId,
         data?.user.accessToken!,
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["post", "detail", `${postId}`, "comments"],
-      });
+      queryClient
+        .invalidateQueries({
+          queryKey: ["post", "detail", `${postId}`, "comments"],
+        })
+        .then(() => {
+          setContent("");
+        });
+
+      invalidateReplies(commentId);
+      invalidateReplies(parentId);
+      if (closeEvent) closeEvent();
     },
     onError: (error: any) => {
       console.error("댓글 작성 실패:", error);
@@ -66,6 +86,7 @@ export default function DetailCommentTextarea({
       {data && <div className={styles.commentFilter} />}
       <Textarea
         name="comment-content"
+        value={content}
         className={styles.textarea}
         resize="none"
         placeholder={

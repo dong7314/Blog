@@ -2,10 +2,14 @@ import { Viewer } from "@toast-ui/react-editor";
 
 import * as styles from "./ToastUiViewer.css";
 
-import "@toast-ui/editor/dist/toastui-editor.css";
 import "prismjs/themes/prism.css";
+import "@toast-ui/editor/dist/i18n/ko-kr";
+import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
 import Prism from "prismjs";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-typescript";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import { useAnchorNavigationStore } from "@/app/posts/detail/[id]/_store/anchorNavigation";
 

@@ -6,8 +6,10 @@ import * as styles from "./Toolbar.css";
 
 import { Button, IconButton, SearchBar } from "@frontend/coreui";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Toolbar() {
+  const router = useRouter();
   const { data } = useSession();
 
   return (
@@ -31,6 +33,7 @@ export default function Toolbar() {
           <Button
             onClick={() => {
               signOut({ redirect: false });
+              router.replace("/home");
             }}
           >
             로그아웃

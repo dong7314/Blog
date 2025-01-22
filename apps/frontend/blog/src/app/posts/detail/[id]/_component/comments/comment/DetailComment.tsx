@@ -11,6 +11,7 @@ import * as styles from "./DetailComment.css";
 
 import { Comment as IComment } from "@/app/_model/Comment.model";
 import { Button, Icon, Text, TextButton } from "@frontend/coreui";
+import DeleteTextButton from "./button/DeleteTextButton";
 import DetailCommentReplies from "../replies/DetailCommentReplies";
 import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
 
@@ -20,9 +21,16 @@ dayjs.locale("ko");
 type Props = {
   postId: number;
   comment: IComment;
+  parentId?: number;
+  grandParentId?: number;
 };
 
-export default function DetailComment({ postId, comment }: Props) {
+export default function DetailComment({
+  postId,
+  comment,
+  parentId,
+  grandParentId,
+}: Props) {
   const { data } = useSession();
   const [openReplyTextarea, setOpenReplyTextarea] = useState(false);
   const [openReplyComments, setOpenReplyComments] = useState(false);
@@ -34,6 +42,7 @@ export default function DetailComment({ postId, comment }: Props) {
 
   const handleTextarea = () => setOpenReplyTextarea((prev) => !prev);
   const handleComments = () => setOpenReplyComments((prev) => !prev);
+  const handleCloseTextarea = () => setOpenReplyTextarea(false);
 
   return (
     <div className={styles.detailCommentContainer}>
@@ -74,7 +83,12 @@ export default function DetailComment({ postId, comment }: Props) {
               <Text size="xs" className={styles.seperate}>
                 |
               </Text>
-              <TextButton size="xs">삭제</TextButton>
+              <DeleteTextButton
+                postId={postId}
+                parentId={parentId}
+                commentId={comment.id}
+                grandParentId={grandParentId}
+              />
             </div>
           )}
         </div>
@@ -119,13 +133,19 @@ export default function DetailComment({ postId, comment }: Props) {
         <div className={styles.subFunctions}>
           <DetailCommentTextarea
             postId={postId}
-            parentId={comment.id}
+            parentId={parentId}
+            commentId={comment.id}
+            closeEvent={handleCloseTextarea}
             type={"reply"}
           />
         </div>
       )}
       {openReplyComments && (
-        <DetailCommentReplies postId={postId} commentId={comment.id} />
+        <DetailCommentReplies
+          postId={postId}
+          parentId={parentId}
+          commentId={comment.id}
+        />
       )}
     </div>
   );

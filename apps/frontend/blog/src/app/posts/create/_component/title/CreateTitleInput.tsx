@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@frontend/coreui";
-import { usePostStore } from "../../_store/post";
+import { usePostStore } from "../../_store/postStore";
 
 export default function CreateTitleInput() {
   const postStore = usePostStore();

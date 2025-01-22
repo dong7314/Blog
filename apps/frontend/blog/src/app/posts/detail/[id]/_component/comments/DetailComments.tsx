@@ -37,13 +37,17 @@ export default function DetailComments({ postId }: Props) {
       <Text size="xl" weight={500} className={styles.detailCommentsCount}>
         {commentsData.count}개의 댓글
       </Text>
-      <DetailCommentTextarea postId={postId} parentId={null} type={"comment"} />
+      <DetailCommentTextarea
+        postId={postId}
+        commentId={null}
+        type={"comment"}
+      />
       {commentsData.comments.map((comment: IComment) => {
         return (
           <DetailComment
             key={`comment-id-${comment.id}`}
-            comment={comment}
             postId={postId}
+            comment={comment}
           />
         );
       })}

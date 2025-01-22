@@ -52,3 +52,5 @@ export const usePostStore = create<PostState>((set) => ({
     });
   },
 }));
+
+export default usePostStore;

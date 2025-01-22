@@ -4,7 +4,7 @@ import { useState } from "react";
 import * as styles from "./CreateTags.css";
 
 import { IconButton, Text } from "@frontend/coreui";
-import { usePostStore } from "../../_store/post";
+import { usePostStore } from "../../_store/postStore";
 
 export default function CreateTags() {
   const postStore = usePostStore();

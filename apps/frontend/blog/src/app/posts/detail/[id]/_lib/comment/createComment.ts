@@ -6,7 +6,7 @@ export default async function createComment(
   postId: number,
   content: string,
   isSecret: boolean,
-  parentId: number | null,
+  commentId: number | null,
   token: string,
 ) {
   let body = {
@@ -14,8 +14,8 @@ export default async function createComment(
     isSecret,
   };
 
-  if (parentId) {
-    (body as any).parentId = parentId;
+  if (commentId) {
+    (body as any).parentId = commentId;
   }
 
   const res = await modifyData(

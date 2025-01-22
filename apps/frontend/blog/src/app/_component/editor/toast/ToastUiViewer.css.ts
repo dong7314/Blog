@@ -74,3 +74,7 @@ globalStyle(`${viewer} .toastui-editor-contents ol li::before`, {
   marginTop: "-2px",
   fontSize: "15px",
 });
+
+globalStyle(`${viewer} pre`, {
+  borderRadius: "6px !important",
+});

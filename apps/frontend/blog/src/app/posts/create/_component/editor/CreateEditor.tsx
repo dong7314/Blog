@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as styles from "./CreateEditor.css";
 
 import Editor from "@/app/_component/editor/Editor";
-import { usePostStore } from "../../_store/post";
+import { usePostStore } from "../../_store/postStore";
 
 export default function CreateEditor() {
   const editorRef = useRef(null);

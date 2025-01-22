@@ -8,9 +8,11 @@ import DetailComment from "../comment/DetailComment";
 import { Loading, Text } from "@frontend/coreui";
 import { getCommentReplies } from "@/app/posts/detail/[id]/_lib/comment/getCommentReplies";
 import { Comment as IComment } from "@/app/_model/Comment.model";
+import { useEffect } from "react";
 
 type Props = {
   postId: number;
+  parentId?: number;
   commentId: number;
 };
 
@@ -44,15 +46,14 @@ const ReplyStatus = ({
   </div>
 );
 
-export default function DetailCommentReplies({ postId, commentId }: Props) {
-  const {
-    data: replies,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["comment", commentId, "replies"],
+export default function DetailCommentReplies({
+  postId,
+  parentId,
+  commentId,
+}: Props) {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["comment", `${commentId}`, "replies"],
     queryFn: () => getCommentReplies(commentId),
-    enabled: true, // 자동으로 데이터 가져오기
   });
 
   if (isLoading) {
@@ -68,17 +69,19 @@ export default function DetailCommentReplies({ postId, commentId }: Props) {
     );
   }
 
-  if (!replies || replies.comments.length === 0) {
-    return <ReplyStatus message="답글이 없습니다." />;
+  if (!data || data.comments.length === 0) {
+    return <></>;
   }
 
   return (
     <div className={composeStyles(styles.subFunctions, styles.commentReplies)}>
-      {replies.comments.map((reply: IComment) => (
+      {data.comments.map((reply: IComment) => (
         <DetailComment
           key={`reply-comment-id-${reply.id}`}
           postId={postId}
           comment={reply}
+          parentId={commentId}
+          grandParentId={parentId}
         />
       ))}
     </div>
