@@ -8,7 +8,7 @@ import * as styles from "./TextButton.css";
 import { Text } from "../../../components/atom/text/Text";
 import { TextButtonSize, TextButtonWeight } from "./TextButton.type";
 
-export interface IconButtonProps {
+export interface TextButtonProps {
   /** 텍스트 버튼 사이즈 설정 */
   size?: TextButtonSize;
   /** 텍스트 버튼의 폰트 색상 설정 */
@@ -30,7 +30,7 @@ export const TextButton = ({
   disabled = false,
   children,
   onClick,
-}: IconButtonProps) => {
+}: TextButtonProps) => {
   const [isHover, setIsHover] = useState(false);
   const [currentColor, setCurrentColor] = useState(color);
 
@@ -44,6 +44,10 @@ export const TextButton = ({
       onClick();
     }
   };
+
+  useEffect(() => {
+    setCurrentColor(color);
+  }, [color]);
 
   useEffect(() => {
     setCurrentColor(disabled ? "#c9c9c9" : color);
