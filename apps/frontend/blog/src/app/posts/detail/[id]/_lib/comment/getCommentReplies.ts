@@ -12,8 +12,6 @@ export async function getCommentReplies(commentId: number) {
     "replies",
   ]);
 
-  console.log(response);
-
   if (!response.ok) {
     throw new Error("데이터를 가져오는데 실패하였습니다.");
   }

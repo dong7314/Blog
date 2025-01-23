@@ -23,6 +23,10 @@ export const reply = style({
   height: "120px",
 });
 
+export const edit = style({
+  height: "120px",
+});
+
 export const textarea = style({
   padding: "16px 20px 48px !important",
   scrollPadding: "48px",

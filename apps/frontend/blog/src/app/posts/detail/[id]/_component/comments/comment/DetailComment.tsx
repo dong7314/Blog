@@ -14,6 +14,8 @@ import { Button, Icon, Text, TextButton } from "@frontend/coreui";
 import DeleteTextButton from "./button/DeleteTextButton";
 import DetailCommentReplies from "../replies/DetailCommentReplies";
 import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
+import DetailCommentView from "./content/view/DetailCommentView";
+import DetailCommentEdit from "./content/edit/DetailCommentEdit";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -32,6 +34,7 @@ export default function DetailComment({
   grandParentId,
 }: Props) {
   const { data } = useSession();
+  const [isEditMode, setIsEditMode] = useState(false);
   const [openReplyTextarea, setOpenReplyTextarea] = useState(false);
   const [openReplyComments, setOpenReplyComments] = useState(false);
 
@@ -40,8 +43,9 @@ export default function DetailComment({
       ? dayjs(date).format("YYYY년 MM월 DD일")
       : dayjs(date).fromNow();
 
-  const handleTextarea = () => setOpenReplyTextarea((prev) => !prev);
   const handleComments = () => setOpenReplyComments((prev) => !prev);
+  const handleTextarea = () => setOpenReplyTextarea((prev) => !prev);
+  const handleCloseEdit = () => setIsEditMode(false);
   const handleCloseTextarea = () => setOpenReplyTextarea(false);
 
   return (
@@ -79,56 +83,50 @@ export default function DetailComment({
           </div>
           {comment.author.id.toString() === data?.user.id && (
             <div className={styles.authorFunctions}>
-              <TextButton size="xs">수정</TextButton>
-              <Text size="xs" className={styles.seperate}>
-                |
-              </Text>
-              <DeleteTextButton
-                postId={postId}
-                parentId={parentId}
-                commentId={comment.id}
-                grandParentId={grandParentId}
-              />
+              {!isEditMode ? (
+                <>
+                  <TextButton size="xs" onClick={() => setIsEditMode(true)}>
+                    수정
+                  </TextButton>
+                  <Text size="xs" className={styles.seperate}>
+                    |
+                  </Text>
+                  <DeleteTextButton
+                    postId={postId}
+                    parentId={parentId}
+                    commentId={comment.id}
+                    grandParentId={grandParentId}
+                  />
+                </>
+              ) : (
+                <TextButton
+                  color="red"
+                  size="xs"
+                  onClick={() => setIsEditMode(false)}
+                >
+                  취소
+                </TextButton>
+              )}
             </div>
           )}
         </div>
       </div>
-      <div className={styles.content}>
-        <Text
-          color={
-            `${comment.author.id}` === data?.user.id || !comment.isSecret
-              ? "#262626"
-              : "#a5a5a5"
-          }
-        >
-          {comment.content}
-        </Text>
-      </div>
-      <div className={styles.addButton}>
-        <div className={styles.button} onClick={handleComments}>
-          {comment.replies.length !== 0 && (
-            <>
-              <span className={styles.arrowIcon}>
-                <Icon
-                  type={openReplyComments ? "minus" : "enter_arrow"}
-                  color="#262626"
-                  size="s"
-                />
-              </span>
-              <Text size="s" weight={600} className={styles.textButton}>
-                {openReplyComments
-                  ? "숨기기"
-                  : `${comment.replies.length}개의 답글 보기`}
-              </Text>
-            </>
-          )}
-        </div>
-        <div className={styles.button} onClick={handleTextarea}>
-          <Button size="s">
-            {openReplyTextarea ? "작성 취소" : "답글 달기"}
-          </Button>
-        </div>
-      </div>
+      {!isEditMode ? (
+        <DetailCommentView
+          comment={comment}
+          textareaActive={openReplyTextarea}
+          commentsActive={openReplyComments}
+          handleComments={handleComments}
+          handleTextarea={handleTextarea}
+        />
+      ) : (
+        <DetailCommentEdit
+          postId={postId}
+          comment={comment}
+          parentId={parentId}
+          closeEvent={handleCloseEdit}
+        />
+      )}
       {openReplyTextarea && (
         <div className={styles.subFunctions}>
           <DetailCommentTextarea

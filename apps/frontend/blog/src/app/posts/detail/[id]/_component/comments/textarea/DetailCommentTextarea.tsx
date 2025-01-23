@@ -6,27 +6,35 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import * as styles from "./DetailCommentTextarea.css";
 
-import { Icon, Text, Textarea } from "@frontend/coreui";
 import createComment from "../../../_lib/comment/createComment";
+import { Comment as IComment } from "@/app/_model/Comment.model";
+import { Icon, Text, Textarea } from "@frontend/coreui";
+import updateComment from "../../../_lib/comment/updateComment";
 
 type Props = {
-  type: "comment" | "reply";
+  type: "comment" | "reply" | "edit";
   postId: number;
-  parentId?: number;
   commentId: number | null;
+  comment?: IComment;
+  parentId?: number;
   closeEvent?: Function;
 };
 export default function DetailCommentTextarea({
   type,
   postId,
-  parentId,
   commentId,
+  comment,
+  parentId,
   closeEvent,
 }: Props) {
   const { data } = useSession();
   const queryClient = useQueryClient();
-  const [content, setContent] = useState("");
-  const [isSecret, setIsSecret] = useState(false);
+  const [content, setContent] = useState(
+    type !== "edit" ? "" : comment!.content,
+  );
+  const [isSecret, setIsSecret] = useState(
+    type !== "edit" ? false : comment!.isSecret,
+  );
   const [buttonIsHover, setButtonIsHover] = useState(false);
 
   const invalidateReplies = (id?: number | null) => {
@@ -38,7 +46,7 @@ export default function DetailCommentTextarea({
   };
 
   // Mutation 정의
-  const mutation = useMutation({
+  const create = useMutation({
     mutationFn: ({
       content,
       isSecret,
@@ -71,6 +79,33 @@ export default function DetailCommentTextarea({
     },
   });
 
+  // Mutation 정의
+  const update = useMutation({
+    mutationFn: ({
+      content,
+      isSecret,
+    }: {
+      content: string;
+      isSecret: boolean;
+    }) => updateComment(content, isSecret, commentId, data?.user.accessToken!),
+    onSuccess: () => {
+      queryClient
+        .invalidateQueries({
+          queryKey: ["post", "detail", `${postId}`, "comments"],
+        })
+        .then(() => {
+          setContent("");
+        });
+
+      invalidateReplies(commentId);
+      invalidateReplies(parentId);
+      if (closeEvent) closeEvent();
+    },
+    onError: (error: any) => {
+      console.error("댓글 작성 실패:", error);
+    },
+  });
+
   const handleAction = () => {
     if (!content.trim()) {
       alert("댓글 내용을 입력해주세요.");
@@ -78,7 +113,11 @@ export default function DetailCommentTextarea({
     }
 
     // 댓글 작성 요청
-    mutation.mutate({ content, isSecret });
+    if (type === "edit") {
+      update.mutate({ content, isSecret });
+    } else {
+      create.mutate({ content, isSecret });
+    }
   };
 
   return (
@@ -125,7 +164,7 @@ export default function DetailCommentTextarea({
         >
           <button type="submit" className={styles.submitButton}>
             <Text color={buttonIsHover ? "#0066ff" : "#66A3FF"} size="s">
-              작성
+              {type === "edit" ? "수정" : "작성"}
             </Text>
           </button>
         </form>
