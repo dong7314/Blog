@@ -84,7 +84,7 @@ export default function DashboardFeed() {
                 <DashboardPost key={`dashboard-post-${post.id}`} data={post} />
               );
             })}
-            {page.length === 0 && (
+            {data?.pages.flat().length === 0 && (
               <Text color="#595959">게시글이 존재하지 않습니다.</Text>
             )}
           </Fragment>
