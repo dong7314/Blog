@@ -13,7 +13,6 @@ import { UserEntity } from 'src/users/entity/user.entity';
 import { CommentDao } from './dao/comment.dao';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CustomCommentDao } from './dao/custom-comment.dao';
-import { delay } from 'rxjs';
 
 @Injectable()
 export class CommentService {
@@ -57,16 +56,6 @@ export class CommentService {
 
       if (!parent) {
         throw new NotFoundException('부모 댓글이 존재하지 않습니다.');
-      }
-
-      // 비밀 댓글에 대댓글을 작성하려는 경우 권한 확인
-      if (
-        parent.isSecret &&
-        !(post.author.id === userId || parent.author.id === userId)
-      ) {
-        throw new ForbiddenException(
-          '비밀 댓글에 대댓글을 작성할 권한이 없습니다.',
-        );
       }
     }
 
