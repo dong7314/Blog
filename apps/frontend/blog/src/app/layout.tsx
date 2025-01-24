@@ -50,13 +50,13 @@ export default function RootLayout({ children, modal }: Props) {
       </head>
       <body>
         <NextAuthSession>
-          <Nav />
-          <main id="main">
-            <RQProvider>
+          <RQProvider>
+            <Nav />
+            <main id="main">
               <div className="container">{children}</div>
-            </RQProvider>
-            {modal}
-          </main>
+              {modal}
+            </main>
+          </RQProvider>
         </NextAuthSession>
       </body>
     </html>

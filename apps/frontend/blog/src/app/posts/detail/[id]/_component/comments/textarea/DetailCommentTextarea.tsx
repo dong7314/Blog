@@ -1,15 +1,13 @@
 "use client";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useComment } from "../../../_hooks/useComment";
 import { composeStyles } from "@vanilla-extract/css";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import * as styles from "./DetailCommentTextarea.css";
 
-import createComment from "../../../_lib/comment/createComment";
-import { Comment as IComment } from "@/app/_model/Comment.model";
 import { Icon, Text, Textarea } from "@frontend/coreui";
-import updateComment from "../../../_lib/comment/updateComment";
+import { Comment as IComment } from "@/app/_model/Comment.model";
 
 type Props = {
   type: "comment" | "reply" | "edit";
@@ -19,6 +17,7 @@ type Props = {
   parentId?: number;
   closeEvent?: Function;
 };
+
 export default function DetailCommentTextarea({
   type,
   postId,
@@ -28,83 +27,28 @@ export default function DetailCommentTextarea({
   closeEvent,
 }: Props) {
   const { data } = useSession();
-  const queryClient = useQueryClient();
+
+  // 세션에서 accessToken 추출
+  const accessToken = data?.user.accessToken;
+
+  // 커스텀 훅 사용
+  const { create, update } = useComment({
+    postId,
+    commentId,
+    parentId,
+    closeEvent,
+    accessToken,
+  });
+
+  // 로컬 상태 관리
   const [content, setContent] = useState(
-    type !== "edit" ? "" : comment!.content,
+    type !== "edit" ? "" : comment?.content || "",
   );
   const [isSecret, setIsSecret] = useState(
-    type !== "edit" ? false : comment!.isSecret,
+    type !== "edit" ? false : comment?.isSecret || false,
   );
+
   const [buttonIsHover, setButtonIsHover] = useState(false);
-
-  const invalidateReplies = (id?: number | null) => {
-    if (id) {
-      queryClient.invalidateQueries({
-        queryKey: ["comment", `${id}`, "replies"],
-      });
-    }
-  };
-
-  // Mutation 정의
-  const create = useMutation({
-    mutationFn: ({
-      content,
-      isSecret,
-    }: {
-      content: string;
-      isSecret: boolean;
-    }) =>
-      createComment(
-        postId,
-        content,
-        isSecret,
-        commentId,
-        data?.user.accessToken!,
-      ),
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({
-          queryKey: ["post", "detail", `${postId}`, "comments"],
-        })
-        .then(() => {
-          setContent("");
-        });
-
-      invalidateReplies(commentId);
-      invalidateReplies(parentId);
-      if (closeEvent) closeEvent();
-    },
-    onError: (error: any) => {
-      console.error("댓글 작성 실패:", error);
-    },
-  });
-
-  // Mutation 정의
-  const update = useMutation({
-    mutationFn: ({
-      content,
-      isSecret,
-    }: {
-      content: string;
-      isSecret: boolean;
-    }) => updateComment(content, isSecret, commentId, data?.user.accessToken!),
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({
-          queryKey: ["post", "detail", `${postId}`, "comments"],
-        })
-        .then(() => {
-          setContent("");
-        });
-
-      invalidateReplies(commentId);
-      invalidateReplies(parentId);
-      if (closeEvent) closeEvent();
-    },
-    onError: (error: any) => {
-      console.error("댓글 작성 실패:", error);
-    },
-  });
 
   const handleAction = () => {
     if (!content.trim()) {
@@ -112,7 +56,7 @@ export default function DetailCommentTextarea({
       return;
     }
 
-    // 댓글 작성 요청
+    // 댓글 작성 또는 수정 요청
     if (type === "edit") {
       update.mutate({ content, isSecret });
     } else {

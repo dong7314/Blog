@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import followUser from "../../_lib/follow/followUser";
-import unfollowUser from "../../_lib/follow/unfollowUser";
-import { getFollowers } from "../../_lib/follow/getFollowers";
+import followUser from "../_lib/follow/followUser";
+import unfollowUser from "../_lib/follow/unfollowUser";
+import { getFollowers } from "../_lib/follow/getFollowers";
 import { User as IUser } from "@/app/_model/User.model";
 
 export default function useFollow(author: IUser, sessionData: any) {

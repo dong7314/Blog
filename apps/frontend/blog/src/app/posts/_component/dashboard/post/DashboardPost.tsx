@@ -35,8 +35,12 @@ export default function DashboardPost({ data }: Props) {
             }
             priority
             alt={data.title}
-            width={380}
+            width={390}
             height={290}
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
             className={styles.image}
           />
         </div>

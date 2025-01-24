@@ -100,7 +100,7 @@ export default function DetailComment({
                 </>
               ) : (
                 <TextButton
-                  color="red"
+                  color="#FB3E3E"
                   size="xs"
                   onClick={() => setIsEditMode(false)}
                 >

@@ -8,7 +8,6 @@ import DetailComment from "../comment/DetailComment";
 import { Loading, Text } from "@frontend/coreui";
 import { getCommentReplies } from "@/app/posts/detail/[id]/_lib/comment/getCommentReplies";
 import { Comment as IComment } from "@/app/_model/Comment.model";
-import { useEffect } from "react";
 
 type Props = {
   postId: number;

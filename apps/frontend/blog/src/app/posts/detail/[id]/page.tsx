@@ -22,7 +22,6 @@ import DetailTags from "./_component/tags/DetailTags";
 import DetailSeries from "./_component/series/DetailSeries";
 import DetailViewer from "./_component/viewer/DetailViewer";
 import DetailProfile from "./_component/profile/DetailProfile";
-import DetailComments from "./_component/comments/DetailComments";
 import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
 import DetailCommentsContainer from "./_component/comments/DetailCommentsContainer";
 

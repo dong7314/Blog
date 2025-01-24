@@ -6,23 +6,23 @@ interface PostState {
   content: string;
   tags: string[];
   imgUrl: string;
-  seriesId: string;
+  seriesId: number | null;
   setTitle(title: string): void;
   setDescription(description: string): void;
   setContent(content: string): void;
   setTags(tags: string[]): void;
   setImgUrl(imgUrl: string): void;
-  setSeriesId(seriesId: string): void;
+  setSeriesId(seriesId: number): void;
   reset(): void;
 }
 
-export const usePostStore = create<PostState>((set) => ({
+export const usePostStore = create<PostState>((set, get) => ({
   title: "",
   description: "",
   content: "",
   tags: [],
   imgUrl: "",
-  seriesId: "",
+  seriesId: null,
   setTitle(title: string) {
     set({ title });
   },
@@ -38,8 +38,9 @@ export const usePostStore = create<PostState>((set) => ({
   setImgUrl(imgUrl: string) {
     set({ imgUrl });
   },
-  setSeriesId(seriesId: string) {
-    set({ seriesId });
+  setSeriesId(id: number) {
+    const { seriesId } = get();
+    set({ seriesId: seriesId === id ? null : id });
   },
   reset() {
     set({
@@ -48,7 +49,7 @@ export const usePostStore = create<PostState>((set) => ({
       content: "",
       tags: [],
       imgUrl: "",
-      seriesId: "",
+      seriesId: null,
     });
   },
 }));

@@ -5,7 +5,7 @@ import * as styles from "./DetailCommentView.css";
 
 import { Button, Icon, Text } from "@frontend/coreui";
 import { Comment as IComment } from "@/app/_model/Comment.model";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 
 type Props = {
   comment: IComment;
@@ -33,7 +33,12 @@ export default function DetailCommentView({
               : "#a5a5a5"
           }
         >
-          {comment.content}
+          {comment.content.split("\n").map((line, index) => (
+            <Fragment key={index}>
+              {line}
+              <br />
+            </Fragment>
+          ))}
         </Text>
       </div>
       <div className={styles.addButton}>

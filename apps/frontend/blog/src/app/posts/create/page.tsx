@@ -6,6 +6,7 @@ import CreateTags from "./_component/tags/CreateTags";
 import ImagePicker from "./_component/imagePicker/ImagePicker";
 import CreateTitleInput from "./_component/title/CreateTitleInput";
 import CreateDescriptionTextarea from "./_component/description/CreateDescriptionTextarea";
+import CreateSeries from "./_component/series/CreateSeries";
 
 export default function CreatePostPage() {
   return (
@@ -33,7 +34,7 @@ export default function CreatePostPage() {
           <Text size="s" color="#262626" className={styles.createLabel}>
             시리즈 설정
           </Text>
-          <div className={styles.exampleSeries}></div>
+          <CreateSeries />
         </div>
       </div>
       <CreateEditor />

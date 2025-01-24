@@ -5,7 +5,7 @@ import { Button, Text, TextButton } from "@frontend/coreui";
 
 import * as styles from "./DetailProfile.css";
 
-import useFollow from "./useFollow";
+import useFollow from "../../_hooks/useFollow";
 import FollowButton from "./button/FollowButton";
 import { User as IUser } from "@/app/_model/User.model";
 
