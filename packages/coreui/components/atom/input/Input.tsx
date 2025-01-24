@@ -38,10 +38,14 @@ export interface InputProps {
   error?: boolean;
   /** 인풋 미리보기 */
   placeholder?: string;
+  /** 인풋풋 값 세팅 */
+  value?: string;
   /** 인풋 라운드 효과 설정 */
   rounded?: boolean;
   /** 인풋 에러 발생 시 출력할 문자열 */
   children?: ReactNode;
+  /** 인풋 자동완성성 설정 */
+  autoComplete?: "on" | "off";
   /** input value 변경 시 동작할 함수 */
   onChange?: (value: string) => void;
   /** input에 style 커스텀 설정 */
@@ -56,12 +60,14 @@ export const Input = forwardRef<InputRef, InputProps>(
       size = "m",
       name,
       label,
+      value = "",
       rounded,
       pattern,
       minLength,
       maxLength,
       error = false,
       placeholder,
+      autoComplete = "off",
       children,
       onChange,
       className,
@@ -70,7 +76,7 @@ export const Input = forwardRef<InputRef, InputProps>(
   ) => {
     const uuid = useId();
     const [currentError, setCurrentError] = useState(error);
-    const [value, setValue] = useState("");
+    const [inputValue, setInputValue] = useState(value);
     const [focus, setFocus] = useState(false);
     const [inputType, setInputType] = useState(type);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -85,7 +91,7 @@ export const Input = forwardRef<InputRef, InputProps>(
       styles.label,
       focus ? styles.labelFocus : "",
       currentError ? styles.labelError : "",
-      (focus || value) && !placeholder ? styles.labelInValue : "",
+      (focus || inputValue) && !placeholder ? styles.labelInValue : "",
       placeholder ? styles.hasPlaceholder : styles.withoutPlaceholder,
     );
     const inlineInputStyle = composeStyles(
@@ -107,7 +113,7 @@ export const Input = forwardRef<InputRef, InputProps>(
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       // value 값 세팅
       const newValue = e.target.value;
-      setValue(newValue);
+      setInputValue(newValue);
       // 에러 확인
       setCurrentError(e.target.validity.patternMismatch);
 
@@ -119,14 +125,18 @@ export const Input = forwardRef<InputRef, InputProps>(
     useImperativeHandle(ref, () => ({
       setBlur: () => inputRef.current?.blur(),
       setFocus: () => inputRef.current?.focus,
-      getValue: () => value,
-      setValue: (newValue: string) => setValue(newValue),
-      clearValue: () => setValue(""),
+      getValue: () => inputValue,
+      setValue: (newValue: string) => setInputValue(newValue),
+      clearValue: () => setInputValue(""),
     }));
 
     useEffect(() => {
       setCurrentError(error);
     }, [error]);
+
+    useEffect(() => {
+      setInputValue(value);
+    }, [value]);
 
     return (
       <div className={styles.inputBox}>
@@ -147,12 +157,13 @@ export const Input = forwardRef<InputRef, InputProps>(
             ref={inputRef}
             type={inputType}
             name={name}
-            value={value}
+            value={inputValue}
             pattern={pattern}
             minLength={minLength}
             maxLength={maxLength}
             placeholder={placeholder}
             onBlur={handleBlur}
+            autoComplete={autoComplete}
             onFocus={handleFocus}
             onChange={handleChange}
           />
