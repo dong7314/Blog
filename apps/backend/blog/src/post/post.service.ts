@@ -45,7 +45,7 @@ export class PostService {
     if (data.seriesId) {
       series = await this.seriesRepository.findOne({
         where: { id: data.seriesId },
-        relations: ['posts'],
+        relations: ['posts', 'author'],
       });
       if (!series) {
         throw new NotFoundException('시리즈가 존재하지 않습니다.');
