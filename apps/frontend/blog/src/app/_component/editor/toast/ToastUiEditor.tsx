@@ -13,6 +13,7 @@ import "prismjs/components/prism-typescript";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import { Editor } from "@toast-ui/react-editor";
+import { useEffect } from "react";
 
 type Props = {
   content: string;
@@ -38,6 +39,15 @@ export default function ToastUiEditor({ content, editorRef, onChange }: Props) {
       onChange(editorInstance.getMarkdown());
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!content && editorRef.current) {
+        const instance = editorRef.current.getInstance(); // 인스턴스 가져오기
+        instance.setMarkdown("");
+      }
+    }, 10);
+  }, [content]);
 
   return (
     <div className={styles.editor}>
