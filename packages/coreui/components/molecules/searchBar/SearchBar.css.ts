@@ -1,8 +1,9 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
 export const searchBar = style({
-  display: "inline-flex",
   position: "relative",
+  display: "inline-flex",
+  width: "100%",
 });
 
 export const iconButton = style({

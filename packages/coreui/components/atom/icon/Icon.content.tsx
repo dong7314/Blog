@@ -537,6 +537,54 @@ export const icons = {
       </g>
     </svg>
   ),
+  arrow_left: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <path
+        d="M12.6654 8H3.33203"
+        stroke="#595959"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.9987 12.6673L3.33203 8.00065L7.9987 3.33398"
+        stroke="#595959"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  arrow_right: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <path
+        d="M3.33464 8H12.668"
+        stroke="#595959"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.0013 12.6673L12.668 8.00065L8.0013 3.33398"
+        stroke="#595959"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
   enter_arrow: (
     <svg
       width="16px"

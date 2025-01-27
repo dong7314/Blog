@@ -21,6 +21,8 @@ export type IconType =
   | "lock"
   | "lock_open"
   | "lock_color"
+  | "arrow_left"
+  | "arrow_right"
   | "enter_arrow";
 
 export type IconSize = "xs" | "s" | "m" | "l" | "xl" | "h";
