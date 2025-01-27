@@ -8,6 +8,7 @@ export const toolbar = style({
 export const searchBar = style({
   display: "inline-flex",
   marginRight: "20px",
+  width: "250px",
 });
 
 export const loginButton = style({

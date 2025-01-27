@@ -27,9 +27,20 @@ export default function DetailCommentTextarea({
   closeEvent,
 }: Props) {
   const { data } = useSession();
-
+  // 로컬 상태 관리
+  const [content, setContent] = useState(
+    type !== "edit" ? "" : comment?.content || "",
+  );
+  const [isSecret, setIsSecret] = useState(
+    type !== "edit" ? false : comment?.isSecret || false,
+  );
+  const [buttonIsHover, setButtonIsHover] = useState(false);
   // 세션에서 accessToken 추출
   const accessToken = data?.user.accessToken;
+
+  const resetContent = () => {
+    setContent("");
+  };
 
   // 커스텀 훅 사용
   const { create, update } = useComment({
@@ -38,17 +49,8 @@ export default function DetailCommentTextarea({
     parentId,
     closeEvent,
     accessToken,
+    resetContent,
   });
-
-  // 로컬 상태 관리
-  const [content, setContent] = useState(
-    type !== "edit" ? "" : comment?.content || "",
-  );
-  const [isSecret, setIsSecret] = useState(
-    type !== "edit" ? false : comment?.isSecret || false,
-  );
-
-  const [buttonIsHover, setButtonIsHover] = useState(false);
 
   const handleAction = () => {
     if (!content.trim()) {

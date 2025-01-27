@@ -9,12 +9,14 @@ export const useComment = ({
   parentId,
   closeEvent,
   accessToken,
+  resetContent,
 }: {
   postId: number;
   commentId: number | null;
   parentId?: number;
   closeEvent?: Function;
   accessToken: string | undefined;
+  resetContent: Function;
 }) => {
   const queryClient = useQueryClient();
 
@@ -38,6 +40,7 @@ export const useComment = ({
       queryClient.invalidateQueries({
         queryKey: ["post", "detail", `${postId}`, "comments"],
       });
+      resetContent();
       invalidateReplies(commentId);
       invalidateReplies(parentId);
       if (closeEvent) closeEvent();
@@ -59,6 +62,7 @@ export const useComment = ({
       queryClient.invalidateQueries({
         queryKey: ["post", "detail", `${postId}`, "comments"],
       });
+      resetContent();
       invalidateReplies(commentId);
       invalidateReplies(parentId);
       if (closeEvent) closeEvent();
