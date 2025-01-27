@@ -61,8 +61,13 @@ export default function Signup() {
           </div>
         </div>
         <Terms />
-        <div className={styles.signupButton}>
-          <Button size="xl" type="primary">
+        <div className={styles.signupButtonBox}>
+          <Button
+            size="xl"
+            type="primary"
+            disabled={true}
+            className={styles.signupButton}
+          >
             회원가입
           </Button>
         </div>

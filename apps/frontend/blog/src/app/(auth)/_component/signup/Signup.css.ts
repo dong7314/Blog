@@ -30,8 +30,12 @@ export const signupInput = style({
   marginBottom: "16px",
 });
 
-export const signupButton = style({
+export const signupButtonBox = style({
   display: "flex",
   width: "calc(100% - 2px)",
   marginTop: "16px",
+});
+
+export const signupButton = style({
+  width: "100%",
 });
