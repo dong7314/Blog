@@ -100,9 +100,9 @@ export const disabled = styleVariants({
   primary: [
     defaultDisabled,
     {
-      backgroundColor: "#66A3FF",
+      backgroundColor: "#a5a5a5",
       ":hover": {
-        backgroundColor: "#66A3FF",
+        backgroundColor: "#a5a5a5",
       },
     },
   ],
