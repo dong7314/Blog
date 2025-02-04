@@ -1,9 +1,27 @@
+"use client";
+import { useState } from "react";
+
 import * as styles from "./Signup.css";
 
-import { Button, Checkbox, Input, Text } from "@frontend/coreui";
 import Terms from "./terms/Terms";
+import SignupEmail from "./email/SignupEmail";
+import SignupNickname from "./nickname/SignupNickname";
+import { Button, Input, Text } from "@frontend/coreui";
 
 export default function Signup() {
+  const [emailInspected, setEmailInspected] = useState<null | boolean>(null);
+  const [nicknameInspected, setNicknameInspected] = useState<null | boolean>(
+    null,
+  );
+
+  const handleEmailChecked = (value: boolean) => {
+    setEmailInspected(value);
+  };
+
+  const handleNicknameChecked = (value: boolean) => {
+    setNicknameInspected(value);
+  };
+
   return (
     <section className={styles.signupSection}>
       <span className={styles.signupTitle}>
@@ -13,26 +31,10 @@ export default function Signup() {
       </span>
       <form className={styles.signupForm}>
         <div className={styles.signupInput}>
-          <Input
-            label="이메일"
-            size="l"
-            type="text"
-            name={"email"}
-            placeholder="이메일을 입력해 주세요."
-            error={false}
-            pattern={"[a-zA-Z0-9.]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"}
-          >
-            <span>유효한 이메일 주소를 입력해 주세요.</span>
-          </Input>
+          <SignupEmail inspectChange={handleEmailChecked} />
         </div>
         <div className={styles.signupInput}>
-          <Input
-            size="l"
-            type="text"
-            name={"nickname"}
-            label="닉네임"
-            placeholder="사용하실 닉네임을 입력해 주세요."
-          />
+          <SignupNickname inspectChange={handleNicknameChecked} />
         </div>
         <div className={styles.signupInput}>
           <Input
@@ -65,7 +67,10 @@ export default function Signup() {
           <Button
             size="xl"
             type="primary"
-            disabled={true}
+            disabled={
+              (emailInspected === null ? true : !emailInspected) ||
+              (nicknameInspected === null ? true : !nicknameInspected)
+            }
             className={styles.signupButton}
           >
             회원가입
