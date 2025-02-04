@@ -215,6 +215,16 @@ export class UserService {
     return expiredTokens;
   }
 
+  async isEmailTaken(email: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    return !!user;
+  }
+
+  async isNameTaken(name: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({ where: { name } });
+    return !!user;
+  }
+
   private async checkUserExists(emailAddress: string) {
     const user = await this.userRepository.findOne({
       where: { email: emailAddress },

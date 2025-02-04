@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -44,6 +45,30 @@ export class UserController {
   async createUser(@Body() dto: CreateUserDto): Promise<void> {
     const { name, email, password } = dto;
     await this.userService.createUser(name, email, password);
+  }
+
+  @Get('/email-check')
+  async checkEmail(@Query('email') email: string) {
+    if (!email) {
+      throw new BadRequestException('이메일을 작성해 주세요.');
+    }
+    const isTaken = await this.userService.isEmailTaken(email);
+    if (isTaken) {
+      throw new BadRequestException('존재하는 이메일 입니다.');
+    }
+    return { message: '사용가능한 이메일 입니다.' };
+  }
+
+  @Get('/name-check')
+  async checkName(@Query('name') name: string) {
+    if (!name) {
+      throw new BadRequestException('이름을 작성해 주세요.');
+    }
+    const isTaken = await this.userService.isNameTaken(name);
+    if (isTaken) {
+      throw new BadRequestException('존재하는 이름 입니다.');
+    }
+    return { message: '사용가능한 이름 입니다.' };
   }
 
   @Post('/email-verify')
