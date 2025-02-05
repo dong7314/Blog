@@ -15,7 +15,20 @@ export const termSeperate = style({
   backgroundColor: "#ededed",
 });
 
+export const checkbox = style({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
 export const lastCheckbox = style({
   marginTop: "12px",
   marginBottom: "16px",
+});
+
+export const telegram = style({
+  display: "inline-flex",
+  alignItems: "center",
+  ":hover": {
+    cursor: "pointer",
+  },
 });

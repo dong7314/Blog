@@ -7,9 +7,10 @@ import { Input } from "@frontend/coreui";
 import { checkNameDuplicate } from "@/app/(auth)/_lib/checkNameDuplicate";
 
 type Props = {
+  valueChange: Function;
   inspectChange: Function;
 };
-export default function SignupNickname({ inspectChange }: Props) {
+export default function SignupNickname({ valueChange, inspectChange }: Props) {
   const [checked, setChecked] = useState<boolean | null>(null);
   const [patternChecked, setPatternChecked] = useState<boolean | null>(null);
   const timeoutDelay = useRef<NodeJS.Timeout | null>(null);
@@ -27,7 +28,7 @@ export default function SignupNickname({ inspectChange }: Props) {
 
   const checkNicknamePattern = (value: string) => {
     const nicknamePattern =
-      /^(?!\s)[a-zA-Z가-힣.,\-_](?: [a-zA-Z가-힣.,\-_]|[a-zA-Z가-힣.,\-_]){1,9}$/;
+      /^(?!\s)[0-9a-zA-Z가-힣.,\-_](?: [0-9a-zA-Z가-힣.,\-_]|[0-9a-zA-Z가-힣.,\-_]){1,9}$/;
     if (!nicknamePattern.test(value)) {
       setPatternChecked(false);
     } else {
@@ -39,10 +40,10 @@ export default function SignupNickname({ inspectChange }: Props) {
   const handleNicknameChange = (value: string) => {
     // 이름 입력 값 변경시 checked 값 초기화
     setChecked(null);
+    valueChange(value);
     inspectChange(false);
     // 패턴 검사 진행
     const pattern = checkNicknamePattern(value);
-    console.log(pattern);
     // 딜레이 조절
     if (timeoutDelay.current) {
       clearTimeout(timeoutDelay.current);
@@ -66,7 +67,7 @@ export default function SignupNickname({ inspectChange }: Props) {
         (checked !== null && !checked) ||
         (patternChecked !== null && !patternChecked)
       }
-      pattern="^(?!\s)[a-zA-Z가-힣.,\-_](?: [a-zA-Z가-힣.,\-_]|[a-zA-Z가-힣.,\-_]){1,9}$"
+      pattern="^(?!\s)[0-9a-zA-Z가-힣.,\-_](?: [0-9a-zA-Z가-힣.,\-_]|[0-9a-zA-Z가-힣.,\-_]){1,9}$"
       onChange={handleNicknameChange}
     >
       {checked !== null && !checked && (

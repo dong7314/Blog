@@ -2,9 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 export const signupBox = style({
   width: "100%",
-  marginBottom: "48px",
+  marginBottom: "24px",
 });
 
-export const backButton = style({
-  
-})
+export const backButton = style({});

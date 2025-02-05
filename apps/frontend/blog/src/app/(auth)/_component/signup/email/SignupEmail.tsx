@@ -7,9 +7,10 @@ import { Input } from "@frontend/coreui";
 import { checkEmailDuplicate } from "@/app/(auth)/_lib/checkEmailDuplicate";
 
 type Props = {
+  valueChange: Function;
   inspectChange: Function;
 };
-export default function SignupEmail({ inspectChange }: Props) {
+export default function SignupEmail({ valueChange, inspectChange }: Props) {
   const [checked, setChecked] = useState<boolean | null>(null);
   const [patternChecked, setPatternChecked] = useState<boolean | null>(null);
   const timeoutDelay = useRef<NodeJS.Timeout | null>(null);
@@ -36,6 +37,7 @@ export default function SignupEmail({ inspectChange }: Props) {
   };
 
   const handleEmailChange = (value: string) => {
+    valueChange(value);
     // 이메일 입력 값 변경시 checked 값 초기화
     setChecked(null);
     inspectChange(false);

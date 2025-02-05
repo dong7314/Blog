@@ -13,8 +13,8 @@ export default function Layout({ children }: Props) {
     <div className={styles.authPage}>
       <Link href="/home">
         <div className={styles.backButton}>
-          <Icon type="arrow_left" size="h" color="#262626" />
-          <Text size="l" weight={500} className={styles.backButtonText}>
+          <Icon type="arrow_left" size="xl" color="#262626" />
+          <Text weight={500} className={styles.backButtonText}>
             뒤로가기
           </Text>
         </div>

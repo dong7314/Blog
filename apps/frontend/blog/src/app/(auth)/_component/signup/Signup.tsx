@@ -3,23 +3,48 @@ import { useState } from "react";
 
 import * as styles from "./Signup.css";
 
-import Terms from "./terms/Terms";
+import signup from "../../_lib/signup";
+import SignupTerms from "./terms/SignupTerms";
 import SignupEmail from "./email/SignupEmail";
 import SignupNickname from "./nickname/SignupNickname";
-import { Button, Input, Text } from "@frontend/coreui";
+import SignupPassword from "./password/SignupPassword";
+import { Button, Text } from "@frontend/coreui";
 
 export default function Signup() {
-  const [emailInspected, setEmailInspected] = useState<null | boolean>(null);
-  const [nicknameInspected, setNicknameInspected] = useState<null | boolean>(
-    null,
-  );
+  const [inspections, setInspections] = useState({
+    email: null,
+    nickname: null,
+    password: null,
+    terms: null,
+  });
 
-  const handleEmailChecked = (value: boolean) => {
-    setEmailInspected(value);
-  };
+  const [body, setBody] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleNicknameChecked = (value: boolean) => {
-    setNicknameInspected(value);
+  const handleChecked =
+    (field: "email" | "nickname" | "password" | "terms") =>
+    (value: boolean) => {
+      setInspections((prev) => ({ ...prev, [field]: value }));
+    };
+
+  const handleValue =
+    (field: "email" | "name" | "password") => (value: boolean) => {
+      setBody((prev) => ({ ...prev, [field]: value }));
+    };
+
+  const isButtonDisabled =
+    !inspections.email ||
+    !inspections.nickname ||
+    !inspections.password ||
+    !inspections.terms;
+
+  const handleSignup = () => {
+    if (!isButtonDisabled) {
+      signup(body.name, body.email, body.password);
+    }
   };
 
   return (
@@ -31,47 +56,31 @@ export default function Signup() {
       </span>
       <form className={styles.signupForm}>
         <div className={styles.signupInput}>
-          <SignupEmail inspectChange={handleEmailChecked} />
+          <SignupEmail
+            inspectChange={handleChecked("email")}
+            valueChange={handleValue("email")}
+          />
         </div>
         <div className={styles.signupInput}>
-          <SignupNickname inspectChange={handleNicknameChecked} />
+          <SignupNickname
+            inspectChange={handleChecked("nickname")}
+            valueChange={handleValue("name")}
+          />
         </div>
         <div className={styles.signupInput}>
-          <Input
-            label="비밀번호"
-            size="l"
-            type="password"
-            name={"password"}
-            error={false}
-            pattern={
-              "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$"
-            }
-            placeholder="비밀번호를 입력해 주세요."
-          >
-            <span>
-              비밀번호는 8자 이상으로 영문자, 숫자, 특수기호를 조합하여 입력해
-              주세요.
-            </span>
-          </Input>
-          <div style={{ marginTop: "4px" }}>
-            <Input
-              size="l"
-              type="password"
-              name={"password"}
-              placeholder="비밀번호를 다시 한번 입력해 주세요."
-            />
-          </div>
+          <SignupPassword
+            inspectChange={handleChecked("password")}
+            valueChange={handleValue("password")}
+          />
         </div>
-        <Terms />
+        <SignupTerms inspectChange={handleChecked("terms")} />
         <div className={styles.signupButtonBox}>
           <Button
             size="xl"
             type="primary"
-            disabled={
-              (emailInspected === null ? true : !emailInspected) ||
-              (nicknameInspected === null ? true : !nicknameInspected)
-            }
+            disabled={isButtonDisabled}
             className={styles.signupButton}
+            onClick={handleSignup}
           >
             회원가입
           </Button>
