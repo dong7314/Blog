@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './users/user.module';
 import { LikeModule } from './like/like.module';
 import { PostModule } from './post/post.module';
+import { ImageModule } from './image/image.module';
 import { SeriesModule } from './series/series.module';
 import { ConfigModule } from '@nestjs/config';
 import { FollowModule } from './follow/follow.module';
@@ -11,6 +12,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 
 import urlConfig from './config/url.config';
 import authConfig from './config/auth.config';
+import minioConfig from './config/minio.config';
 import emailConfig from './config/email.config';
 import { validationSchema } from './config/validation.schema';
 
@@ -19,7 +21,7 @@ import { validationSchema } from './config/validation.schema';
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: [`${__dirname}/config/env/.${process.env.NODE_ENV}.env`],
-      load: [emailConfig, authConfig, urlConfig],
+      load: [emailConfig, authConfig, urlConfig, minioConfig],
       isGlobal: true,
       validationSchema,
     }),
@@ -39,6 +41,7 @@ import { validationSchema } from './config/validation.schema';
     SeriesModule,
     CommentModule,
     PostModule,
+    ImageModule,
   ],
   controllers: [],
   providers: [],
