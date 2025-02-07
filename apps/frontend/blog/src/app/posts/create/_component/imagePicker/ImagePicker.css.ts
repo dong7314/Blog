@@ -15,9 +15,15 @@ export const fileLabel = style({
   flexDirection: "column",
   width: "100%",
   height: "100%",
+  backgroundColor: "transparent",
+  transition: "background-color .2s ease-out",
   ":hover": {
     cursor: "pointer",
   },
+});
+
+export const fileLabelDragging = style({
+  backgroundColor: "#EBF3FF",
 });
 
 export const labelText = style({
