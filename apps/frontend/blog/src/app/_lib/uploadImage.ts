@@ -1,20 +1,23 @@
 "use server";
 
 import { auth } from "@/auth";
-import { modifyData } from "@/app/_lib/restful";
 
 export default async function uploadImage(file: File) {
   const session = await auth();
+  const accessToken = session?.user.accessToken;
 
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await modifyData(
-    `api.image/upload`,
-    "post",
-    ["image", "upload"],
-    formData,
-    session?.user.accessToken,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api.image/upload`,
+    {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: accessToken ? `Bearer ${accessToken}` : "",
+      },
+    },
   );
 
   if (!res.ok) {

@@ -6,10 +6,12 @@ import * as styles from "./ImagePicker.css";
 
 import { Text } from "@frontend/coreui";
 import { composeStyles } from "@vanilla-extract/css";
+import uploadImage from "@/app/_lib/uploadImage";
 
 export default function ImagePicker() {
-  const [isDragging, setIsDragging] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const dragRef = useRef<HTMLLabelElement | null>(null);
 
@@ -78,6 +80,13 @@ export default function ImagePicker() {
     }
   }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
 
+  const handleUpload = async () => {
+    if (file) {
+      const result = await uploadImage(file);
+      setImageUrl(result.url);
+    }
+  };
+
   useEffect(() => {
     initDragEvents();
 
@@ -86,7 +95,7 @@ export default function ImagePicker() {
 
   useEffect(() => {
     if (file) {
-      console.log(file);
+      handleUpload();
     }
   }, [file]);
 
