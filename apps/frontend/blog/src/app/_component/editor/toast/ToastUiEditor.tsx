@@ -1,19 +1,23 @@
 "use client";
 
+import { useEffect } from "react";
+
 import * as styles from "./ToastUiEditor.css";
 
+import Prism from "prismjs";
+import { Editor } from "@toast-ui/react-editor";
 import "prismjs/themes/prism.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-typescript";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
-import { Editor } from "@toast-ui/react-editor";
-import { useEffect } from "react";
+
+import uploadImage from "@/app/_lib/image/uploadImage";
+import compressImage from "@/app/_lib/image/compressImage";
 
 type Props = {
   content: string;
@@ -48,6 +52,25 @@ export default function ToastUiEditor({ content, editorRef, onChange }: Props) {
       }
     }, 10);
   }, [content]);
+
+  useEffect(() => {
+    if (editorRef) {
+      editorRef.current.getInstance().removeHook("addImageBlobHook");
+      editorRef.current
+        .getInstance()
+        .addHook("addImageBlobHook", async (file: File, callback: any) => {
+          // file 크기 10mb 넘을 시 converting 작업
+          let converFile = file;
+          if (file.size > 10 * 1024 * 1024) {
+            converFile = await compressImage(file);
+          }
+          const res = await uploadImage(file);
+          // 에디터에 url과 파일 이름을 이용한 마크다운 이미지 문법 작성 콜백 함수
+          callback(res.url, file.name);
+          return false;
+        });
+    }
+  }, [editorRef]);
 
   return (
     <div className={styles.editor}>

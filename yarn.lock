@@ -2048,6 +2048,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.16.1"
     "@vanilla-extract/next-plugin": "npm:^2.4.7"
     "@vanilla-extract/vite-plugin": "npm:^4.0.18"
+    browser-image-compression: "npm:^2.0.2"
     dayjs: "npm:^1.11.13"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.1.1"
@@ -6398,6 +6399,15 @@ __metadata:
   version: 1.2.1
   resolution: "browser-assert@npm:1.2.1"
   checksum: 10c0/902abf999f92c9c951fdb6d7352c09eea9a84706258699655f7e7906e42daa06a1ae286398a755872740e05a6a71c43c5d1a0c0431d67a8cdb66e5d859a3fc0c
+  languageName: node
+  linkType: hard
+
+"browser-image-compression@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "browser-image-compression@npm:2.0.2"
+  dependencies:
+    uzip: "npm:0.20201231.0"
+  checksum: 10c0/32be07f8849f2de501a71f6dd07e691c085fc7a2055456eb120fe5d765e3fcf7de00696915a8d614527d4df10f34c31526304b7d18aae036bb1c58d801e3fcbd
   languageName: node
   linkType: hard
 
@@ -15001,6 +15011,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
+  languageName: node
+  linkType: hard
+
+"uzip@npm:0.20201231.0":
+  version: 0.20201231.0
+  resolution: "uzip@npm:0.20201231.0"
+  checksum: 10c0/44b261b20ac7e4d71e7099d7a7c4885626044be61cd246e76cf548fa444a4a37c301d1a683679168bc29c91d2ec81d62b8c1c75217a26b37f6ce35223866c2d2
   languageName: node
   linkType: hard
 

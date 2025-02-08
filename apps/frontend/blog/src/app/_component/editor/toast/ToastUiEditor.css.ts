@@ -40,3 +40,10 @@ globalStyle(`${editor} .ProseMirror::-webkit-scrollbar-thumb`, {
   borderRadius: "2.5px !important",
   transition: "all 0.2s ease-out !important",
 });
+
+globalStyle(
+  `${editor} .toastui-editor-file-select-button, ${editor} .toastui-editor-close-button, ${editor} .toastui-editor-ok-button`,
+  {
+    fontFamily: "Pretendard, sans-serif !important",
+  },
+);

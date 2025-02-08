@@ -2858,6 +2858,7 @@ const RAW_RUNTIME_STATE =
           ["@vanilla-extract/css", "npm:1.16.1"],\
           ["@vanilla-extract/next-plugin", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:2.4.7"],\
           ["@vanilla-extract/vite-plugin", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:4.0.18"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:9.17.0"],\
           ["eslint-config-next", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:15.1.1"],\
@@ -8791,6 +8792,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/browser-assert-npm-1.2.1-f4eb571cbe-902abf999f.zip/node_modules/browser-assert/",\
         "packageDependencies": [\
           ["browser-assert", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["browser-image-compression", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/browser-image-compression-npm-2.0.2-21a831f9cb-32be07f884.zip/node_modules/browser-image-compression/",\
+        "packageDependencies": [\
+          ["browser-image-compression", "npm:2.0.2"],\
+          ["uzip", "npm:0.20201231.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18711,6 +18722,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/uuid-npm-9.0.1-39a8442bc6-1607dd32ac.zip/node_modules/uuid/",\
         "packageDependencies": [\
           ["uuid", "npm:9.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["uzip", [\
+      ["npm:0.20201231.0", {\
+        "packageLocation": "./.yarn/cache/uzip-npm-0.20201231.0-122f770c6a-44b261b20a.zip/node_modules/uzip/",\
+        "packageDependencies": [\
+          ["uzip", "npm:0.20201231.0"]\
         ],\
         "linkType": "HARD"\
       }]\

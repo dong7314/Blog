@@ -24,5 +24,5 @@ export default async function uploadImage(file: File) {
     throw new Error("이미지 업로드가 실패하였습니다.");
   }
 
-  return res.json();
+  return await res.json();
 }

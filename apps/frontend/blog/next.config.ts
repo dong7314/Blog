@@ -6,6 +6,11 @@ const withVanillaExtract = createVanillaExtractPlugin();
 const nextConfig: NextConfig = {
   /* config options here */
   transpilePackages: ["@frontend/coreui"],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "50mb",
+    },
+  },
   images: {
     remotePatterns: [
       {

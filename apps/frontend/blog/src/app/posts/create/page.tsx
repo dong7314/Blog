@@ -25,9 +25,6 @@ export default function CreatePostPage() {
           <CreateTags />
         </div>
         <div className={styles.createInput}>
-          <Text size="s" color="#262626" className={styles.createLabel}>
-            썸네일
-          </Text>
           <ImagePicker />
         </div>
         <div className={styles.createInput}>
