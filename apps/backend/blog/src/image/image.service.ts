@@ -1,7 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { ConfigType } from '@nestjs/config';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'; // v3 명령어 가져오기
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3'; // v3 명령어 가져오기
 
 import minioConfig from 'src/config/minio.config';
 
@@ -24,7 +28,12 @@ export class ImageService {
   }
 
   async uploadFile(file: Express.Multer.File) {
-    const fileName = `${uuid()}-${file.originalname}`;
+    // 한글 깨짐 현상 해결
+    const originalname = Buffer.from(file.originalname, 'latin1').toString(
+      'utf8',
+    );
+    const fileName = `${uuid()}-${originalname}`;
+
     const bucketName = 'dpost';
 
     // v3에서는 Command 객체를 생성해서 사용함
@@ -33,18 +42,31 @@ export class ImageService {
       Key: fileName,
       Body: file.buffer,
       ContentType: file.mimetype,
-      ACL: 'public-read', // 공개 접근 가능 (필요시 변경)
+      ACL: 'public-read',
     });
 
     try {
-      // 명령어 실행
       await this.s3.send(command);
       return {
-        url: `https://api-minio.ldy-studio.com/${bucketName}/${fileName}`,
+        url: `https://api-minio.ldy-studio.com/${bucketName}/${encodeURIComponent(fileName)}`,
       };
     } catch (error) {
       console.error('이미지 업로드가 실패하였습니다.', error);
-      throw error; // 에러 처리
+      throw error;
+    }
+  }
+
+  async deleteFile(fileName: string) {
+    const params = {
+      Bucket: 'dpost',
+      Key: fileName,
+    };
+
+    try {
+      await this.s3.send(new DeleteObjectCommand(params));
+      return { message: `${fileName} 파일이 삭제 되었습니다.` };
+    } catch (error) {
+      throw new Error(`${error.message} 파일 삭제를 실패하였습니다.`);
     }
   }
 }
