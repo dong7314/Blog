@@ -13,8 +13,8 @@ export default async function Menu() {
   const menuData: MenuData[] = [
     { menuName: "홈", link: "/home" },
     { menuName: "게시글", link: "/posts" },
-    { menuName: "노트", link: "/note" },
-    { menuName: "마이페이지", link: "/profile" },
+    // { menuName: "노트", link: "/note" },
+    // { menuName: "마이페이지", link: "/profile" },
   ];
 
   return (

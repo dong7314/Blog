@@ -65,8 +65,13 @@ globalStyle(`${viewer} .toastui-editor-contents h6`, {
 });
 
 globalStyle(`${viewer} .toastui-editor-contents p`, {
+  display: "flex",
   fontSize: "16px",
   lineHeight: "1.5",
+});
+
+globalStyle(`${viewer} .toastui-editor-contents p:has(img)`, {
+  justifyContent: "center",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents ul li`, {
@@ -85,6 +90,10 @@ globalStyle(`${viewer} .toastui-editor-contents ol li`, {
 globalStyle(`${viewer} .toastui-editor-contents ol li::before`, {
   marginTop: "-2px",
   fontSize: "15px",
+});
+
+globalStyle(`${viewer} .toastui-editor-contents ul li::before`, {
+  marginTop: "8.5px",
 });
 
 globalStyle(`${viewer} pre`, {

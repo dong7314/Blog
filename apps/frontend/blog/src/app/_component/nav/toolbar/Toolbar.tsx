@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 
 import * as styles from "./Toolbar.css";
 
 import { Button, IconButton, SearchBar } from "@frontend/coreui";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function Toolbar() {
   const router = useRouter();
@@ -26,7 +26,9 @@ export default function Toolbar() {
       <div className={styles.loginButton}>
         {!data && (
           <Link href="/login">
-            <Button size="l">회원가입/로그인</Button>
+            <Button size="l" rounded={true}>
+              회원가입/로그인
+            </Button>
           </Link>
         )}
         {data && (
@@ -35,6 +37,7 @@ export default function Toolbar() {
               signOut({ redirect: false });
               router.replace("/home");
             }}
+            rounded={true}
           >
             로그아웃
           </Button>

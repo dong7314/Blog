@@ -85,6 +85,18 @@ export default async function DetailPage({ params }: Props) {
                 </Text>
               </span>
             </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "4px",
+                paddingRight: "1px",
+              }}
+            >
+              <TextButton size="s">수정</TextButton>
+              <span>&nbsp;</span>
+              <TextButton size="s">삭제</TextButton>
+            </div>
             {data.tags.length > 0 && (
               <div className={styles.tags}>
                 <DetailTags tags={data.tags} />
