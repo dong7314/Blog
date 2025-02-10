@@ -21,6 +21,7 @@
     "@vanilla-extract/css": "^1.16.1",
     "@vanilla-extract/next-plugin": "^2.4.7",
     "@vanilla-extract/vite-plugin": "^4.0.18",
+    "boring-avatars": "^1.11.2",
     "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.13",
     "jsonwebtoken": "^9.0.2",
