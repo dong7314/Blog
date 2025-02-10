@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
+import Avatar from "boring-avatars";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
@@ -48,13 +49,22 @@ export default function DashboardPost({ data }: Props) {
           <div>
             <div className={styles.author}>
               <div className={styles.profile}>
-                <Image
-                  src={"/profile.png"}
-                  alt={"profile-icon"}
-                  width={28}
-                  height={28}
-                  className={styles.profileIcon}
-                />
+                {data.author.thumbnail ? (
+                  <Image
+                    src={data.author.thumbnail}
+                    alt={"profile-icon"}
+                    width={28}
+                    height={28}
+                    className={styles.profileIcon}
+                  />
+                ) : (
+                  <Avatar
+                    name={data.author.name}
+                    variant="beam"
+                    size={28}
+                    className={styles.profileIcon}
+                  />
+                )}
                 <TextButton weight={600} size="l">
                   {data.author.name}
                 </TextButton>

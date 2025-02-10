@@ -4,13 +4,14 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import dayjs from "dayjs";
+import Avatar from "boring-avatars";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
 import * as styles from "./DetailComment.css";
 
 import { Comment as IComment } from "@/app/_model/Comment.model";
-import { Button, Icon, Text, TextButton } from "@frontend/coreui";
+import { Icon, Text, TextButton } from "@frontend/coreui";
 import DeleteTextButton from "./button/DeleteTextButton";
 import DetailCommentReplies from "../replies/DetailCommentReplies";
 import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
@@ -52,13 +53,22 @@ export default function DetailComment({
     <div className={styles.detailCommentContainer}>
       <div className={styles.header}>
         <div className={styles.author}>
-          <Image
-            src={"/profile.png"}
-            alt={"profile-icon"}
-            width={42}
-            height={42}
-            className={styles.profileIcon}
-          />
+          {comment.author.thumbnail ? (
+            <Image
+              src={comment.author.thumbnail}
+              alt={"profile-icon"}
+              width={42}
+              height={42}
+              className={styles.profileIcon}
+            />
+          ) : (
+            <Avatar
+              name={comment.author.name}
+              variant="beam"
+              size={42}
+              className={styles.profileIcon}
+            />
+          )}
           <div>
             <TextButton weight={500}>{comment.author.name}</TextButton>
             <Text size="s" color="#595959" className={styles.date}>

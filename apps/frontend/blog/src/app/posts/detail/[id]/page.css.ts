@@ -46,7 +46,8 @@ export const infoSpan = style({
 
 export const tags = style({
   display: "flex",
-  height: "32px",
+  flexWrap: "wrap",
+  minHeight: "32px",
   marginTop: "16px",
 });
 

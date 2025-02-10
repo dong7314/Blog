@@ -5,7 +5,7 @@ type Props = { pageParam?: number };
 export async function getPostsFeedInfinite(pageParam = 0, token: string) {
   const response = await fetchData(
     "api.post/followed",
-    ["posts", "followed"],
+    ["posts", "dashboard", "followed"],
     {
       limit: 6,
       offset: pageParam,

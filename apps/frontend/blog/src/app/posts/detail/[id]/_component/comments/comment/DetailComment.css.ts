@@ -24,7 +24,7 @@ export const author = style({
 });
 
 export const profileIcon = style({
-  marginRight: "6px",
+  marginRight: "10px",
 });
 
 export const lockIcon = style({

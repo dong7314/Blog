@@ -30,7 +30,7 @@ export const profile = style({
 });
 
 export const profileIcon = style({
-  marginRight: "12px",
+  marginRight: "16px",
 });
 
 export const profileUser = style({

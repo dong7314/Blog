@@ -1,5 +1,5 @@
-import Preview from "./_component/Preview";
-import PreviewModal from "./_component/modal/PreviewModal";
+import Preview from "../../_component/preview/Preview";
+import PreviewModal from "../../_component/preview/modal/PreviewModal";
 
 export default function PostCreatePreviewModalPage() {
   return (

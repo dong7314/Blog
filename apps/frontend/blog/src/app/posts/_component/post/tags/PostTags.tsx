@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import * as styles from "./CreateTags.css";
+import { useEffect, useState } from "react";
+import * as styles from "./PostTags.css";
 
+import { Tag as ITag } from "@/app/_model/Tag.model";
+import { usePostStore } from "../../../_store/postStore";
 import { IconButton, Text } from "@frontend/coreui";
-import { usePostStore } from "../../_store/postStore";
 
-export default function CreateTags() {
+type Props = {
+  tags?: ITag[];
+};
+export default function PostTags({ tags }: Props) {
   const postStore = usePostStore();
   const [value, setValue] = useState("");
   const [tagList, setTagList] = useState<string[]>([]);
@@ -44,6 +48,14 @@ export default function CreateTags() {
       addTagList();
     }
   };
+
+  useEffect(() => {
+    if (tags) {
+      const convertTagsList = tags.map((tag) => tag.name);
+      setTagList(convertTagsList);
+      postStore.setTags(convertTagsList);
+    }
+  }, [tags]);
 
   return (
     <div className={styles.tagsBox}>

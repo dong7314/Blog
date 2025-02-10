@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
+import Avatar from "boring-avatars";
 import { useSession } from "next-auth/react";
-import { Button, Text, TextButton } from "@frontend/coreui";
 
 import * as styles from "./DetailProfile.css";
 
 import useFollow from "../../_hooks/useFollow";
 import FollowButton from "./button/FollowButton";
 import { User as IUser } from "@/app/_model/User.model";
+import { Button, Text, TextButton } from "@frontend/coreui";
 
 type Props = {
   author: IUser;
@@ -24,13 +25,22 @@ export default function DetailProfile({ author }: Props) {
     <div className={styles.profileContainer}>
       <div className={styles.profileBox}>
         <div className={styles.profile}>
-          <Image
-            src={"/profile.png"}
-            alt={"profile-icon"}
-            width={72}
-            height={72}
-            className={styles.profileIcon}
-          />
+          {author.thumbnail ? (
+            <Image
+              src={author.thumbnail}
+              alt={"profile-icon"}
+              width={72}
+              height={72}
+              className={styles.profileIcon}
+            />
+          ) : (
+            <Avatar
+              name={author.name}
+              variant="beam"
+              size={72}
+              className={styles.profileIcon}
+            />
+          )}
           <div className={styles.profileUser}>
             <TextButton size="dxl" weight={600}>
               {author.name}

@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const detailTag = style({
   display: "inline-flex",
   marginRight: "12px",
+  marginBottom: "6px",
   padding: "6px 8px",
   backgroundColor: "#f2f2f2",
   borderRadius: "6px",

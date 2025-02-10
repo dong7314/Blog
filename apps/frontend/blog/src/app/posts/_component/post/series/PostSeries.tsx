@@ -1,23 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { composeStyles } from "@vanilla-extract/css";
 
-import * as styles from "./CreateSeries.css";
+import * as styles from "./PostSeries.css";
 
-import getSeries from "../../_lib/getSeries";
-import createSeries from "../../_lib/createSeries";
-import usePostStore from "../../_store/postStore";
+import getSeries from "../../../_lib/getSeries";
+import createSeries from "../../../_lib/createSeries";
+import usePostStore from "../../../_store/postStore";
 import { Series as ISeries } from "@/app/_model/Series.model";
 import { Button, Icon, Input, Text, TextButton } from "@frontend/coreui";
 
-export default function CreateSeries() {
+type Props = {
+  seriesId?: string;
+};
+export default function PostSeries({ seriesId }: Props) {
   const session = useSession();
   const postStore = usePostStore();
   const queryClient = useQueryClient();
   const [seriesTitle, setSeriesTitle] = useState<string>("");
   const [openAddSeries, setOpenAddSeries] = useState<boolean>(false);
+  const [selectSeriesId, setSelectSeriesId] = useState<number | null>(null);
 
   const { data } = useQuery<ISeries[]>({
     queryKey: ["series", "author", `${session.data?.user.id}`],
@@ -42,6 +46,7 @@ export default function CreateSeries() {
   });
 
   const handleOnClick = (id: number) => {
+    setSelectSeriesId(id);
     postStore.setSeriesId(id);
   };
 
@@ -52,6 +57,13 @@ export default function CreateSeries() {
     }
     mutation.mutate();
   };
+
+  useEffect(() => {
+    if (seriesId) {
+      setSelectSeriesId(parseInt(seriesId));
+      postStore.setSeriesId(parseInt(seriesId));
+    }
+  }, [seriesId]);
 
   return (
     <div className={styles.createSeries}>
@@ -97,7 +109,7 @@ export default function CreateSeries() {
             key={series.id}
             className={composeStyles(
               styles.series,
-              postStore.seriesId === series.id ? styles.checked : "",
+              selectSeriesId === series.id ? styles.checked : "",
             )}
             onClick={() => {
               handleOnClick(series.id);

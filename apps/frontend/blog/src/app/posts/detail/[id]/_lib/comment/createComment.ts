@@ -14,8 +14,6 @@ export default async function createComment(
     isSecret,
   };
 
-  console.log(body);
-
   if (commentId) {
     (body as any).parentId = commentId;
   }

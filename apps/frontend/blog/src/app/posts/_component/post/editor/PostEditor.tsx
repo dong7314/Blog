@@ -1,13 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-import * as styles from "./CreateEditor.css";
+import * as styles from "./PostEditor.css";
 
 import Editor from "@/app/_component/editor/Editor";
-import { usePostStore } from "../../_store/postStore";
+import { usePostStore } from "../../../_store/postStore";
 
-export default function CreateEditor() {
+type Props = {
+  content?: string;
+};
+export default function PostEditor({ content }: Props) {
   const editorRef = useRef(null);
   const postStore = usePostStore();
 
@@ -15,10 +18,16 @@ export default function CreateEditor() {
     postStore.setContent(value);
   };
 
+  useEffect(() => {
+    if (content) {
+      postStore.setContent(content);
+    }
+  }, [content]);
+
   return (
     <div className={styles.editor}>
       <Editor
-        content=""
+        content={content ?? ""}
         editorRef={editorRef}
         onChange={handleOnChange}
       ></Editor>

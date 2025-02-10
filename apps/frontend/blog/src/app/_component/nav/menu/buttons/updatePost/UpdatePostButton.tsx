@@ -1,21 +1,24 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
-import * as styles from "./CreatePostButton.css";
+import * as styles from "./UpdatePostButton.css";
 
 import { Button } from "@frontend/coreui";
-import createPost from "@/app/posts/create/_lib/createPost";
+import updatePost from "@/app/posts/update/_lib/updatePost";
 import usePostStore from "@/app/posts/_store/postStore";
 
-export default function CreatPostButton() {
+type Props = {
+  id: number;
+};
+export default function UpdatePostButton({ id }: Props) {
   const router = useRouter();
   const postStore = usePostStore();
 
   const mutation = useMutation({
     mutationFn: () =>
-      createPost(
+      updatePost(
+        id,
         postStore.title,
         postStore.description,
         postStore.content,
@@ -28,11 +31,11 @@ export default function CreatPostButton() {
       router.push(`/posts/detail/${response.id}`);
     },
     onError: (error: any) => {
-      console.error("포스트 생성 실패:", error);
+      console.error("포스트 수정 실패:", error);
     },
   });
 
-  const handleCreatePost = () => {
+  const handleUpdatePost = () => {
     if (postStore.title.trim() === "") {
       alert("포스트 타이틀은 필수적으로 입력하셔야 합니다.");
       return;
@@ -48,10 +51,10 @@ export default function CreatPostButton() {
   return (
     <Button
       className={styles.buttonMargin}
-      onClick={handleCreatePost}
       type="primary"
+      onClick={handleUpdatePost}
     >
-      출간하기
+      수정하기
     </Button>
   );
 }

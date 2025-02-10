@@ -8,6 +8,7 @@ import * as styles from "./DetailCommentTextarea.css";
 
 import { Icon, Text, Textarea } from "@frontend/coreui";
 import { Comment as IComment } from "@/app/_model/Comment.model";
+import { useRouter } from "next/navigation";
 
 type Props = {
   type: "comment" | "reply" | "edit";
@@ -27,6 +28,7 @@ export default function DetailCommentTextarea({
   closeEvent,
 }: Props) {
   const { data } = useSession();
+  const router = useRouter();
   // 로컬 상태 관리
   const [content, setContent] = useState(
     type !== "edit" ? "" : comment?.content || "",
@@ -53,16 +55,19 @@ export default function DetailCommentTextarea({
   });
 
   const handleAction = () => {
-    if (!content.trim()) {
-      alert("댓글 내용을 입력해주세요.");
-      return;
-    }
+    // 로그인 되어 있을 때만 동작
+    if (data?.user) {
+      if (!content.trim()) {
+        alert("댓글 내용을 입력해주세요.");
+        return;
+      }
 
-    // 댓글 작성 또는 수정 요청
-    if (type === "edit") {
-      update.mutate({ content, isSecret });
-    } else {
-      create.mutate({ content, isSecret });
+      // 댓글 작성 또는 수정 요청
+      if (type === "edit") {
+        update.mutate({ content, isSecret });
+      } else {
+        create.mutate({ content, isSecret });
+      }
     }
   };
 
@@ -115,6 +120,12 @@ export default function DetailCommentTextarea({
           </button>
         </form>
       </div>
+      {!data?.user && (
+        <div
+          className={styles.commentTextareaCover}
+          onClick={() => router.replace("/login")}
+        />
+      )}
     </div>
   );
 }

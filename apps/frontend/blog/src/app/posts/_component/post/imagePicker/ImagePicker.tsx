@@ -7,11 +7,14 @@ import * as styles from "./ImagePicker.css";
 
 import { Text, TextButton } from "@frontend/coreui";
 import uploadImage from "@/app/_lib/image/uploadImage";
-import usePostStore from "../../_store/postStore";
+import usePostStore from "../../../_store/postStore";
 import deleteImage from "@/app/_lib/image/deleteImage";
 import compressImage from "@/app/_lib/image/compressImage";
 
-export default function ImagePicker() {
+type Props = {
+  url?: string;
+};
+export default function ImagePicker({ url }: Props) {
   const postStore = usePostStore();
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -102,11 +105,18 @@ export default function ImagePicker() {
   const handleDelete = async () => {
     if (imageUrl) {
       const imageName = imageUrl.split("/").at(-1) as string;
-      await deleteImage(imageName);
       setFile(null);
       setImageUrl(null);
+      postStore.setImgUrl("");
+      await deleteImage(imageName);
     }
   };
+
+  useEffect(() => {
+    if (url) {
+      setImageUrl(url);
+    }
+  }, [url]);
 
   useEffect(() => {
     initDragEvents();

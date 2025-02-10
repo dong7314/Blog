@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { auth } from "@/auth";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -24,11 +26,14 @@ import DetailViewer from "./_component/viewer/DetailViewer";
 import DetailProfile from "./_component/profile/DetailProfile";
 import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
 import DetailCommentsContainer from "./_component/comments/DetailCommentsContainer";
+import DeletePostTextButton from "./_component/button/DeletePostButton";
+import Avatar from "boring-avatars";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 export default async function DetailPage({ params }: Props) {
+  const session = await auth();
   const { id } = await params;
   const postId = parseInt(id);
 
@@ -61,13 +66,22 @@ export default async function DetailPage({ params }: Props) {
             </div>
             <div className={styles.info}>
               <span className={styles.infoSpan}>
-                <Image
-                  src={"/profile.png"}
-                  alt={"profile-icon"}
-                  width={24}
-                  height={24}
-                  className={styles.profileIcon}
-                />
+                {data.author.thumbnail ? (
+                  <Image
+                    src={data.author.thumbnail}
+                    alt={"profile-icon"}
+                    width={24}
+                    height={24}
+                    className={styles.profileIcon}
+                  />
+                ) : (
+                  <Avatar
+                    name={data.author.name}
+                    variant="beam"
+                    size={24}
+                    className={styles.profileIcon}
+                  />
+                )}
                 <TextButton weight={600}>{data.author.name}</TextButton>
               </span>
               <span className={styles.infoSpan}>
@@ -85,18 +99,22 @@ export default async function DetailPage({ params }: Props) {
                 </Text>
               </span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "4px",
-                paddingRight: "1px",
-              }}
-            >
-              <TextButton size="s">수정</TextButton>
-              <span>&nbsp;</span>
-              <TextButton size="s">삭제</TextButton>
-            </div>
+            {session?.user.id === `${data.author.id}` && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "4px",
+                  paddingRight: "1px",
+                }}
+              >
+                <Link href={`/posts/update/${postId}`}>
+                  <TextButton size="s">수정</TextButton>
+                </Link>
+                <span>&nbsp;</span>
+                <DeletePostTextButton postId={data.id} />
+              </div>
+            )}
             {data.tags.length > 0 && (
               <div className={styles.tags}>
                 <DetailTags tags={data.tags} />

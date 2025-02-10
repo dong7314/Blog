@@ -83,3 +83,11 @@ export const second = style([
     bottom: "12px",
   },
 ]);
+
+export const commentTextareaCover = style({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+});
