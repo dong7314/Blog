@@ -2048,6 +2048,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.16.1"
     "@vanilla-extract/next-plugin": "npm:^2.4.7"
     "@vanilla-extract/vite-plugin": "npm:^4.0.18"
+    boring-avatars: "npm:^1.11.2"
     browser-image-compression: "npm:^2.0.2"
     dayjs: "npm:^1.11.13"
     eslint: "npm:^9"
@@ -6357,6 +6358,13 @@ __metadata:
     raw-body: "npm:^3.0.0"
     type-is: "npm:~1.6.18"
   checksum: 10c0/2382c03242f131dae0319225d2cd98e91d7a6c3ebb2ace982513cb2c1670c15a9fc06d3af3ddb03715dc254334f10fa17146cebc17651d1373ad6ff461e4619d
+  languageName: node
+  linkType: hard
+
+"boring-avatars@npm:^1.11.2":
+  version: 1.11.2
+  resolution: "boring-avatars@npm:1.11.2"
+  checksum: 10c0/b574bbbd926faeca7615c82a1bc2e0dda85803ed677c5e243b27cdda7b1ee97289d53f81bfe89087429b73897e2a329e306f13fd65c279e23b394595cfa15828
   languageName: node
   linkType: hard
 

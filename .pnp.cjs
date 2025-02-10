@@ -2858,6 +2858,7 @@ const RAW_RUNTIME_STATE =
           ["@vanilla-extract/css", "npm:1.16.1"],\
           ["@vanilla-extract/next-plugin", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:2.4.7"],\
           ["@vanilla-extract/vite-plugin", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:4.0.18"],\
+          ["boring-avatars", "npm:1.11.2"],\
           ["browser-image-compression", "npm:2.0.2"],\
           ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:c11bf9e074e28e61513e1bd1c880dbbd07b0f7a3d5e8fa31070b03535f79a7084791cdef297e9ba270af09af7b347bafde4f7a34909854e9310f10c516d385c1#npm:9.17.0"],\
@@ -8745,6 +8746,15 @@ const RAW_RUNTIME_STATE =
           ["qs", "npm:6.13.0"],\
           ["raw-body", "npm:3.0.0"],\
           ["type-is", "npm:1.6.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["boring-avatars", [\
+      ["npm:1.11.2", {\
+        "packageLocation": "./.yarn/cache/boring-avatars-npm-1.11.2-78f9eaaa25-b574bbbd92.zip/node_modules/boring-avatars/",\
+        "packageDependencies": [\
+          ["boring-avatars", "npm:1.11.2"]\
         ],\
         "linkType": "HARD"\
       }]\
