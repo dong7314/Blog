@@ -9,6 +9,7 @@ import useFollow from "../../_hooks/useFollow";
 import FollowButton from "./button/FollowButton";
 import { User as IUser } from "@/app/_model/User.model";
 import { Button, Text, TextButton } from "@frontend/coreui";
+import ProfileIcon from "@/app/_component/profile/ProfileIcon";
 
 type Props = {
   author: IUser;
@@ -25,22 +26,12 @@ export default function DetailProfile({ author }: Props) {
     <div className={styles.profileContainer}>
       <div className={styles.profileBox}>
         <div className={styles.profile}>
-          {author.thumbnail ? (
-            <Image
-              src={author.thumbnail}
-              alt={"profile-icon"}
-              width={72}
-              height={72}
-              className={styles.profileIcon}
-            />
-          ) : (
-            <Avatar
-              name={author.name}
-              variant="beam"
-              size={72}
-              className={styles.profileIcon}
-            />
-          )}
+          <ProfileIcon
+            size={72}
+            name={author.name}
+            thumbnail={author.thumbnail}
+            className={styles.profileIcon}
+          />
           <div className={styles.profileUser}>
             <TextButton size="dxl" weight={600}>
               {author.name}

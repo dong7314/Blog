@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
-import Avatar from "boring-avatars";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
 import * as styles from "./DashboardPost.css";
 
-import { Icon, Text, TextButton } from "@frontend/coreui";
+import ProfileIcon from "@/app/_component/profile/ProfileIcon";
 import { Post as IPost } from "@/app/_model/Post.model";
+import { Icon, Text, TextButton } from "@frontend/coreui";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -49,22 +49,12 @@ export default function DashboardPost({ data }: Props) {
           <div>
             <div className={styles.author}>
               <div className={styles.profile}>
-                {data.author.thumbnail ? (
-                  <Image
-                    src={data.author.thumbnail}
-                    alt={"profile-icon"}
-                    width={28}
-                    height={28}
-                    className={styles.profileIcon}
-                  />
-                ) : (
-                  <Avatar
-                    name={data.author.name}
-                    variant="beam"
-                    size={28}
-                    className={styles.profileIcon}
-                  />
-                )}
+                <ProfileIcon
+                  size={28}
+                  name={data.author.name}
+                  thumbnail={data.author.thumbnail}
+                  className={styles.profileIcon}
+                />
                 <TextButton weight={600} size="l">
                   {data.author.name}
                 </TextButton>

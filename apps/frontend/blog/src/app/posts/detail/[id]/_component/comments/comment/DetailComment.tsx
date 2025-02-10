@@ -2,21 +2,20 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import dayjs from "dayjs";
-import Avatar from "boring-avatars";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
 import * as styles from "./DetailComment.css";
 
+import ProfileIcon from "@/app/_component/profile/ProfileIcon";
 import { Comment as IComment } from "@/app/_model/Comment.model";
 import { Icon, Text, TextButton } from "@frontend/coreui";
 import DeleteTextButton from "./button/DeleteTextButton";
-import DetailCommentReplies from "../replies/DetailCommentReplies";
-import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
 import DetailCommentView from "./content/view/DetailCommentView";
 import DetailCommentEdit from "./content/edit/DetailCommentEdit";
+import DetailCommentReplies from "../replies/DetailCommentReplies";
+import DetailCommentTextarea from "../textarea/DetailCommentTextarea";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -53,22 +52,12 @@ export default function DetailComment({
     <div className={styles.detailCommentContainer}>
       <div className={styles.header}>
         <div className={styles.author}>
-          {comment.author.thumbnail ? (
-            <Image
-              src={comment.author.thumbnail}
-              alt={"profile-icon"}
-              width={42}
-              height={42}
-              className={styles.profileIcon}
-            />
-          ) : (
-            <Avatar
-              name={comment.author.name}
-              variant="beam"
-              size={42}
-              className={styles.profileIcon}
-            />
-          )}
+          <ProfileIcon
+            size={42}
+            name={comment.author.name}
+            thumbnail={comment.author.thumbnail}
+            className={styles.profileIcon}
+          />
           <div>
             <TextButton weight={500}>{comment.author.name}</TextButton>
             <Text size="s" color="#595959" className={styles.date}>

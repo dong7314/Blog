@@ -21,13 +21,13 @@ import { Text, TextButton } from "@frontend/coreui";
 
 import Anchor from "./_component/anchor/Anchor";
 import DetailTags from "./_component/tags/DetailTags";
+import ProfileIcon from "@/app/_component/profile/ProfileIcon";
 import DetailSeries from "./_component/series/DetailSeries";
 import DetailViewer from "./_component/viewer/DetailViewer";
 import DetailProfile from "./_component/profile/DetailProfile";
 import DetailFavoritesButton from "./_component/favorites/DetailFavoritesButton";
 import DetailCommentsContainer from "./_component/comments/DetailCommentsContainer";
 import DeletePostTextButton from "./_component/button/DeletePostButton";
-import Avatar from "boring-avatars";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -66,22 +66,12 @@ export default async function DetailPage({ params }: Props) {
             </div>
             <div className={styles.info}>
               <span className={styles.infoSpan}>
-                {data.author.thumbnail ? (
-                  <Image
-                    src={data.author.thumbnail}
-                    alt={"profile-icon"}
-                    width={24}
-                    height={24}
-                    className={styles.profileIcon}
-                  />
-                ) : (
-                  <Avatar
-                    name={data.author.name}
-                    variant="beam"
-                    size={24}
-                    className={styles.profileIcon}
-                  />
-                )}
+                <ProfileIcon
+                  size={24}
+                  name={data.author.name}
+                  thumbnail={data.author.thumbnail}
+                  className={styles.profileIcon}
+                />
                 <TextButton weight={600}>{data.author.name}</TextButton>
               </span>
               <span className={styles.infoSpan}>
