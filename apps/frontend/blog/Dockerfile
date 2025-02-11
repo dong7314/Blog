@@ -1,35 +1,37 @@
-# Base 이미지 설정
+# Base 이미지 설정(빌드 단계)
 FROM node:22.10-alpine AS builder
-
-# 작업 디렉토리 생성
 WORKDIR /app
 
-# Monorepo 전체 패키지 복사
+# Monorepo 전체 패키지 복사(workspace 정상적으로 복사되도록)
 COPY package.json yarn.lock .yarnrc.yml ./  
 COPY .yarn .yarn
-COPY packages/coreui packages/coreui  
-COPY apps/frontend apps/frontend
+COPY packages packages
+COPY apps apps
 
-# Yarn 설치 & Next.js 빌드
+# Yarn Berry & workspace 설정
 WORKDIR /app/apps/frontend/blog
 RUN yarn install
-RUN yarn run build
+RUN NODE_OPTIONS=--max_old_space_size=2048 yarn run build
 
-# 런타임 환경 설정
+# 런타임 컨테이너 설정(실행 전용)
 FROM node:22.10-alpine AS runner
 WORKDIR /app
 
-# PnP 환경을 유지하면서 실행하기 위해 필요한 파일들 복사
-COPY --from=builder /app/apps/frontend/blog/.next ./.next
-COPY --from=builder /app/apps/frontend/blog/public ./public
-COPY --from=builder /app/apps/frontend/blog/package.json ./package.json
-COPY --from=builder /app/apps/frontend/blog/.yarn ./yarn  # ✅ PnP 환경 유지
-COPY --from=builder /app/apps/frontend/blog/.yarnrc.yml ./yarnrc.yml  # ✅ PnP 환경 유지
-COPY --from=builder /app/packages/coreui ./packages/coreui 
+# 'package.json' 전체 복사(workspace 정보 유지)
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/yarn.lock ./yarn.lock
+COPY --from=builder /app/.yarnrc.yml ./.yarnrc.yml
+COPY --from=builder /app/.yarn ./.yarn
 
-# Yarn PnP 실행을 위해 환경 변수 설정
-ENV YARN_ENABLE_GLOBAL_CACHE=true
-ENV YARN_NODE_LINKER=pnp
+# 전체 packages 복사
+COPY --from=builder /app/packages ./packages
 
-# Next.js 서버 실행
+# 'apps/frontend/blog' 복사
+COPY --from=builder /app/apps/frontend/blog ./apps/frontend/blog
+
+# Next 실행을 위해 설치 진행
+WORKDIR /app/apps/frontend/blog
+RUN yarn install
+
+# Next.js 실행
 CMD ["yarn", "run", "start"]
