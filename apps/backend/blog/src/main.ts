@@ -9,7 +9,7 @@ async function bootstrap() {
   // cors
   const corsOrigin =
     process.env.NODE_ENV === 'production'
-      ? 'https://www.example.com'
+      ? 'https://api.dpost.site'
       : 'http://localhost:3000';
   app.enableCors({
     origin: corsOrigin,
