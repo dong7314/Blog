@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json yarn.lock .yarnrc.yml ./  
 COPY .yarn .yarn
 COPY packages packages
-COPY apps apps
+COPY apps/frontend apps/frontend
 
 # Yarn Berry & workspace 설정
 WORKDIR /app/apps/frontend/blog
