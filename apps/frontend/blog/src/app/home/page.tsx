@@ -1,9 +1,8 @@
 import * as styles from "./page.css";
 
 import { Text } from "@frontend/coreui";
-import PostCarousel from "./_component/carousel/PostCarousel";
-import PostsPopularity from "./_component/popularity/PostsPopularity";
 import PostsRecently from "./_component/recently/PostsRecently";
+import PostsPopularity from "./_component/popularity/PostsPopularity";
 
 export default async function HomePage() {
   return (

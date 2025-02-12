@@ -1,3 +1,5 @@
+"use server";
+
 export async function fetchData(
   url: string,
   tags: string[],
@@ -10,7 +12,7 @@ export async function fetchData(
   }
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/${url}${queryParams ? "?" + queryParams : ""}`,
+    `${process.env.NEXT_BASE_URL}/${url}${queryParams ? "?" + queryParams : ""}`,
     {
       method: "get",
       headers: {

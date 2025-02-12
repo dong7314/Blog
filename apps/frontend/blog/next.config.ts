@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "50mb",
     },
+    workerThreads: false,
+    cpus: 2,
   },
   images: {
     remotePatterns: [
@@ -26,6 +28,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  staticPageGenerationTimeout: 200,
 };
 
 module.exports = withVanillaExtract(nextConfig);

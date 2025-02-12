@@ -19,6 +19,8 @@ export default function RQProvider({ children }: Props) {
     }),
   );
 
+  console.log(process.env.NEXT_PUBLIC_MODE);
+
   return (
     <QueryClientProvider client={client}>
       {children}

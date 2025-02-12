@@ -1,7 +1,7 @@
 "use server";
 
-import { modifyData } from "@/app/_lib/restful";
 import { auth } from "@/auth";
+import { modifyData } from "@/app/_lib/restful";
 
 export default async function createSeries(title: string, description: string) {
   const session = await auth();
