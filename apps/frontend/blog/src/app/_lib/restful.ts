@@ -25,7 +25,20 @@ export async function fetchData(
     },
   );
 
-  return res;
+  let jsonData = null;
+  try {
+    const text = await res.text();
+    jsonData = text ? JSON.parse(text) : null;
+  } catch (error) {
+    console.error("JSON 파싱 오류:", error);
+  }
+
+  const data: { ok: boolean; data: any } = {
+    ok: res.ok,
+    data: jsonData,
+  };
+
+  return data;
 }
 
 export async function modifyData(
@@ -35,7 +48,7 @@ export async function modifyData(
   body?: any,
   accessToken?: string,
 ) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${url}`, {
+  const res = await fetch(`${process.env.NEXT_BASE_URL}/${url}`, {
     method,
     headers: {
       "Content-Type": "application/json",
@@ -47,5 +60,18 @@ export async function modifyData(
     },
   });
 
-  return res;
+  let jsonData = null;
+  try {
+    const text = await res.text();
+    jsonData = text ? JSON.parse(text) : null;
+  } catch (error) {
+    console.error("JSON 파싱 오류:", error);
+  }
+
+  const data: { ok: boolean; data: any } = {
+    ok: res.ok,
+    data: jsonData,
+  };
+
+  return data;
 }

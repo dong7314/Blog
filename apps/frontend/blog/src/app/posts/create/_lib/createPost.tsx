@@ -37,5 +37,5 @@ export default async function createPost(
     throw new Error("포스트 생성이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 }

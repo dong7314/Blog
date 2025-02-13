@@ -6,7 +6,7 @@ export async function getPostsPopularityInfinite(
   pageParam = 0,
   period: string,
 ) {
-  const response = await fetchData(
+  const res = await fetchData(
     "api.post/popular",
     ["posts", "dashboard", "popularity", period],
     {
@@ -16,9 +16,9 @@ export async function getPostsPopularityInfinite(
     },
   );
 
-  if (!response.ok) {
+  if (!res.ok) {
     throw new Error("데이터를 가져오는데 실패하였습니다.");
   }
 
-  return await response.json();
+  return res.data;
 }

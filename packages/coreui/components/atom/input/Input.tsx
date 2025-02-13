@@ -115,7 +115,9 @@ export const Input = forwardRef<InputRef, InputProps>(
       const newValue = e.target.value;
       setInputValue(newValue);
       // 에러 확인
-      setCurrentError(e.target.validity.patternMismatch);
+      if (pattern) {
+        setCurrentError(e.target.validity.patternMismatch);
+      }
 
       if (onChange) {
         onChange(e.target.value);

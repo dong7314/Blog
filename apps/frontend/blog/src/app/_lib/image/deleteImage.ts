@@ -7,7 +7,7 @@ export default async function deleteImage(imageName: string) {
   const accessToken = session?.user.accessToken;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api.image/${imageName}`,
+    `${process.env.NEXT_BASE_URL}/api.image/${imageName}`,
     {
       method: "delete",
       headers: {

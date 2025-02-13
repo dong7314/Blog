@@ -23,5 +23,5 @@ export default async function createSeries(title: string, description: string) {
     throw new Error("시리즈 생성이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 }

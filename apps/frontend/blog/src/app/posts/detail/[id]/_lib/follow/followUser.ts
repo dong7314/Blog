@@ -17,5 +17,5 @@ export default async function followUser(
     throw new Error("팔로우가 실패하였습니다..");
   }
 
-  return await res.json();
+  return res.data;
 }

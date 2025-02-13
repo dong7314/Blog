@@ -11,14 +11,25 @@ type Props = {
 export default function SignupPassword({ valueChange, inspectChange }: Props) {
   const [password, setPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const [patternChecked, setPatternChecked] = useState<boolean | null>(null);
 
-  const handleRepeatPasswordChange = (value: string) => {
+  const handlePasswordChange = (value: string) => {
     const passwordPattern =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/i;
-    const checked = passwordPattern.test(value);
 
+    if (!passwordPattern.test(value)) {
+      setPatternChecked(false);
+    } else {
+      setPatternChecked(true);
+    }
+
+    setPassword(value);
+    valueChange(value);
+  };
+
+  const handleRepeatPasswordChange = (value: string) => {
     setRepeatPassword(value);
-    inspectChange(checked && password === value);
+    inspectChange(patternChecked && password === value);
   };
 
   return (
@@ -33,10 +44,7 @@ export default function SignupPassword({ valueChange, inspectChange }: Props) {
           "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$"
         }
         placeholder="비밀번호를 입력해 주세요."
-        onChange={(value) => {
-          setPassword(value);
-          valueChange(value);
-        }}
+        onChange={handlePasswordChange}
       >
         <span>
           비밀번호는 8~20자로 영문자, 숫자, 특수기호를 조합하여 입력해 주세요.

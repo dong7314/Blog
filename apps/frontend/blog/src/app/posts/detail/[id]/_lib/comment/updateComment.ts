@@ -29,5 +29,5 @@ export default async function updateComment(
     throw new Error("댓글 수정정이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 }

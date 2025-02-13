@@ -3,7 +3,7 @@ import { fetchData } from "@/app/_lib/restful";
 type Props = { pageParam?: number };
 
 export async function getPostsFeedInfinite(pageParam = 0, token: string) {
-  const response = await fetchData(
+  const res = await fetchData(
     "api.post/followed",
     ["posts", "dashboard", "followed"],
     {
@@ -13,9 +13,9 @@ export async function getPostsFeedInfinite(pageParam = 0, token: string) {
     token,
   );
 
-  if (!response.ok) {
+  if (!res.ok) {
     throw new Error("데이터를 가져오는데 실패하였습니다.");
   }
 
-  return await response.json();
+  return res.data;
 }

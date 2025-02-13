@@ -53,7 +53,7 @@ export default function DetailComment({
       <div className={styles.header}>
         <div className={styles.author}>
           <ProfileIcon
-            size={42}
+            size={41}
             name={comment.author.name}
             thumbnail={comment.author.thumbnail}
             className={styles.profileIcon}

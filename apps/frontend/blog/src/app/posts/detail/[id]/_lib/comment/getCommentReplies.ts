@@ -8,16 +8,16 @@ export async function getCommentReplies(commentId: number) {
   revalidateTag("replies");
   const session = await auth();
 
-  const response = await fetchData(
+  const res = await fetchData(
     `api.comment/${commentId}/replies`,
     ["comment", `${commentId}`, "replies"],
     {},
     session?.user.accessToken,
   );
 
-  if (!response.ok) {
+  if (!res.ok) {
     throw new Error("데이터를 가져오는데 실패하였습니다.");
   }
 
-  return await response.json();
+  return res.data;
 }

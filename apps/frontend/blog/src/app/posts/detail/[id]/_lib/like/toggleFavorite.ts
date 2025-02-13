@@ -15,5 +15,5 @@ export default async (postId: number, token: string) => {
     throw new Error("좋아요 토글 요청이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 };

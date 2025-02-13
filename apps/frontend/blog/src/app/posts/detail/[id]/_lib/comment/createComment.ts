@@ -30,5 +30,5 @@ export default async function createComment(
     throw new Error("댓글 생성이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 }

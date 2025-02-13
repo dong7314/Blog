@@ -10,7 +10,7 @@ export default async function uploadImage(file: File) {
   formData.append("file", file);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api.image/upload`,
+    `${process.env.NEXT_BASE_URL}/api.image/upload`,
     {
       method: "POST",
       body: formData,

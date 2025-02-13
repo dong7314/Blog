@@ -38,5 +38,5 @@ export default async function updatePost(
     throw new Error("포스트 수정이 실패하였습니다.");
   }
 
-  return res.json();
+  return res.data;
 }

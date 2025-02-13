@@ -17,5 +17,5 @@ export default async function unfollowUser(
     throw new Error("언팔로우가 실패하였습니다..");
   }
 
-  return await res.json();
+  return res.data;
 }
