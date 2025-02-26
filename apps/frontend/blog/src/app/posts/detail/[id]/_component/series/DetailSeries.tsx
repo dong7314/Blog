@@ -70,7 +70,10 @@ export default function DetailSeries({ series, postId }: Props) {
               >
                 <div className={styles.flex}>
                   <Text color="#595959" className={styles.seriesOrder}>
-                    {post.seriesOrder && 0 + 1}.&nbsp;&nbsp;
+                    {post.seriesOrder === 0 || post.seriesOrder === null
+                      ? 1
+                      : post.seriesOrder}
+                    .&nbsp;&nbsp;
                   </Text>
                   <TextButton disabled={post.id === postId}>
                     <span style={{ color: "#262626" }}>{post.title}</span>
