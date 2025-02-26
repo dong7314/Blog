@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { composeStyles } from "@vanilla-extract/css";
 import { useAnchorNavigationStore } from "../../_store/anchorNavigation";
 
 import * as styles from "./Anchor.css";
@@ -61,7 +60,7 @@ export default function Anchor() {
     return () => {
       container.removeEventListener("scroll", checkActiveItem);
     };
-  }, [anchorNavigationStore.navPositionList]);
+  }, [anchorNavigationStore.navPositionList, pathname]);
 
   useEffect(() => {
     return () => {
