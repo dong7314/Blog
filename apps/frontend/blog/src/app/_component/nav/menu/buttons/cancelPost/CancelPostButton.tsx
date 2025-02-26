@@ -17,18 +17,18 @@ export default function CancelPostButton({ id }: Props) {
   const modalStore = useModalStore();
 
   useEffect(() => {
-    modalStore.resetModalAction();
     setTimeout(() => {
       if (modalStore.id === id && modalStore.modalAction === "active") {
         // 나가기 버튼 클릭 시 reset
         postStore.reset();
         // id로 판별하여 뒤로 보낼 routing 구분
         if (id === 999999999) {
-          router.replace("/posts");
+          router.back();
         } else {
           router.replace(`/posts/detail/${id}`);
         }
       }
+      modalStore.resetModalAction();
     });
   }, [modalStore.modalAction]);
 
