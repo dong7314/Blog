@@ -65,7 +65,6 @@ globalStyle(`${viewer} .toastui-editor-contents h6`, {
 });
 
 globalStyle(`${viewer} .toastui-editor-contents p`, {
-  display: "flex",
   fontSize: "16px",
   lineHeight: "1.5",
 });
