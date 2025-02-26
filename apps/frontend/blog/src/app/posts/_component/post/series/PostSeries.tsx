@@ -13,7 +13,7 @@ import { Series as ISeries } from "@/app/_model/Series.model";
 import { Button, Icon, Input, Text, TextButton } from "@frontend/coreui";
 
 type Props = {
-  seriesId?: string;
+  seriesId?: number;
 };
 export default function PostSeries({ seriesId }: Props) {
   const session = useSession();
@@ -60,8 +60,8 @@ export default function PostSeries({ seriesId }: Props) {
 
   useEffect(() => {
     if (seriesId) {
-      setSelectSeriesId(parseInt(seriesId));
-      postStore.setSeriesId(parseInt(seriesId));
+      setSelectSeriesId(seriesId);
+      postStore.setSeriesId(seriesId);
     }
   }, [seriesId]);
 

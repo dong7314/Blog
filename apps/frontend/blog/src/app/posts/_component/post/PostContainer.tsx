@@ -43,7 +43,7 @@ export default async function PostContainer({ data }: Props) {
           <Text size="s" color="#262626" className={styles.postLabel}>
             시리즈 설정
           </Text>
-          <PostSeries seriesId={`${data?.series?.id}`} />
+          <PostSeries seriesId={data?.series?.id} />
         </div>
       </div>
       <PostEditor content={data?.content} />

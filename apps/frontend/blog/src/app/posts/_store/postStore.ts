@@ -39,8 +39,7 @@ export const usePostStore = create<PostState>((set, get) => ({
     set({ imgUrl });
   },
   setSeriesId(id: number) {
-    const { seriesId } = get();
-    set({ seriesId: seriesId === id ? null : id });
+    set({ seriesId: id });
   },
   reset() {
     set({
