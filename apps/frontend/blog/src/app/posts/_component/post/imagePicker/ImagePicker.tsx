@@ -115,6 +115,7 @@ export default function ImagePicker({ url }: Props) {
   useEffect(() => {
     if (url) {
       setImageUrl(url);
+      postStore.setImgUrl(url);
     }
   }, [url]);
 
