@@ -69,6 +69,10 @@ globalStyle(`${viewer} .toastui-editor-contents p`, {
   lineHeight: "1.5",
 });
 
+globalStyle(`${viewer} .toastui-editor-contents code`, {
+  fontSize: "15px",
+});
+
 globalStyle(`${viewer} .toastui-editor-contents p:has(img)`, {
   justifyContent: "center",
 });
@@ -87,12 +91,13 @@ globalStyle(`${viewer} .toastui-editor-contents ol li`, {
 });
 
 globalStyle(`${viewer} .toastui-editor-contents ol li::before`, {
-  marginTop: "-2px",
   fontSize: "15px",
+  marginLeft: "-30px",
+  marginTop: "1.5px",
 });
 
 globalStyle(`${viewer} .toastui-editor-contents ul li::before`, {
-  marginTop: "8.5px",
+  marginTop: "9px",
 });
 
 globalStyle(`${viewer} pre`, {

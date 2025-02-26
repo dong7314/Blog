@@ -6,12 +6,8 @@ import "prismjs/themes/prism.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
-import Prism from "prismjs";
-import "prismjs/components/prism-jsx";
-import "prismjs/components/prism-tsx";
-import "prismjs/components/prism-typescript";
-import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import { useAnchorNavigationStore } from "@/app/posts/detail/[id]/_store/anchorNavigation";
+const codeSyntaxHighlight = require("@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js");
 
 type Props = {
   content: string;
@@ -57,7 +53,7 @@ export default function ToastUiViewer({ content = "" }: Props) {
       {content && (
         <Viewer
           initialValue={content || ""}
-          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+          plugins={[[codeSyntaxHighlight]]}
           customHTMLRenderer={customHTMLRenderer}
         />
       )}

@@ -4,17 +4,13 @@ import { useEffect } from "react";
 
 import * as styles from "./ToastUiEditor.css";
 
-import Prism from "prismjs";
 import { Editor } from "@toast-ui/react-editor";
 import "prismjs/themes/prism.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import "prismjs/components/prism-jsx";
-import "prismjs/components/prism-tsx";
-import "prismjs/components/prism-typescript";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
+const codeSyntaxHighlight = require("@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js");
 
 import uploadImage from "@/app/_lib/image/uploadImage";
 import compressImage from "@/app/_lib/image/compressImage";
@@ -86,7 +82,7 @@ export default function ToastUiEditor({ content, editorRef, onChange }: Props) {
         useCommandShortcut={true}
         hideModeSwitch={true}
         language="ko-KR"
-        plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+        plugins={[colorSyntax, [codeSyntaxHighlight]]}
         options={{
           headingAnchor: true, // 제목에 자동으로 id를 추가하여 앵커 링크 기능 활성화
         }}
