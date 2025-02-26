@@ -118,9 +118,10 @@ export default function PostSeries({ seriesId }: Props) {
             <Text size="s" color="#595959">
               {series.title}
             </Text>
-            {postStore.seriesId === series.id && (
-              <Icon type="check" color="#0066ff" />
-            )}
+            {postStore.seriesId !== null &&
+              postStore.seriesId === series.id && (
+                <Icon type="check" color="#0066ff" />
+              )}
           </div>
         );
       })}
