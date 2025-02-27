@@ -28,12 +28,14 @@ export default function AnchorItem({ data, index, active }: Props) {
   );
 
   useEffect(() => {
-    const element = document.getElementById(data.id);
-    if (element) {
-      anchorNavigationStore.setNavPositionList(
-        Math.floor(element.offsetTop) - 2,
-      );
-    }
+    setTimeout(() => {
+      const element = document.getElementById(data.id);
+      if (element) {
+        anchorNavigationStore.setNavPositionList(
+          Math.floor(element.offsetTop) - 2,
+        );
+      }
+    });
   }, []);
 
   return (

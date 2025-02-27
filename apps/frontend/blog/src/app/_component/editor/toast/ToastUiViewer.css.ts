@@ -69,7 +69,7 @@ globalStyle(`${viewer} .toastui-editor-contents p`, {
   lineHeight: "1.5",
 });
 
-globalStyle(`${viewer} .toastui-editor-contents code`, {
+globalStyle(`${viewer} .toastui-editor-contents p code`, {
   fontSize: "15px",
 });
 

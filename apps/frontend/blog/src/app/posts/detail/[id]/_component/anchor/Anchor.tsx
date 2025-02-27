@@ -60,13 +60,7 @@ export default function Anchor() {
     return () => {
       container.removeEventListener("scroll", checkActiveItem);
     };
-  }, [anchorNavigationStore.navPositionList, pathname]);
-
-  useEffect(() => {
-    return () => {
-      anchorNavigationStore.reset();
-    };
-  }, []);
+  }, [anchorNavigationStore.navPositionList]);
 
   return (
     <div className={styles.anchorContainer}>

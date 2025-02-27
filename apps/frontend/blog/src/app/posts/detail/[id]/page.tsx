@@ -112,7 +112,11 @@ export default async function DetailPage({ params }: Props) {
             )}
           </div>
           <div className={styles.content}>
-            <DetailViewer content={data.content} imgUrl={data.thumbnail} />
+            <DetailViewer
+              key={data.id}
+              content={data.content}
+              imgUrl={data.thumbnail}
+            />
             <Anchor />
           </div>
           <div className={styles.subContent}>
