@@ -208,9 +208,6 @@ export class PostService {
     }
     post.viewCount++;
     await this.postRepository.save(post);
-
-    // 쿠키에 기록 (1시간 동안 유지)
-    res.cookie(cookieName, true, { maxAge: 3600000, httpOnly: true });
   }
 
   // 인기 순 조회
