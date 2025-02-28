@@ -12,10 +12,16 @@ export default function Toolbar() {
   const router = useRouter();
   const { data } = useSession();
 
+  const handleSearch = (value: string) => {
+    if (value) {
+      router.push(`/posts?search=${value}`);
+    }
+  };
+
   return (
     <div className={styles.toolbar}>
       <div className={styles.searchBar}>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
       </div>
       <div className={styles.iconButton}>
         <IconButton type="bell" size="xl" />
