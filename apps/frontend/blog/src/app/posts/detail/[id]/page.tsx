@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { auth } from "@/auth";
-import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -39,12 +38,16 @@ export default async function DetailPage({ params }: Props) {
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["post", "detail"],
+    queryKey: ["post", "detail", id],
     queryFn: () => getPost(postId),
   });
   const dehydratedState = dehydrate(queryClient);
   // React Query 상태에서 데이터를 직접 추출
-  const data: IPost | undefined = queryClient.getQueryData(["post", "detail"]);
+  const data: IPost | undefined = queryClient.getQueryData([
+    "post",
+    "detail",
+    id,
+  ]);
 
   const convertDate = (date: Date) => {
     const givenDate = dayjs(date);
