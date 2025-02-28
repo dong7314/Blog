@@ -91,6 +91,11 @@ export class PostController {
     return this.postService.findPostsBySearchKeyword(keyword, limit, offset);
   }
 
+  @Get('search/count')
+  async getPostsCountBySearch(@Query('keyword') keyword: string = '') {
+    return this.postService.findPostsCountBySearchKeyword(keyword);
+  }
+
   @Get(':id')
   async getPostById(
     @Param('id') id: number,

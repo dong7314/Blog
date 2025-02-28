@@ -373,6 +373,16 @@ export class PostService {
     });
   }
 
+  async findPostsCountBySearchKeyword(keyword: string): Promise<number> {
+    const query = this.postRepository
+      .createQueryBuilder('post')
+      .where('post.title LIKE :keyword', { keyword: `%${keyword}%` })
+      .orWhere('post.content LIKE :keyword', { keyword: `%${keyword}%` });
+
+    const count = await query.getCount();
+    return count;
+  }
+
   private getStartDateForPeriod(
     period: 'day' | 'week' | 'month' | 'year',
   ): Date {
