@@ -29,6 +29,13 @@ export const Size: Story = {
   },
 };
 
+export const CustomSize: Story = {
+  args: {
+    customSize: "1.75rem",
+    children: "Large",
+  },
+};
+
 export const Color: Story = {
   args: {
     color: "red",

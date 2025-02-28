@@ -12,6 +12,8 @@ export interface TextProps {
   color?: string;
   /** 폰트 크기 설정 */
   size?: TextSize;
+  /** 폰트 커스텀 크기 설정 */
+  customSize?: string;
   /** 폰트 굵기 */
   weight?: TextWeight;
   /** 폰트 라인 높이 */
@@ -27,6 +29,7 @@ export const Text = ({
   color = "#262626",
   weight = 400,
   children,
+  customSize,
   lineHeight,
   className,
 }: TextProps) => {
@@ -38,7 +41,12 @@ export const Text = ({
   return (
     <div
       className={textStyle}
-      style={{ color, fontWeight: weight, lineHeight }}
+      style={{
+        color,
+        fontWeight: weight,
+        lineHeight,
+        fontSize: customSize ?? "",
+      }}
     >
       {children}
     </div>
