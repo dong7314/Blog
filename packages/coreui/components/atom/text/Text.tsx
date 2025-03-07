@@ -20,6 +20,8 @@ export interface TextProps {
   lineHeight?: string;
   /** 폰트 내용 */
   children: ReactNode;
+  /** 클릭 시 동작할 함수 */
+  onClick?: () => void;
   /** text에 style 커스텀 설정 */
   className?: string;
 }
@@ -31,6 +33,7 @@ export const Text = ({
   children,
   customSize,
   lineHeight,
+  onClick,
   className,
 }: TextProps) => {
   const textStyle = composeStyles(
@@ -41,6 +44,7 @@ export const Text = ({
   return (
     <div
       className={textStyle}
+      onClick={onClick}
       style={{
         color,
         fontWeight: weight,
