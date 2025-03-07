@@ -351,6 +351,21 @@ export class PostService {
     });
   }
 
+  async findPostsCountByTags(tags: string[]): Promise<number> {
+    if (!tags || tags.length === 0) {
+      throw new Error('Tags array must not be empty.');
+    }
+
+    const query = this.postRepository
+      .createQueryBuilder('post')
+      .leftJoin('post.tags', 'tags')
+      .where('tags.name IN (:...tagNames)', { tagNames: tags })
+      .groupBy('post.id');
+
+    const count = await query.getCount();
+    return count;
+  }
+
   async findPostsBySearchKeyword(
     keyword: string,
     limit: number,

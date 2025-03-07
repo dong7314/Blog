@@ -82,6 +82,12 @@ export class PostController {
     return this.postService.findPostsByTags(tagArray, limit, offset);
   }
 
+  @Get('by-tags/count')
+  async getPostsCountByTags(@Query('tags') tags: string = '') {
+    const tagArray = tags.split(',');
+    return this.postService.findPostsCountByTags(tagArray);
+  }
+
   @Get('search')
   async getPostsBySearch(
     @Query('limit') limit: number,
