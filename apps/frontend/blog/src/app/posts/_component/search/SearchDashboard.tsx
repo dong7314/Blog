@@ -18,15 +18,15 @@ export default function SearchDashboard({ search, tag }: Props) {
           <Text size="h" weight={600} customSize="1.75rem">
             "{search || tag}"
           </Text>
-          <Text size="dxl">
+          <Text customSize="1.625rem">
             &nbsp;{search && "단어"}
             {tag && "태그"}에 대한 검색 결과입니다.
           </Text>
         </span>
       </h2>
       <div className={styles.container}>
-        {tag && <SearchDashboardTag />}
-        {search && <SearchDashboardWord />}
+        {tag && <SearchDashboardTag keyword={tag} />}
+        {search && <SearchDashboardWord keyword={search} />}
       </div>
     </>
   );

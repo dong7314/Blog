@@ -1,7 +1,5 @@
 import { fetchData } from "@/app/_lib/restful";
 
-type Props = { pageParam?: number };
-
 export async function getPostsPopularityInfinite(
   pageParam = 0,
   period: string,

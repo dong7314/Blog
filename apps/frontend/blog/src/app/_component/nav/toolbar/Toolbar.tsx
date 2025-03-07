@@ -14,6 +14,11 @@ export default function Toolbar() {
 
   const handleSearch = (value: string) => {
     if (value) {
+      setTimeout(() => {
+        document
+          .querySelectorAll("#main")[0]
+          .scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
       router.push(`/posts?search=${value}`);
     }
   };

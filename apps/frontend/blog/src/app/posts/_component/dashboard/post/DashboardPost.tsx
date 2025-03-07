@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -18,12 +19,20 @@ type Props = {
 };
 
 export default function DashboardPost({ data }: Props) {
+  const router = useRouter();
+
   const convertDate = (date: Date) => {
     const givenDate = dayjs(date);
     const oneDayAgo = dayjs().subtract(1, "day");
     return givenDate.isBefore(oneDayAgo)
       ? givenDate.format("YYYY년 MM월 DD일")
       : givenDate.fromNow();
+  };
+
+  const handleTagClick = (tag: string) => {
+    if (tag) {
+      router.push(`/posts?tag=${tag}`);
+    }
   };
 
   return (
@@ -84,6 +93,7 @@ export default function DashboardPost({ data }: Props) {
                     className={styles.tag}
                     color="#7F7F7F"
                     key={`tag-${data.id}-${tag.id}`}
+                    onClick={() => handleTagClick(tag.name)}
                   >
                     <span style={{ fontWeight: 500, marginRight: "3px" }}>
                       #

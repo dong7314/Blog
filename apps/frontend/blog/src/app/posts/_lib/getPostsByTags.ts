@@ -1,13 +1,13 @@
 import { fetchData } from "@/app/_lib/restful";
 
-export async function getPostsBySearchInfinite(pageParam = 0, keyword: string) {
+export async function getPostsByTagsInfinite(pageParam = 0, tags: string) {
   const res = await fetchData(
-    "api.post/search",
-    ["posts", "dashboard", "search", keyword],
+    "api.post/by-tags",
+    ["posts", "dashboard", "tags", tags],
     {
       limit: 12,
       offset: pageParam,
-      keyword,
+      tags,
     },
   );
 
