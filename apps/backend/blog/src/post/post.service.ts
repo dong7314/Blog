@@ -328,6 +328,7 @@ export class PostService {
       .leftJoinAndSelect('post.author', 'author')
       .leftJoinAndSelect('post.tags', 'tags') // 모든 태그를 가져옴
       .leftJoinAndSelect('post.likes', 'likes')
+      .leftJoinAndSelect('post.comments', 'comments')
       .where((qb) => {
         const subQuery = qb
           .subQuery()
@@ -360,6 +361,7 @@ export class PostService {
       .leftJoinAndSelect('post.author', 'author')
       .leftJoinAndSelect('post.tags', 'tags')
       .leftJoinAndSelect('post.likes', 'likes')
+      .leftJoinAndSelect('post.comments', 'comments')
       .where('post.title LIKE :keyword', { keyword: `%${keyword}%` })
       .orWhere('post.content LIKE :keyword', { keyword: `%${keyword}%` })
       .orderBy('post.createdDate', 'DESC')
